@@ -1,0 +1,218 @@
+import SwiftUI
+
+struct RecipeDetailView: View {
+    let recipe: Recipe
+    @State private var servings: Int
+    @State private var showCookingMode = false
+    @Environment(\.dismiss) private var dismiss
+
+    init(recipe: Recipe) {
+        self.recipe = recipe
+        _servings = State(initialValue: recipe.defaultServings)
+    }
+
+    var scaledIngredients: [Ingredient] {
+        recipe.ingredients.map { $0.scaled(to: servings, from: recipe.defaultServings) }
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                heroImage
+                VStack(alignment: .leading, spacing: 16) {
+                    titleBlock
+                    statsRow
+                    servingsControl
+                    sectionHeader("Ingredients")
+                    ingredientsList
+                    sectionHeader("Steps")
+                    stepsList
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 16)
+            }
+        }
+        .background(Color(uiColor: .systemGroupedBackground))
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            startCookingButton
+                .background(.ultraThinMaterial)
+        }
+        .navigationBarBackButtonHidden(true)
+        .overlay(alignment: .topLeading) { backButton }
+        .fullScreenCover(isPresented: $showCookingMode) {
+            CookingModeView(recipe: recipe)
+        }
+    }
+
+    private var heroImage: some View {
+        ZStack {
+            LinearGradient(
+                colors: [Color(hex: recipe.accentHex), Color(hex: recipe.accentHex).opacity(0.7)],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+            Image(systemName: recipe.sfSymbol)
+            .font(.system(size: 72, weight: .semibold))
+            .foregroundStyle(.white.opacity(0.9))
+        }
+        .frame(height: 220)
+    }
+
+    private var backButton: some View {
+        Button { dismiss() } label: {
+            Image(systemName: "chevron.left")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(.primary)
+                .frame(width: 36, height: 36)
+                .background(.white.opacity(0.92))
+                .clipShape(Circle())
+        }
+        .padding(.leading, 16).padding(.top, 12)
+    }
+
+    private var titleBlock: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(recipe.name)
+                .font(.system(size: 24, weight: .bold))
+                .tracking(-0.5)
+            Text("\(recipe.cuisine) · \(recipe.difficulty.rawValue) · \(recipe.totalMinutes) min total")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private var statsRow: some View {
+        HStack(spacing: 10) {
+            statCard(value: "\(recipe.totalMinutes)m", label: "Time")
+            statCard(value: "\(recipe.steps.count)", label: "Steps")
+            statCard(value: recipe.isMultiDish ? "Multi" : "Solo", label: "Dishes")
+        }
+    }
+
+    private func statCard(value: String, label: String) -> some View {
+        VStack(spacing: 2) {
+            Text(value).font(.system(size: 16, weight: .bold))
+            Text(label.uppercased())
+                .font(.system(size: 10, weight: .medium))
+                .tracking(0.5)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(10)
+        .background(Color(uiColor: .systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var servingsControl: some View {
+        HStack {
+            Text("Servings · auto-scales")
+                .font(.subheadline.weight(.medium))
+            Spacer()
+            HStack(spacing: 10) {
+                stepperBtn(symbol: "minus") {
+                    if servings > 1 { servings -= 1 }
+                }
+                Text("\(servings)")
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(minWidth: 20)
+                stepperBtn(symbol: "plus") {
+                    if servings < 20 { servings += 1 }
+                }
+            }
+            .padding(.horizontal, 6).padding(.vertical, 3)
+            .background(Color(uiColor: .systemGray5))
+            .clipShape(Capsule())
+        }
+        .padding(.horizontal, 14).padding(.vertical, 10)
+        .background(Color(uiColor: .systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func stepperBtn(symbol: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: 12, weight: .bold))
+                .frame(width: 22, height: 22)
+                .background(Color(uiColor: .systemBackground))
+                .clipShape(Circle())
+        }
+    }
+
+    private var ingredientsList: some View {
+        VStack(spacing: 0) {
+            ForEach(Array(scaledIngredients.enumerated()), id: \.element.id) { index, ing in
+                HStack {
+                    Text(ing.name).font(.footnote)
+                    Spacer()
+                    Text(ing.displayAmount)
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.vertical, 9)
+                if index < scaledIngredients.count - 1 {
+                    Divider()
+                }
+            }
+        }
+        .padding(.horizontal, 14)
+        .background(Color(uiColor: .systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var stepsList: some View {
+        VStack(spacing: 8) {
+            ForEach(recipe.steps) { step in
+                HStack(alignment: .top, spacing: 12) {
+                    Text("\(step.order)")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(width: 24, height: 24)
+                        .background(Color(hex: recipe.accentHex))
+                        .clipShape(Circle())
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(step.instruction).font(.footnote)
+                        if let tip = step.tip {
+                            Text("💡 \(tip)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        if let secs = step.timerSeconds {
+                            Label("\(secs / 60) min timer", systemImage: "timer")
+                                .font(.caption)
+                                .foregroundStyle(Color(hex: recipe.accentHex))
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background(Color(uiColor: .systemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+    }
+
+    private func sectionHeader(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.system(size: 13, weight: .semibold))
+            .tracking(0.8)
+            .foregroundStyle(.secondary)
+            .padding(.top, 4)
+    }
+
+    private var startCookingButton: some View {
+        Button { showCookingMode = true } label: {
+            Text("Start Cooking →")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(14)
+                .background(Color(hex: recipe.accentHex))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+                .shadow(color: Color(hex: recipe.accentHex).opacity(0.35), radius: 12, y: 6)
+        }
+        .padding(.horizontal, 20).padding(.bottom, 24)
+    }
+}
+
+#Preview {
+    NavigationStack { RecipeDetailView(recipe: SeedRecipes.dalTadka) }
+}

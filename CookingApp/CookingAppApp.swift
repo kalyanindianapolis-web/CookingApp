@@ -1,32 +1,20 @@
-//
-//  CookingAppApp.swift
-//  CookingApp
-//
-//  Created by Kalyan Hari on 4/22/26.
-//
-
 import SwiftUI
-import SwiftData
 
 @main
 struct CookingAppApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @StateObject private var store = RecipeStore()
+    @StateObject private var groceryStore = GroceryStore()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                HomeView()
+                    .tabItem { Label("Recipes", systemImage: "fork.knife") }
+                GroceryListView()
+                    .tabItem { Label("Groceries", systemImage: "cart") }
+            }
+            .environmentObject(store)
+            .environmentObject(groceryStore)
         }
-        .modelContainer(sharedModelContainer)
     }
 }
