@@ -3,12 +3,13 @@ import SwiftUI
 struct RecipeDetailView: View {
     let recipe: Recipe
     @State private var servings: Int
-    @State private var showCookingMode = false
+    @State private var showIngredientCheck = false
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var groceryStore: GroceryStore
 
     init(recipe: Recipe) {
         self.recipe = recipe
-        _servings = State(initialValue: recipe.defaultServings)
+        _servings = State(initialValue: 2)
     }
 
     var scaledIngredients: [Ingredient] {
@@ -39,8 +40,9 @@ struct RecipeDetailView: View {
         }
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading) { backButton }
-        .fullScreenCover(isPresented: $showCookingMode) {
-            CookingModeView(recipe: recipe)
+        .sheet(isPresented: $showIngredientCheck) {
+            IngredientCheckView(recipe: recipe)
+                .environmentObject(groceryStore)
         }
     }
 
@@ -199,7 +201,7 @@ struct RecipeDetailView: View {
     }
 
     private var startCookingButton: some View {
-        Button { showCookingMode = true } label: {
+        Button { showIngredientCheck = true } label: {
             Text("Start Cooking →")
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(.white)

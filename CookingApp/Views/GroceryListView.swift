@@ -4,6 +4,15 @@ struct GroceryListView: View {
     @EnvironmentObject var groceryStore: GroceryStore
     @State private var showAddSheet = false
 
+    private var categorisedItems: [(GroceryCategory, [GroceryItem])] {
+        let grouped = Dictionary(grouping: groceryStore.items) { $0.category }
+        return GroceryCategory.allCases
+            .compactMap { cat in
+                guard let items = grouped[cat], !items.isEmpty else { return nil }
+                return (cat, items)
+            }
+    }
+
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
@@ -23,13 +32,9 @@ struct GroceryListView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header
-                if !groceryStore.uncheckedItems.isEmpty {
-                    sectionHeader("To Buy (\(groceryStore.uncheckedItems.count))")
-                    itemsSection(groceryStore.uncheckedItems)
-                }
-                if !groceryStore.checkedItems.isEmpty {
-                    sectionHeader("In Cart (\(groceryStore.checkedItems.count))")
-                    itemsSection(groceryStore.checkedItems, dimmed: true)
+                ForEach(categorisedItems, id: \.0) { category, items in
+                    sectionHeader("\(category.emoji) \(category.rawValue)")
+                    itemsSection(items)
                 }
             }
             .padding(.horizontal, 20)
@@ -39,7 +44,9 @@ struct GroceryListView: View {
 
     private var emptyState: some View {
         VStack(spacing: 0) {
-            header.padding(.horizontal, 20).padding(.top, 0).frame(maxWidth: .infinity, alignment: .leading)
+            header
+                .padding(.horizontal, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
             VStack(spacing: 12) {
                 Image(systemName: "cart")
@@ -75,12 +82,12 @@ struct GroceryListView: View {
             .padding(.top, 4)
     }
 
-    private func itemsSection(_ list: [GroceryItem], dimmed: Bool = false) -> some View {
+    private func itemsSection(_ list: [GroceryItem]) -> some View {
         VStack(spacing: 0) {
             ForEach(Array(list.enumerated()), id: \.element.id) { index, item in
-                itemRow(item, dimmed: dimmed)
+                itemRow(item)
                 if index < list.count - 1 {
-                    Divider().padding(.leading, 14)
+                    Divider().padding(.leading, 48)
                 }
             }
         }
@@ -88,7 +95,7 @@ struct GroceryListView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
-    private func itemRow(_ item: GroceryItem, dimmed: Bool) -> some View {
+    private func itemRow(_ item: GroceryItem) -> some View {
         HStack(spacing: 12) {
             Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
                 .font(.system(size: 22))
@@ -98,7 +105,7 @@ struct GroceryListView: View {
                 Text(item.name)
                     .font(.system(size: 15, weight: .medium))
                     .strikethrough(item.isChecked)
-                    .foregroundStyle(dimmed ? .secondary : .primary)
+                    .foregroundStyle(item.isChecked ? .secondary : .primary)
                 if !item.quantity.isEmpty {
                     Text(item.quantity)
                         .font(.caption)
@@ -146,15 +153,25 @@ struct AddGroceryItemSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var quantity = ""
+    @State private var category: GroceryCategory = .vegetables
     @FocusState private var nameFocused: Bool
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Item name (e.g. Tomatoes)", text: $name)
+                    TextField("Item name (e.g. Spinach)", text: $name)
                         .focused($nameFocused)
-                    TextField("Quantity (e.g. 500g, 2 cans)", text: $quantity)
+                    TextField("Quantity (e.g. 200g, 1 bunch)", text: $quantity)
+                }
+                Section("Category") {
+                    Picker("Category", selection: $category) {
+                        ForEach(GroceryCategory.allCases, id: \.self) { cat in
+                            Text("\(cat.emoji) \(cat.rawValue)").tag(cat)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .frame(height: 140)
                 }
             }
             .navigationTitle("New Item")
@@ -167,7 +184,11 @@ struct AddGroceryItemSheet: View {
                     Button("Add") {
                         let trimmed = name.trimmingCharacters(in: .whitespaces)
                         guard !trimmed.isEmpty else { return }
-                        groceryStore.add(name: trimmed, quantity: quantity.trimmingCharacters(in: .whitespaces))
+                        groceryStore.add(
+                            name: trimmed,
+                            quantity: quantity.trimmingCharacters(in: .whitespaces),
+                            category: category
+                        )
                         dismiss()
                     }
                     .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
@@ -175,7 +196,7 @@ struct AddGroceryItemSheet: View {
             }
             .onAppear { nameFocused = true }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.large])
     }
 }
 

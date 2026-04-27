@@ -11,8 +11,8 @@ class GroceryStore: ObservableObject {
     var uncheckedItems: [GroceryItem] { items.filter { !$0.isChecked } }
     var checkedItems: [GroceryItem] { items.filter { $0.isChecked } }
 
-    func add(name: String, quantity: String) {
-        items.append(GroceryItem(name: name, quantity: quantity))
+    func add(name: String, quantity: String, category: GroceryCategory = .other) {
+        items.append(GroceryItem(name: name, quantity: quantity, category: category))
         save()
     }
 

@@ -2,97 +2,80 @@ import Foundation
 
 enum SeedRecipes {
     static let all: [Recipe] = [
-        vegBiryani, masalaDosa, dalTadka,
-        palakPaneer, chanaMasala, alooGobi,
-        sambar, rajma
+        dalTadka, jeeraRice, chanaMasala, alooGobi,
+        paneerDahiSandwich, paneerLababdar
     ]
-
-    static let vegBiryani = Recipe(
-        name: "Vegetable Biryani",
-        cuisine: "Hyderabadi",
-        difficulty: .medium,
-        totalMinutes: 50,
-        defaultServings: 4,
-        sfSymbol: "flame.fill",
-        accentHex: "4CAF50",
-        isMultiDish: true,
-        ingredients: [
-            Ingredient(name: "Basmati rice", amount: 2, unit: "cups"),
-            Ingredient(name: "Mixed vegetables (carrot, beans, peas, potato)", amount: 2, unit: "cups"),
-            Ingredient(name: "Yogurt", amount: 1, unit: "cup"),
-            Ingredient(name: "Biryani masala", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Fried onions", amount: 1, unit: "cup"),
-            Ingredient(name: "Mint leaves", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Ghee", amount: 3, unit: "tbsp"),
-            Ingredient(name: "Saffron strands", amount: 1, unit: "pinch")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Marinate vegetables with yogurt, biryani masala, and salt. Rest 20 minutes.", tip: "Use carrots, beans, peas, and potatoes for best results.", timerSeconds: 1200),
-            Step(order: 2, instruction: "Soak basmati rice in water for 20 minutes, then drain.", timerSeconds: 1200),
-            Step(order: 3, instruction: "Boil water with whole spices (bay leaf, cloves, cardamom). Add rice and cook until 70% done.", timerSeconds: 420),
-            Step(order: 4, instruction: "In a heavy pot, layer marinated vegetables at the bottom, then rice on top.", tip: "Heavy-bottomed pot prevents burning."),
-            Step(order: 5, instruction: "Add fried onions, mint, saffron milk, and ghee. Seal the lid.", tip: "Use dough to seal the lid for authentic dum."),
-            Step(order: 6, instruction: "Cook on high for 5 min, then low for 25 min. Don't open the lid.", timerSeconds: 1800),
-            Step(order: 7, instruction: "Rest 10 minutes before opening. Fluff gently and serve.", timerSeconds: 600)
-        ]
-    )
-
-    static let masalaDosa = Recipe(
-        name: "Masala Dosa",
-        cuisine: "South Indian",
-        difficulty: .medium,
-        totalMinutes: 40,
-        defaultServings: 2,
-        sfSymbol: "fork.knife",
-        accentHex: "FFA62B",
-        isMultiDish: true,
-        ingredients: [
-            Ingredient(name: "Dosa batter", amount: 2, unit: "cups"),
-            Ingredient(name: "Potatoes", amount: 3, unit: "medium"),
-            Ingredient(name: "Onion", amount: 1, unit: "large"),
-            Ingredient(name: "Mustard seeds", amount: 1, unit: "tsp"),
-            Ingredient(name: "Curry leaves", amount: 10, unit: "leaves"),
-            Ingredient(name: "Turmeric", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Green chilies", amount: 2, unit: "nos"),
-            Ingredient(name: "Oil", amount: 2, unit: "tbsp")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Boil potatoes until fork-tender, then peel and mash coarsely.", timerSeconds: 900),
-            Step(order: 2, instruction: "Heat oil. Splutter mustard seeds, add curry leaves and green chilies."),
-            Step(order: 3, instruction: "Add chopped onions. Sauté until translucent.", timerSeconds: 240),
-            Step(order: 4, instruction: "Add turmeric and mashed potatoes. Mix well and cook 3 minutes.", timerSeconds: 180),
-            Step(order: 5, instruction: "Heat a flat pan. Pour a ladle of batter and spread thin in circles.", tip: "Pan should be medium-hot — water droplets should sizzle."),
-            Step(order: 6, instruction: "Drizzle oil around edges. Cook until golden and crisp.", timerSeconds: 120),
-            Step(order: 7, instruction: "Place potato filling in center, fold, and serve with chutney.")
-        ]
-    )
 
     static let dalTadka = Recipe(
         name: "Dal Tadka",
         cuisine: "North Indian",
-        difficulty: .easy,
-        totalMinutes: 25,
-        defaultServings: 3,
+        difficulty: .medium,
+        totalMinutes: 45,
+        defaultServings: 4,
         sfSymbol: "drop.fill",
         accentHex: "FFD60A",
         isMultiDish: false,
         ingredients: [
-            Ingredient(name: "Toor dal", amount: 1, unit: "cup"),
-            Ingredient(name: "Tomato", amount: 1, unit: "large"),
-            Ingredient(name: "Onion", amount: 1, unit: "medium"),
-            Ingredient(name: "Ginger-garlic paste", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Turmeric", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Toor dal", amount: 0.5, unit: "cup"),
+            Ingredient(name: "Chana dal", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Masoor dal", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Green chilli (slit)", amount: 1, unit: "no."),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Ginger julienne", amount: 1, unit: "inch piece"),
             Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Red chili powder", amount: 1, unit: "tsp")
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Red chilli", amount: 1, unit: "no."),
+            Ingredient(name: "Ginger (chopped)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Garlic (chopped)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Green chilli (chopped)", amount: 3, unit: "nos."),
+            Ingredient(name: "Onion (chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Tomato (chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "pinch"),
+            Ingredient(name: "Dry mango powder (amchur)", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Butter", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+            Ingredient(name: "Ghee (2nd tadka)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Onion (sliced)", amount: 0.5, unit: "no."),
+            Ingredient(name: "Asafoetida (hing)", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste")
         ],
         steps: [
-            Step(order: 1, instruction: "Rinse dal and pressure cook with turmeric and salt until soft.", timerSeconds: 900),
-            Step(order: 2, instruction: "Heat ghee in a pan. Add cumin seeds until they splutter."),
-            Step(order: 3, instruction: "Add chopped onions and sauté until golden.", timerSeconds: 300),
-            Step(order: 4, instruction: "Add ginger-garlic paste and chopped tomato. Cook until soft.", timerSeconds: 240),
-            Step(order: 5, instruction: "Add red chili powder. Pour in cooked dal. Simmer 5 minutes.", timerSeconds: 300),
-            Step(order: 6, instruction: "Garnish with fresh coriander. Serve hot with rice or roti.")
+            Step(order: 1, instruction: "Wash all three dals together until the water runs clear. Soak in fresh water for 30–60 minutes, then discard the soaking water.", timerSeconds: 1800),
+            Step(order: 2, instruction: "Transfer drained dals to a pressure cooker. Add slit green chilli, salt, turmeric, ginger julienne, and 2.5 cups water. Pressure cook for 3–4 whistles on medium-high flame.", timerSeconds: 900),
+            Step(order: 3, instruction: "Switch off and let pressure release naturally. Open, discard the green chilli, and stir the dal well. Set aside."),
+            Step(order: 4, instruction: "For the 1st tadka: heat a large pan on high and add 2 tbsp ghee. Add cumin seeds, red chilli, chopped ginger, garlic, and green chilli. Cook on medium for 1 minute.", timerSeconds: 60),
+            Step(order: 5, instruction: "Add chopped onion and cook until light golden brown.", timerSeconds: 300),
+            Step(order: 6, instruction: "Add chopped tomato and salt. Cook until mushy. Add all powdered spices (turmeric, Kashmiri chilli, coriander, garam masala) and a splash of water. Carefully tilt the pan toward the flame for a few seconds.", tip: "Tilting the pan so the flame enters creates a smoky dhaba flavour — do this carefully and only briefly."),
+            Step(order: 7, instruction: "Add the boiled dal and stir well. Bring to a boil. Add kasuri methi powder, dry mango powder, butter, and fresh coriander. Mix well."),
+            Step(order: 8, instruction: "For the 2nd tadka: heat a small pan, add 1 tbsp ghee. Fry sliced onion until light golden. Add red chilli, asafoetida, and Kashmiri chilli powder. Immediately pour over the dal and serve hot.", timerSeconds: 180)
+        ]
+    )
+
+    static let jeeraRice = Recipe(
+        name: "Jeera Rice",
+        cuisine: "North Indian",
+        difficulty: .easy,
+        totalMinutes: 20,
+        defaultServings: 4,
+        sfSymbol: "fork.knife",
+        accentHex: "A5D6A7",
+        isMultiDish: false,
+        ingredients: [
+            Ingredient(name: "Basmati rice", amount: 1, unit: "cup"),
+            Ingredient(name: "Lemon juice", amount: 1, unit: "tsp"),
+            Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Wash rice until water runs clear. Soak in fresh water for 30–45 minutes, then drain.", tip: "Soaking rice ensures it cooks evenly and stays fluffy.", timerSeconds: 1800),
+            Step(order: 2, instruction: "Bring a large pot of water to a rolling boil. Add salt and lemon juice with the slice. Add soaked, drained rice. Cook until 90% done — about 4–5 minutes.", timerSeconds: 300),
+            Step(order: 3, instruction: "Drain through a sieve and fluff gently with forks to release steam. Spread out and cool completely.", tip: "Cooling the rice prevents it from going mushy when tossed in the wok."),
+            Step(order: 4, instruction: "Heat a wok on high and add ghee. Once hot, add cumin seeds and let them crackle. Add cooled rice, salt, and fresh coriander. Toss on high flame for a few seconds and serve.", timerSeconds: 60)
         ]
     )
 
@@ -151,126 +134,143 @@ enum SeedRecipes {
         ]
     )
 
-    static let palakPaneer = Recipe(
-        name: "Palak Paneer",
-        cuisine: "North Indian",
-        difficulty: .medium,
-        totalMinutes: 35,
-        defaultServings: 3,
-        sfSymbol: "leaf.fill",
-        accentHex: "2E7D32",
-        isMultiDish: false,
-        ingredients: [
-            Ingredient(name: "Spinach", amount: 300, unit: "g"),
-            Ingredient(name: "Paneer", amount: 200, unit: "g"),
-            Ingredient(name: "Onion", amount: 1, unit: "large"),
-            Ingredient(name: "Tomato", amount: 2, unit: "medium"),
-            Ingredient(name: "Ginger-garlic paste", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Heavy cream", amount: 3, unit: "tbsp"),
-            Ingredient(name: "Garam masala", amount: 1, unit: "tsp"),
-            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
-            Ingredient(name: "Oil", amount: 2, unit: "tbsp")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Blanch spinach in boiling salted water for 2 minutes, then transfer immediately to ice water.", tip: "Ice bath keeps the spinach vibrant green.", timerSeconds: 120),
-            Step(order: 2, instruction: "Drain spinach and blend into a smooth purée. Set aside."),
-            Step(order: 3, instruction: "Heat oil, add cumin seeds. Add chopped onions and sauté until golden.", timerSeconds: 360),
-            Step(order: 4, instruction: "Add ginger-garlic paste and chopped tomatoes. Cook until oil separates.", timerSeconds: 300),
-            Step(order: 5, instruction: "Add garam masala and spinach purée. Simmer 5 minutes.", timerSeconds: 300),
-            Step(order: 6, instruction: "Add paneer cubes and cream. Stir gently and cook 3 more minutes.", tip: "Pan-fry paneer first for a firmer, golden texture.", timerSeconds: 180),
-            Step(order: 7, instruction: "Season with salt. Serve hot with naan or jeera rice.")
-        ]
-    )
-
     static let alooGobi = Recipe(
         name: "Aloo Gobi",
         cuisine: "North Indian",
         difficulty: .easy,
-        totalMinutes: 25,
+        totalMinutes: 35,
         defaultServings: 3,
         sfSymbol: "sun.max.fill",
         accentHex: "F9A825",
         isMultiDish: false,
         ingredients: [
-            Ingredient(name: "Cauliflower", amount: 1, unit: "medium head"),
-            Ingredient(name: "Potatoes", amount: 2, unit: "medium"),
-            Ingredient(name: "Onion", amount: 1, unit: "medium"),
-            Ingredient(name: "Tomato", amount: 1, unit: "large"),
-            Ingredient(name: "Ginger-garlic paste", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cauliflower", amount: 500, unit: "g"),
+            Ingredient(name: "Potatoes", amount: 3, unit: "medium"),
+            Ingredient(name: "Ginger", amount: 3, unit: "inch piece"),
+            Ingredient(name: "Green chilli", amount: 3, unit: "nos."),
+            Ingredient(name: "Mustard oil", amount: 3, unit: "tbsp"),
             Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
-            Ingredient(name: "Turmeric", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Coriander powder", amount: 1, unit: "tsp"),
-            Ingredient(name: "Oil", amount: 3, unit: "tbsp")
+            Ingredient(name: "Ajwain (carom seeds)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Hing (asafoetida)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 2, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "pinch"),
+            Ingredient(name: "Dry mango powder (amchur)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste")
         ],
         steps: [
-            Step(order: 1, instruction: "Cut cauliflower into florets and dice potatoes into 1-inch cubes."),
-            Step(order: 2, instruction: "Heat oil. Add cumin seeds and let them splutter."),
-            Step(order: 3, instruction: "Add onions and sauté until translucent. Add ginger-garlic paste.", timerSeconds: 240),
-            Step(order: 4, instruction: "Add chopped tomato, turmeric, and coriander powder. Cook until soft.", timerSeconds: 180),
-            Step(order: 5, instruction: "Add potatoes and stir to coat with masala. Cover and cook 5 minutes.", timerSeconds: 300),
-            Step(order: 6, instruction: "Add cauliflower. Stir, cover and cook until both are tender.", tip: "Sprinkle a little water if sticking.", timerSeconds: 480),
-            Step(order: 7, instruction: "Season with salt and garam masala. Garnish with coriander. Serve with roti.")
+            Step(order: 1, instruction: "Remove the cauliflower core and cut into medium bite-sized florets. Peel the stem, cut the tender inner part into pieces. Wash thoroughly in salted water and keep submerged.", tip: "The cauliflower stem is often discarded but cooks like potato — don't waste it."),
+            Step(order: 2, instruction: "Peel the potatoes and cut into similar-sized pieces. Keep submerged in water to prevent oxidation."),
+            Step(order: 3, instruction: "Using a mortar and pestle, pound ginger and green chillies into a coarse paste. Set aside."),
+            Step(order: 4, instruction: "Heat mustard oil in a kadhai on high until it lightly smokes. Lower the flame. Add cumin seeds, ajwain, and hing — let them crackle.", tip: "Smoking mustard oil removes its pungency and creates the distinct authentic flavour."),
+            Step(order: 5, instruction: "Add drained potato pieces. Stir and cook on medium-high for 1 minute. Cover and cook on the lowest flame for 3–4 minutes until potatoes begin to soften.", timerSeconds: 300),
+            Step(order: 6, instruction: "Uncover, stir, then add the ginger–chilli paste and drained cauliflower. Mix well. Cover and cook for 2–3 minutes to let the vegetables steam and release moisture.", timerSeconds: 180),
+            Step(order: 7, instruction: "Remove lid. Add salt, turmeric, coriander powder, garam masala, and cumin powder. Stir gently to coat. Cover and cook on low for 10–15 minutes, stirring occasionally, until potatoes and cauliflower are fully tender.", tip: "Low and slow is key — don't rush with high heat or the vegetables will brown unevenly.", timerSeconds: 720),
+            Step(order: 8, instruction: "Taste and adjust salt. Finish with dry mango powder and fresh coriander. Mix gently and serve hot with chapati, laccha paratha, or puris.")
         ]
     )
 
-    static let sambar = Recipe(
-        name: "Sambar",
-        cuisine: "South Indian",
+    static let paneerDahiSandwich = Recipe(
+        name: "Paneer Dahi Sandwich",
+        cuisine: "North Indian",
         difficulty: .easy,
-        totalMinutes: 40,
-        defaultServings: 4,
-        sfSymbol: "waveform",
-        accentHex: "FF7043",
+        totalMinutes: 35,
+        defaultServings: 2,
+        sfSymbol: "square.stack.fill",
+        accentHex: "F5A623",
         isMultiDish: false,
         ingredients: [
-            Ingredient(name: "Toor dal", amount: 1, unit: "cup"),
-            Ingredient(name: "Tamarind", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Sambar powder", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Drumstick (moringa)", amount: 2, unit: "pieces"),
-            Ingredient(name: "Pearl onions", amount: 10, unit: "nos"),
-            Ingredient(name: "Tomato", amount: 2, unit: "medium"),
-            Ingredient(name: "Mustard seeds", amount: 1, unit: "tsp"),
-            Ingredient(name: "Curry leaves", amount: 10, unit: "leaves"),
-            Ingredient(name: "Oil", amount: 2, unit: "tbsp")
+            Ingredient(name: "Full fat milk", amount: 1, unit: "litre"),
+            Ingredient(name: "Vinegar", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Water", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Bell pepper", amount: 1, unit: "medium"),
+            Ingredient(name: "Green chilli", amount: 2, unit: "nos"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful"),
+            Ingredient(name: "Curd", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Black pepper", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Oregano", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Red chilli flakes", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Sandwich bread", amount: 6, unit: "slices"),
+            Ingredient(name: "Soft butter", amount: 2, unit: "tbsp")
         ],
         steps: [
-            Step(order: 1, instruction: "Pressure cook toor dal with turmeric until soft. Mash and set aside.", timerSeconds: 900),
-            Step(order: 2, instruction: "Soak tamarind in 1 cup warm water for 10 minutes. Squeeze out pulp.", timerSeconds: 600),
-            Step(order: 3, instruction: "Heat oil. Add mustard seeds, curry leaves, and pearl onions.", timerSeconds: 120),
-            Step(order: 4, instruction: "Add tomatoes and cook until soft. Add drumstick pieces.", timerSeconds: 180),
-            Step(order: 5, instruction: "Pour in tamarind water and sambar powder. Boil 10 minutes.", timerSeconds: 600),
-            Step(order: 6, instruction: "Add mashed dal and simmer 5 minutes. Adjust consistency with water.", tip: "Sambar thickens as it cools — keep it slightly thin.", timerSeconds: 300),
-            Step(order: 7, instruction: "Finish with a tempering of mustard seeds and dry red chilies in ghee. Serve with idli or rice.")
+            Step(order: 1, instruction: "Add full fat milk to a pan and bring to a gentle boil, stirring as it heats. Switch off the flame and let it rest for 1–2 minutes.", timerSeconds: 120),
+            Step(order: 2, instruction: "Mix vinegar and water in a bowl. Slowly add to the warm milk and stir lightly — the paneer will begin separating from the whey almost immediately."),
+            Step(order: 3, instruction: "Strain through a fine strainer. Gently press out excess moisture and transfer paneer to a large bowl.", tip: "Do not squeeze too hard — keep the paneer soft and slightly moist, not dry and crumbly."),
+            Step(order: 4, instruction: "Let the paneer cool completely before mixing the filling.", tip: "The leftover whey can be saved for kadhi, dough, dal, or any sabzi.", timerSeconds: 600),
+            Step(order: 5, instruction: "While paneer cools, cut the bell pepper into planks. Roughly chop along with green chillies and fresh coriander. Add to a chopper and chop finely."),
+            Step(order: 6, instruction: "Add the chopped vegetables to the cooled paneer along with curd, salt, black pepper, oregano, and red chilli flakes. Mix well and taste — adjust salt.", tip: "Get the seasoning right before assembling — you can't fix it after."),
+            Step(order: 7, instruction: "Apply butter evenly on the bread slices. Spread the filling generously on one slice and place another slice on top."),
+            Step(order: 8, instruction: "Heat a pan and apply butter on the surface. Place the sandwich and press firmly with a flat plate. Toast until the bottom is golden and crisp.", tip: "Pressing with a plate ensures even contact and a perfectly golden crust.", timerSeconds: 180),
+            Step(order: 9, instruction: "Apply butter on the top side, flip the sandwich, press again with the plate, and toast until this side is also golden and crisp.", timerSeconds: 180),
+            Step(order: 10, instruction: "Transfer to a chopping board, cut, and serve hot. Crispy on the outside, creamy and fresh on the inside.")
         ]
     )
 
-    static let rajma = Recipe(
-        name: "Rajma",
+    static let paneerLababdar = Recipe(
+        name: "Paneer Lababdar",
         cuisine: "North Indian",
         difficulty: .medium,
         totalMinutes: 45,
-        defaultServings: 4,
-        sfSymbol: "heart.fill",
-        accentHex: "C62828",
+        defaultServings: 5,
+        sfSymbol: "crown.fill",
+        accentHex: "E53935",
         isMultiDish: false,
         ingredients: [
-            Ingredient(name: "Red kidney beans (cooked)", amount: 2, unit: "cups"),
-            Ingredient(name: "Onion", amount: 2, unit: "large"),
-            Ingredient(name: "Tomatoes", amount: 3, unit: "large"),
-            Ingredient(name: "Ginger-garlic paste", amount: 1.5, unit: "tbsp"),
-            Ingredient(name: "Rajma masala", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Turmeric", amount: 0.5, unit: "tsp"),
+            // Base Gravy
+            Ingredient(name: "Oil (base gravy)", amount: 3, unit: "tbsp"),
             Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
-            Ingredient(name: "Butter", amount: 2, unit: "tbsp")
+            Ingredient(name: "Garlic", amount: 10, unit: "cloves"),
+            Ingredient(name: "Ginger", amount: 2, unit: "inch piece"),
+            Ingredient(name: "Green chilli (base)", amount: 3, unit: "nos."),
+            Ingredient(name: "Onion (sliced)", amount: 2, unit: "medium"),
+            Ingredient(name: "Bay leaf", amount: 2, unit: "nos."),
+            Ingredient(name: "Cinnamon", amount: 1, unit: "inch piece"),
+            Ingredient(name: "Green cardamom", amount: 4, unit: "nos."),
+            Ingredient(name: "Tomato (base)", amount: 3, unit: "nos."),
+            Ingredient(name: "Coriander stems", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Kashmiri red chilli powder (base)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli (whole)", amount: 5, unit: "nos."),
+            Ingredient(name: "Cashews", amount: 15, unit: "nos."),
+            Ingredient(name: "Melon seeds", amount: 3, unit: "tbsp"),
+            // Sautéed Paneer
+            Ingredient(name: "Paneer (cubed)", amount: 500, unit: "g"),
+            Ingredient(name: "Oil (paneer)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Kashmiri red chilli powder (paneer)", amount: 0.5, unit: "tsp"),
+            // Final Cooking
+            Ingredient(name: "Oil (final)", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Green chilli (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Onion (chopped)", amount: 2, unit: "medium"),
+            Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Coriander powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Tomato (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Capsicum", amount: 1, unit: "no."),
+            Ingredient(name: "Fresh cream", amount: 4, unit: "tbsp"),
+            Ingredient(name: "Butter", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Roasted kasuri methi powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Paneer (grated, for finishing)", amount: 30, unit: "g"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Sugar", amount: 1, unit: "pinch")
         ],
         steps: [
-            Step(order: 1, instruction: "Heat butter in a heavy pot. Add cumin seeds until they splutter."),
-            Step(order: 2, instruction: "Add finely chopped onions. Cook on medium until deep golden brown.", tip: "Don't rush this step — it builds the base flavor.", timerSeconds: 600),
-            Step(order: 3, instruction: "Add ginger-garlic paste. Sauté 2 minutes.", timerSeconds: 120),
-            Step(order: 4, instruction: "Add blended tomatoes and cook until oil separates, about 8 minutes.", timerSeconds: 480),
-            Step(order: 5, instruction: "Add rajma masala, turmeric, and salt. Stir well."),
-            Step(order: 6, instruction: "Add kidney beans with 1.5 cups water. Bring to boil, then simmer 20 minutes.", timerSeconds: 1200),
-            Step(order: 7, instruction: "Mash a few beans against the pot to thicken the gravy. Serve over steamed rice.")
+            Step(order: 1, instruction: "Heat oil in a deep pan on high. Add cumin seeds, garlic, ginger, green chilli, and sliced onion. Add all whole spices (bay leaf, cinnamon, cardamom). Cook on high until onions turn translucent."),
+            Step(order: 2, instruction: "Add tomatoes, coriander stems, salt, Kashmiri chilli powder, turmeric, whole Kashmiri red chillies, cashews, and melon seeds. Stir and cook briefly on high until tomatoes begin to soften."),
+            Step(order: 3, instruction: "Add hot water as needed. Cover and cook on medium-high until tomatoes are completely mushy.", timerSeconds: 600),
+            Step(order: 4, instruction: "Switch off flame. Discard whole spices. Cool the gravy completely, then blend into a smooth fine paste. Set aside as the base gravy.", tip: "Cool completely before blending — hot gravy in a blender can build pressure and splash."),
+            Step(order: 5, instruction: "Heat 2 tbsp oil in a wok on high. Add paneer cubes, turmeric, Kashmiri chilli powder, and a pinch of salt. Toss on high flame until paneer gets a light golden coating. Transfer to a bowl.", tip: "Work fast on high heat — you want a light crust, not deep-fried paneer."),
+            Step(order: 6, instruction: "In the same wok, heat 3 tbsp oil. Add cumin seeds, chopped green chilli, and chopped onions. Cook until onions turn golden brown.", timerSeconds: 300),
+            Step(order: 7, instruction: "Add ginger garlic paste and cook briefly until the raw smell disappears.", timerSeconds: 60),
+            Step(order: 8, instruction: "Lower the flame. Add turmeric, Kashmiri chilli powder, and coriander powder with a splash of hot water. Stir and cook the spices for 2 minutes.", timerSeconds: 120),
+            Step(order: 9, instruction: "Add chopped tomatoes and salt. Cook on high until completely mushy.", timerSeconds: 240),
+            Step(order: 10, instruction: "Add capsicum and cook on high for 1–2 minutes.", timerSeconds: 90),
+            Step(order: 11, instruction: "Strain the base gravy directly into the pan. Stir well and cook on high for 5 minutes. Taste, adjust seasoning, and add the pinch of sugar.", tip: "Straining gives the dish its silky, restaurant-style texture.", timerSeconds: 300),
+            Step(order: 12, instruction: "Add sautéed paneer, fresh cream, butter, kasuri methi powder, garam masala, and grated paneer. Stir well. Finish with fresh coriander and serve hot with naan or roti.", tip: "Grated paneer at the end naturally thickens and enriches the gravy.")
         ]
     )
 }
