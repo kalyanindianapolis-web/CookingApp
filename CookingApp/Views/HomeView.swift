@@ -29,18 +29,23 @@ struct HomeView: View {
                     header
                     searchBar
                     cuisineChipsRow
-                    sectionHeader("Recipes (\(filteredRecipes.count))")
-                    ForEach(filteredRecipes) { recipe in
-                        NavigationLink(value: recipe) {
-                            RecipeCard(recipe: recipe, isUserRecipe: store.isUserRecipe(recipe))
-                        }
-                        .buttonStyle(.plain)
-                        .contextMenu {
-                            if store.isUserRecipe(recipe) {
-                                Button(role: .destructive) {
-                                    store.delete(recipe)
-                                } label: {
-                                    Label("Delete Recipe", systemImage: "trash")
+                    ForEach(MealType.allCases, id: \.self) { mealType in
+                        let recipes = filteredRecipes.filter { $0.mealType == mealType }
+                        if !recipes.isEmpty {
+                            sectionHeader("\(mealType.rawValue) (\(recipes.count))")
+                            ForEach(recipes) { recipe in
+                                NavigationLink(value: recipe) {
+                                    RecipeCard(recipe: recipe, isUserRecipe: store.isUserRecipe(recipe))
+                                }
+                                .buttonStyle(.plain)
+                                .contextMenu {
+                                    if store.isUserRecipe(recipe) {
+                                        Button(role: .destructive) {
+                                            store.delete(recipe)
+                                        } label: {
+                                            Label("Delete Recipe", systemImage: "trash")
+                                        }
+                                    }
                                 }
                             }
                         }

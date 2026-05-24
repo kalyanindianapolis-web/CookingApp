@@ -2,7 +2,7 @@ import Foundation
 
 enum SeedRecipes {
     static let all: [Recipe] = [
-        dalTadka, jeeraRice, chanaMasala, alooGobi,
+        dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneerLababdar
     ]
 
@@ -15,6 +15,7 @@ enum SeedRecipes {
         sfSymbol: "drop.fill",
         accentHex: "FFD60A",
         isMultiDish: false,
+        mealType: .lunchDinner,
         ingredients: [
             Ingredient(name: "Toor dal", amount: 0.5, unit: "cup"),
             Ingredient(name: "Chana dal", amount: 2, unit: "tbsp"),
@@ -63,6 +64,7 @@ enum SeedRecipes {
         sfSymbol: "fork.knife",
         accentHex: "A5D6A7",
         isMultiDish: false,
+        mealType: .lunchDinner,
         ingredients: [
             Ingredient(name: "Basmati rice", amount: 1, unit: "cup"),
             Ingredient(name: "Lemon juice", amount: 1, unit: "tsp"),
@@ -79,6 +81,43 @@ enum SeedRecipes {
         ]
     )
 
+    static let bagaraRice = Recipe(
+        name: "Bagara Rice",
+        cuisine: "Hyderabadi",
+        difficulty: .easy,
+        totalMinutes: 65,
+        defaultServings: 6,
+        sfSymbol: "leaf.fill",
+        accentHex: "FF8F00",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            Ingredient(name: "Basmati rice", amount: 2, unit: "cups"),
+            Ingredient(name: "Ghee", amount: 4, unit: "tbsp"),
+            Ingredient(name: "Cinnamon stick", amount: 1, unit: "inch piece"),
+            Ingredient(name: "Cloves", amount: 6, unit: "nos."),
+            Ingredient(name: "Shah zeera (caraway seeds)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Star anise", amount: 2, unit: "nos."),
+            Ingredient(name: "Bay leaf", amount: 2, unit: "nos."),
+            Ingredient(name: "Onion (sliced)", amount: 1, unit: "cup"),
+            Ingredient(name: "Green chilli", amount: 2, unit: "nos."),
+            Ingredient(name: "Mint (pudina)", amount: 1, unit: "small bunch"),
+            Ingredient(name: "Fresh coriander (kothimir)", amount: 1, unit: "small bunch"),
+            Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Hot water", amount: 3.5, unit: "cups")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Wash basmati rice well and soak in fresh water for 1 hour. Drain before using.", timerSeconds: 3600),
+            Step(order: 2, instruction: "Melt ghee in a pressure cooker over medium heat. Add cinnamon, cloves, shah zeera, star anise, and bay leaves. Fry until aromatic.", tip: "Don't rush this step — frying the whole spices in ghee builds the fragrant base of the rice."),
+            Step(order: 3, instruction: "Add sliced onions and fry until golden brown.", timerSeconds: 360),
+            Step(order: 4, instruction: "Add green chillies, mint, coriander, and ginger garlic paste. Fry well with the onions for 1–2 minutes.", timerSeconds: 120),
+            Step(order: 5, instruction: "Add the soaked, drained rice and salt. Fry together for 2 minutes so the rice is well coated.", timerSeconds: 120),
+            Step(order: 6, instruction: "Add hot water. Top with extra chopped coriander and mint. Stir gently to mix.", tip: "Use hot water — adding cold water can make the rice gummy."),
+            Step(order: 7, instruction: "Close the pressure cooker lid. Cook on high flame until 2 whistles, then take off the flame. Let the steam release naturally before opening.", timerSeconds: 600)
+        ]
+    )
+
     static let chanaMasala = Recipe(
         name: "Dhaba Style Chana Masala",
         cuisine: "North Indian",
@@ -88,6 +127,7 @@ enum SeedRecipes {
         sfSymbol: "sparkles",
         accentHex: "8D6E63",
         isMultiDish: false,
+        mealType: .lunchDinner,
         ingredients: [
             Ingredient(name: "Dried chickpeas (soaked overnight)", amount: 250, unit: "g"),
             Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
@@ -143,6 +183,7 @@ enum SeedRecipes {
         sfSymbol: "sun.max.fill",
         accentHex: "F9A825",
         isMultiDish: false,
+        mealType: .lunchDinner,
         ingredients: [
             Ingredient(name: "Cauliflower", amount: 500, unit: "g"),
             Ingredient(name: "Potatoes", amount: 3, unit: "medium"),
@@ -181,6 +222,7 @@ enum SeedRecipes {
         sfSymbol: "square.stack.fill",
         accentHex: "F5A623",
         isMultiDish: false,
+        mealType: .breakfast,
         ingredients: [
             Ingredient(name: "Full fat milk", amount: 1, unit: "litre"),
             Ingredient(name: "Vinegar", amount: 2, unit: "tbsp"),
@@ -219,6 +261,7 @@ enum SeedRecipes {
         sfSymbol: "crown.fill",
         accentHex: "E53935",
         isMultiDish: false,
+        mealType: .lunchDinner,
         ingredients: [
             // Base Gravy
             Ingredient(name: "Oil (base gravy)", amount: 3, unit: "tbsp"),

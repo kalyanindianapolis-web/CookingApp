@@ -12,6 +12,7 @@ struct AddRecipeView: View {
     @State private var defaultServings = 2
     @State private var accentHex = "FF6B35"
     @State private var isMultiDish = false
+    @State private var mealType: MealType = .lunchDinner
 
     @State private var ingredients: [DraftIngredient] = [DraftIngredient()]
     @State private var steps: [DraftStep] = [DraftStep(order: 1)]
@@ -89,6 +90,10 @@ struct AddRecipeView: View {
             Stepper("Total time: \(totalMinutes) min", value: $totalMinutes, in: 5...300, step: 5)
 
             Stepper("Servings: \(defaultServings)", value: $defaultServings, in: 1...20)
+
+            Picker("Meal Type", selection: $mealType) {
+                ForEach(MealType.allCases, id: \.self) { Text($0.rawValue) }
+            }
 
             Toggle("Multi-dish meal", isOn: $isMultiDish)
 
@@ -184,6 +189,7 @@ struct AddRecipeView: View {
             sfSymbol: sfSymbol,
             accentHex: accentHex,
             isMultiDish: isMultiDish,
+            mealType: mealType,
             ingredients: validIngredients.map {
                 Ingredient(name: $0.name, amount: Double($0.amount) ?? 1, unit: $0.unit)
             },

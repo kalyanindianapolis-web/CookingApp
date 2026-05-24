@@ -10,6 +10,7 @@ struct Recipe: Identifiable, Hashable, Codable {
     var sfSymbol: String
     var accentHex: String
     var isMultiDish: Bool
+    var mealType: MealType
     var ingredients: [Ingredient]
     var steps: [Step]
 
@@ -23,6 +24,7 @@ struct Recipe: Identifiable, Hashable, Codable {
         sfSymbol: String = "fork.knife",
         accentHex: String,
         isMultiDish: Bool = false,
+        mealType: MealType = .lunchDinner,
         ingredients: [Ingredient],
         steps: [Step]
     ) {
@@ -35,6 +37,7 @@ struct Recipe: Identifiable, Hashable, Codable {
         self.sfSymbol = sfSymbol
         self.accentHex = accentHex
         self.isMultiDish = isMultiDish
+        self.mealType = mealType
         self.ingredients = ingredients
         self.steps = steps
     }
@@ -44,6 +47,11 @@ enum Difficulty: String, CaseIterable, Codable {
     case easy = "Easy"
     case medium = "Medium"
     case hard = "Hard"
+}
+
+enum MealType: String, CaseIterable, Codable {
+    case breakfast   = "Breakfast"
+    case lunchDinner = "Lunch & Dinner"
 }
 
 struct Ingredient: Identifiable, Hashable, Codable {
@@ -64,11 +72,34 @@ struct Ingredient: Identifiable, Hashable, Codable {
         return Ingredient(name: name, amount: amount * factor, unit: unit)
     }
 
+    private static let fractions: [(Double, String)] = [
+        (0, ""), (1/8, "1/8"), (1/4, "1/4"), (1/3, "1/3"),
+        (3/8, "3/8"), (1/2, "1/2"), (5/8, "5/8"),
+        (2/3, "2/3"), (3/4, "3/4"), (7/8, "7/8")
+    ]
+
     var displayAmount: String {
-        if amount == amount.rounded() {
-            return "\(Int(amount)) \(unit)"
+        if amount >= 20 {
+            let rounded = Int((amount / 5).rounded() * 5)
+            return "\(rounded) \(unit)"
         }
-        return String(format: "%.4g %@", amount, unit)
+        if amount >= 10 {
+            return "\(Int(amount.rounded())) \(unit)"
+        }
+        let whole = Int(amount)
+        let fractional = amount - Double(whole)
+        let nearest = Self.fractions.min(by: { abs($0.0 - fractional) < abs($1.0 - fractional) })!
+        let adjustedWhole: Int
+        let fracStr: String
+        if fractional < 0.05 {
+            adjustedWhole = whole; fracStr = ""
+        } else if nearest.0 > 0.94 {
+            adjustedWhole = whole + 1; fracStr = ""
+        } else {
+            adjustedWhole = whole; fracStr = nearest.1
+        }
+        if fracStr.isEmpty { return "\(adjustedWhole) \(unit)" }
+        return adjustedWhole == 0 ? "\(fracStr) \(unit)" : "\(adjustedWhole) \(fracStr) \(unit)"
     }
 }
 
