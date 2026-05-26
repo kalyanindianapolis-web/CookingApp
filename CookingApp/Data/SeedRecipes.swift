@@ -3,7 +3,7 @@ import Foundation
 enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
-        paneerDahiSandwich, paneer, kajuMasala,
+        paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         chiaPudding
     ]
 
@@ -675,6 +675,65 @@ enum SeedRecipes {
             Step(order: 9, instruction: "Add the prepared onion-cashew paste. Stir and cook on medium flame for 8–10 minutes, stirring continuously, until the gravy comes together.", timerSeconds: 540),
             Step(order: 10, instruction: "Add the fried cashew nuts, kasuri methi, garam masala, butter, and cream. Stir and cook for 2–3 minutes on medium flame. Taste and adjust salt.", timerSeconds: 150),
             Step(order: 11, instruction: "Finish with freshly chopped coriander. Serve hot with naan, roti, or any Indian bread.")
+        ]
+    )
+
+    // MARK: - Rajma Masala
+
+    static let rajmaMasala = Recipe(
+        name: "Dhaba Style Rajma Masala",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 45,
+        defaultServings: 5,
+        sfSymbol: "star.fill",
+        accentHex: "991B1B",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Rajma
+            Ingredient(name: "Chitra rajma (soaked overnight)", amount: 250, unit: "g"),
+            Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+            Ingredient(name: "Cinnamon", amount: 2, unit: "inch piece"),
+            Ingredient(name: "Black cardamom", amount: 1, unit: "no."),
+            Ingredient(name: "Cloves", amount: 3, unit: "nos."),
+            // Onion paste
+            Ingredient(name: "Onions (for paste)", amount: 3, unit: "medium"),
+            // Tomato puree
+            Ingredient(name: "Tomatoes", amount: 3, unit: "medium"),
+            Ingredient(name: "Garlic", amount: 15, unit: "cloves"),
+            Ingredient(name: "Ginger (for puree)", amount: 2, unit: "inch piece"),
+            Ingredient(name: "Green chilli", amount: 2, unit: "nos."),
+            // Tempering and final cooking
+            Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Oil", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Asafoetida (hing)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Coriander powder", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Dry mango powder (amchur)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Black salt", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Kasuri methi", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Ghee (finishing)", amount: 1.5, unit: "tbsp"),
+            Ingredient(name: "Yellow chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Ginger julienne", amount: 1, unit: "handful"),
+            Ingredient(name: "Green chilli (sliced)", amount: 2, unit: "nos."),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Soak rajma in water for 6–8 hours or overnight. Discard the soaking water and wash the rajma thoroughly.", tip: "Washing after soaking removes the compounds that cause bloating and any residual smell."),
+            Step(order: 2, instruction: "Transfer rajma to a pressure cooker. Add bay leaf, cinnamon, black cardamom, cloves, a large pinch of salt, and water 1 inch above the rajma. Pressure cook on high for 1 whistle, then on medium for 2–3 more whistles. Let pressure release naturally. Check if cooked; if not, cook 1 more whistle. Discard whole spices.", timerSeconds: 1200),
+            Step(order: 3, instruction: "Blend onions into a smooth paste. In a separate jar, blend tomatoes, garlic, ginger, and green chillies into a fine puree. Keep both aside."),
+            Step(order: 4, instruction: "Heat ghee and oil in a kadhai on high. Add cumin seeds and asafoetida. Add the onion paste and cook on high, stirring, until golden brown. Splash in hot water if the paste sticks to the pan.", timerSeconds: 480),
+            Step(order: 5, instruction: "Lower the flame. Add turmeric, Kashmiri red chilli powder, coriander powder, cumin powder, amchur, and black salt with a splash of water. Cook on high for 1–2 minutes.", timerSeconds: 90),
+            Step(order: 6, instruction: "Add the tomato puree and salt. Cook until the ghee separates and the masala turns crumbly — about 10–12 minutes. Add splashes of hot water if it dries out.", tip: "Full ghee release means the masala's raw smell is gone — don't shortcut this step.", timerSeconds: 720),
+            Step(order: 7, instruction: "Add the cooked rajma and stir well. Simmer for 6–8 minutes until the gravy is semi-thick. Mash a few rajma against the pot to naturally thicken the gravy faster.", tip: "Mashing 10–15 beans is faster than simmering for another 10 minutes.", timerSeconds: 480),
+            Step(order: 8, instruction: "Dry roast kasuri methi in a small pan on medium flame, then crush it between your palms and add to the gravy. In the same pan, heat ghee and pour into the rajma along with yellow chilli powder, ginger julienne, sliced green chilli, garam masala, and fresh coriander. Stir well."),
+            Step(order: 9, instruction: "Serve hot with tandoori roti, bread kulcha, or jeera rice.")
         ]
     )
 
