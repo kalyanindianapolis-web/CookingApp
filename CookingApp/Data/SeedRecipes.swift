@@ -417,6 +417,75 @@ enum SeedRecipes {
                     Step(order: 7, instruction: "Add the fried paneer and mix gently to coat well with the sauce."),
                     Step(order: 8, instruction: "Finish with freshly chopped spring onion greens and take off the heat immediately. Serve as a party appetizer with schezwan sauce on the side.", tip: "Paneer Chilli must be eaten immediately — it loses its texture as it sits.")
                 ]
+            ),
+            RecipeVariation(
+                name: "Makhani Burger",
+                accentHex: "B45309",
+                totalMinutes: 70,
+                ingredients: [
+                    // Makhani puree
+                    Ingredient(name: "Oil (puree)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Onions (sliced)", amount: 3, unit: "medium"),
+                    Ingredient(name: "Garlic (puree)", amount: 11, unit: "cloves"),
+                    Ingredient(name: "Ginger (puree)", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Green chillies (puree)", amount: 2, unit: "nos."),
+                    Ingredient(name: "Green cardamom", amount: 2, unit: "pods"),
+                    Ingredient(name: "Bay leaf", amount: 2, unit: "nos."),
+                    Ingredient(name: "Coriander stems", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Kashmiri red chillies (whole)", amount: 8, unit: "nos."),
+                    Ingredient(name: "Tomatoes (chopped)", amount: 8, unit: "nos."),
+                    Ingredient(name: "Cashew nuts", amount: 11, unit: "nos."),
+                    Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder (puree)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Coriander powder (puree)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Hot water (puree)", amount: 350, unit: "ml"),
+                    // Tadka
+                    Ingredient(name: "Butter (tadka)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Oil (tadka)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Garlic (chopped, tadka)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Ginger (julienne, tadka)", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Green chillies (chopped, tadka)", amount: 1, unit: "no."),
+                    Ingredient(name: "Kashmiri red chilli powder (tadka)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Kasuri methi powder", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Honey", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Fresh cream", amount: 2.5, unit: "tbsp"),
+                    Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+                    // Paneer patty batter
+                    Ingredient(name: "Refined flour (maida)", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Cornflour (batter)", amount: 3, unit: "tbsp"),
+                    Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder (batter)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Coriander powder (batter)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Dry mango powder (amchur)", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Black salt", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Garam masala (batter)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kasuri methi (batter)", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Paneer", amount: 500, unit: "g"),
+                    Ingredient(name: "Panko breadcrumbs", amount: 1, unit: "cup"),
+                    Ingredient(name: "Oil for deep frying", amount: 1, unit: "as needed"),
+                    // Assembly
+                    Ingredient(name: "Burger buns (toasted)", amount: 6, unit: "nos."),
+                    Ingredient(name: "Mint mayo", amount: 1, unit: "as needed"),
+                    Ingredient(name: "Romaine lettuce", amount: 1, unit: "as needed"),
+                    Ingredient(name: "Onion rings", amount: 1, unit: "as needed"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "For the makhani puree: heat oil in a wok on medium-high. Add cumin seeds and sliced onions. Cook on high until light golden brown."),
+                    Step(order: 2, instruction: "Add garlic, ginger, green chillies, cardamom, bay leaves, coriander stems, whole Kashmiri red chillies, chopped tomatoes, salt, cashews, turmeric, chilli powder, and coriander powder. Stir and cook on medium-high for 15–18 minutes until tomatoes are completely mushy. Cover to speed it up.", tip: "Don't add water until the tomatoes break down on their own — it concentrates the flavour.", timerSeconds: 1080),
+                    Step(order: 3, instruction: "Add hot water, lower the flame, cover and cook for 10 more minutes.", timerSeconds: 600),
+                    Step(order: 4, instruction: "Cool to room temperature. Blend into a fine paste using minimal water. Strain through a sieve. Set aside.", tip: "Cool completely before blending — hot liquid in a blender can splash dangerously."),
+                    Step(order: 5, instruction: "For the tadka: heat butter and oil in a pan. Add chopped garlic, ginger julienne, and green chillies. Cook on high for 1–2 minutes.", timerSeconds: 90),
+                    Step(order: 6, instruction: "Lower the flame. Add Kashmiri red chilli powder and stir quickly. Add the strained makhani puree. Cook for 5–6 minutes.", timerSeconds: 360),
+                    Step(order: 7, instruction: "Add hot water if needed to reach a thick, spreadable sauce consistency. Add garam masala, kasuri methi, honey, cream, and fresh coriander. Stir well. Taste and adjust salt. Set aside.", tip: "The sauce should coat a spoon — not drip like water, not stick like paste."),
+                    Step(order: 8, instruction: "For the patty: mix refined flour, cornflour, ginger garlic paste, all spices (chilli powder, coriander, cumin, amchur, black salt, garam masala, kasuri methi), and oil. Add water gradually and whisk into a smooth, lump-free batter."),
+                    Step(order: 9, instruction: "Season breadcrumbs with salt. Cut paneer into slabs less than 1 cm thick. Dip each slab in batter, let excess drip off, then coat evenly in breadcrumbs."),
+                    Step(order: 10, instruction: "Heat oil in a wok for deep frying. Fry coated paneer on medium-high until crisp and golden brown. Drain on a wire sieve.", timerSeconds: 300),
+                    Step(order: 11, instruction: "Toast the burger buns. Spread mint mayo on the bottom bun. Layer with romaine lettuce, the crispy paneer patty, a generous spoonful of makhani sauce, and onion rings. Cap and serve immediately.")
+                ]
             )
         ],
         baseLabel: "Lababdar"
