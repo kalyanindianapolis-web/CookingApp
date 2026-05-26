@@ -4,8 +4,7 @@ enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneerLababdar,
-        baseChiaPudding, mangoCoconutChia, orangeCreamsicleChia,
-        veryBerryChia, applePieChia, pumpkinSpiceChia, chocolateBananaChia
+        chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -319,10 +318,10 @@ enum SeedRecipes {
         ]
     )
 
-    // MARK: - Chia Puddings
+    // MARK: - Chia Pudding
 
-    static let baseChiaPudding = Recipe(
-        name: "Base Chia Pudding",
+    static let chiaPudding = Recipe(
+        name: "Chia Seed Pudding",
         cuisine: "Healthy",
         difficulty: .easy,
         totalMinutes: 125,
@@ -341,178 +340,138 @@ enum SeedRecipes {
             Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
             Step(order: 3, instruction: "Cover with a lid and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
             Step(order: 4, instruction: "Serve as-is, or top with fruits, berries, or nuts.")
-        ]
-    )
-
-    static let mangoCoconutChia = Recipe(
-        name: "Mango Coconut Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 130,
-        defaultServings: 1,
-        sfSymbol: "sun.max.fill",
-        accentHex: "F59E0B",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Canned light coconut milk", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Ripe mango", amount: 1, unit: "no."),
-            Ingredient(name: "Coconut flakes (topping)", amount: 1, unit: "tbsp")
         ],
-        steps: [
-            Step(order: 1, instruction: "Mix coconut milk, chia seeds, maple syrup, and vanilla extract in a jar."),
-            Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 4, instruction: "Peel the mango and cut into small chunks. Reserve a few chunks for topping, then blend the rest into a smooth puree."),
-            Step(order: 5, instruction: "In a jar, add alternating layers of chia pudding and mango puree. Top with mango chunks and coconut flakes.")
-        ]
-    )
-
-    static let orangeCreamsicleChia = Recipe(
-        name: "Orange Creamsicle Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 130,
-        defaultServings: 1,
-        sfSymbol: "sunrise.fill",
-        accentHex: "F97316",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Mandarins", amount: 3, unit: "nos."),
-            Ingredient(name: "Canned light coconut milk", amount: 0.25, unit: "cup"),
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Vanilla extract", amount: 1, unit: "tsp"),
-            Ingredient(name: "Greek yogurt (topping)", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Coconut flakes (topping)", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Mandarin slices (topping)", amount: 3, unit: "slices")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Squeeze the mandarins to get 3 tbsp of juice."),
-            Step(order: 2, instruction: "Mix mandarin juice, coconut milk, chia seeds, maple syrup, and vanilla in a jar."),
-            Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 5, instruction: "Top with a spoonful of Greek yogurt, mandarin slices, and coconut flakes. Finish by grating orange zest over the top.")
-        ]
-    )
-
-    static let veryBerryChia = Recipe(
-        name: "Very Berry Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 130,
-        defaultServings: 1,
-        sfSymbol: "leaf.fill",
-        accentHex: "7C3AED",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Milk", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Frozen berries", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Fresh berries (topping)", amount: 1, unit: "handful"),
-            Ingredient(name: "Granola (topping)", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Hemp hearts (topping)", amount: 1, unit: "tsp")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Blend milk, maple syrup, and frozen berries until completely smooth."),
-            Step(order: 2, instruction: "Combine the blended mixture with chia seeds in a jar and stir well."),
-            Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 5, instruction: "Add toppings: fresh berries, granola, and hemp hearts.")
-        ]
-    )
-
-    static let applePieChia = Recipe(
-        name: "Apple Pie Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 135,
-        defaultServings: 1,
-        sfSymbol: "fork.knife",
-        accentHex: "DC2626",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Almond milk", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Apple sauce", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Cinnamon", amount: 0.25, unit: "tsp"),
-            Ingredient(name: "Red apple", amount: 0.5, unit: "no."),
-            Ingredient(name: "Coconut oil", amount: 1, unit: "tsp"),
-            Ingredient(name: "Maple syrup (for apple)", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Cinnamon (for apple)", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Cinnamon (topping)", amount: 1, unit: "pinch")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Mix chia seeds, almond milk, maple syrup, apple sauce, and cinnamon in a jar."),
-            Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 4, instruction: "Chop apple into small cubes. Cook with coconut oil, maple syrup, and cinnamon in a saucepan over medium heat for 4–5 minutes until caramelized.", timerSeconds: 300),
-            Step(order: 5, instruction: "Spoon caramelized apple chunks on top of the chia pudding and finish with a pinch of cinnamon.")
-        ]
-    )
-
-    static let pumpkinSpiceChia = Recipe(
-        name: "Pumpkin Spice Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 125,
-        defaultServings: 1,
-        sfSymbol: "flame.fill",
-        accentHex: "EA580C",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Milk", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Pure pumpkin puree", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Pumpkin pie spice", amount: 1, unit: "tsp"),
-            Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Greek yogurt (topping)", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Cinnamon (topping)", amount: 1, unit: "pinch")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Mix chia seeds, milk, maple syrup, pumpkin puree, pumpkin pie spice, and vanilla in a jar."),
-            Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 4, instruction: "Add toppings: a spoonful of Greek yogurt and a pinch of cinnamon.")
-        ]
-    )
-
-    static let chocolateBananaChia = Recipe(
-        name: "Chocolate Banana Chia Pudding",
-        cuisine: "Healthy",
-        difficulty: .easy,
-        totalMinutes: 125,
-        defaultServings: 1,
-        sfSymbol: "cup.and.saucer.fill",
-        accentHex: "78350F",
-        isMultiDish: false,
-        mealType: .breakfast,
-        ingredients: [
-            Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Almond milk", amount: 0.5, unit: "cup"),
-            Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
-            Ingredient(name: "Cocoa powder", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "Chocolate chips", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Banana (topping)", amount: 1, unit: "no."),
-            Ingredient(name: "Chocolate chips (topping)", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Crushed almonds (topping)", amount: 1, unit: "tbsp")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Mix chia seeds, almond milk, maple syrup, cocoa powder, vanilla, and chocolate chips in a jar."),
-            Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
-            Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
-            Step(order: 4, instruction: "Slice the banana and add on top along with chocolate chips and crushed almonds.")
+        variations: [
+            RecipeVariation(
+                name: "Mango Coconut",
+                accentHex: "F59E0B",
+                totalMinutes: 130,
+                ingredients: [
+                    Ingredient(name: "Canned light coconut milk", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Ripe mango", amount: 1, unit: "no."),
+                    Ingredient(name: "Coconut flakes (topping)", amount: 1, unit: "tbsp")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Mix coconut milk, chia seeds, maple syrup, and vanilla extract in a jar."),
+                    Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 4, instruction: "Peel the mango and cut into small chunks. Reserve a few chunks for topping, then blend the rest into a smooth puree."),
+                    Step(order: 5, instruction: "In a jar, add alternating layers of chia pudding and mango puree. Top with mango chunks and coconut flakes.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Orange Creamsicle",
+                accentHex: "F97316",
+                totalMinutes: 130,
+                ingredients: [
+                    Ingredient(name: "Mandarins", amount: 3, unit: "nos."),
+                    Ingredient(name: "Canned light coconut milk", amount: 0.25, unit: "cup"),
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Vanilla extract", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Greek yogurt (topping)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Coconut flakes (topping)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Mandarin slices (topping)", amount: 3, unit: "slices")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Squeeze the mandarins to get 3 tbsp of juice."),
+                    Step(order: 2, instruction: "Mix mandarin juice, coconut milk, chia seeds, maple syrup, and vanilla in a jar."),
+                    Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 5, instruction: "Top with a spoonful of Greek yogurt, mandarin slices, and coconut flakes. Finish by grating orange zest over the top.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Very Berry",
+                accentHex: "7C3AED",
+                totalMinutes: 130,
+                ingredients: [
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Milk", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Frozen berries", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Fresh berries (topping)", amount: 1, unit: "handful"),
+                    Ingredient(name: "Granola (topping)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Hemp hearts (topping)", amount: 1, unit: "tsp")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Blend milk, maple syrup, and frozen berries until completely smooth."),
+                    Step(order: 2, instruction: "Combine the blended mixture with chia seeds in a jar and stir well."),
+                    Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 5, instruction: "Add toppings: fresh berries, granola, and hemp hearts.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Apple Pie",
+                accentHex: "DC2626",
+                totalMinutes: 135,
+                ingredients: [
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Almond milk", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Apple sauce", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Cinnamon", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Red apple", amount: 0.5, unit: "no."),
+                    Ingredient(name: "Coconut oil", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Maple syrup (for apple)", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Cinnamon (for apple)", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Cinnamon (topping)", amount: 1, unit: "pinch")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Mix chia seeds, almond milk, maple syrup, apple sauce, and cinnamon in a jar."),
+                    Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 4, instruction: "Chop apple into small cubes. Cook with coconut oil, maple syrup, and cinnamon in a saucepan over medium heat for 4–5 minutes until caramelized.", timerSeconds: 300),
+                    Step(order: 5, instruction: "Spoon caramelized apple chunks on top of the chia pudding and finish with a pinch of cinnamon.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Pumpkin Spice",
+                accentHex: "EA580C",
+                totalMinutes: 125,
+                ingredients: [
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Milk", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Pure pumpkin puree", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Pumpkin pie spice", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Greek yogurt (topping)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Cinnamon (topping)", amount: 1, unit: "pinch")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Mix chia seeds, milk, maple syrup, pumpkin puree, pumpkin pie spice, and vanilla in a jar."),
+                    Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 4, instruction: "Add toppings: a spoonful of Greek yogurt and a pinch of cinnamon.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Chocolate Banana",
+                accentHex: "78350F",
+                totalMinutes: 125,
+                ingredients: [
+                    Ingredient(name: "Chia seeds", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Almond milk", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Maple syrup", amount: 1.5, unit: "tsp"),
+                    Ingredient(name: "Cocoa powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Vanilla extract", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Chocolate chips", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Banana (topping)", amount: 1, unit: "no."),
+                    Ingredient(name: "Chocolate chips (topping)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Crushed almonds (topping)", amount: 1, unit: "tbsp")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Mix chia seeds, almond milk, maple syrup, cocoa powder, vanilla, and chocolate chips in a jar."),
+                    Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
+                    Step(order: 4, instruction: "Slice the banana and add on top along with chocolate chips and crushed almonds.")
+                ]
+            )
         ]
     )
 }

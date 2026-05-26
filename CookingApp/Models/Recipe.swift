@@ -1,5 +1,23 @@
 import Foundation
 
+struct RecipeVariation: Identifiable, Hashable, Codable {
+    let id: UUID
+    let name: String
+    let accentHex: String
+    let totalMinutes: Int
+    let ingredients: [Ingredient]
+    let steps: [Step]
+
+    init(id: UUID = UUID(), name: String, accentHex: String, totalMinutes: Int, ingredients: [Ingredient], steps: [Step]) {
+        self.id = id
+        self.name = name
+        self.accentHex = accentHex
+        self.totalMinutes = totalMinutes
+        self.ingredients = ingredients
+        self.steps = steps
+    }
+}
+
 struct Recipe: Identifiable, Hashable, Codable {
     let id: UUID
     var name: String
@@ -13,6 +31,7 @@ struct Recipe: Identifiable, Hashable, Codable {
     var mealType: MealType
     var ingredients: [Ingredient]
     var steps: [Step]
+    var variations: [RecipeVariation]?
 
     init(
         id: UUID = UUID(),
@@ -26,7 +45,8 @@ struct Recipe: Identifiable, Hashable, Codable {
         isMultiDish: Bool = false,
         mealType: MealType = .lunchDinner,
         ingredients: [Ingredient],
-        steps: [Step]
+        steps: [Step],
+        variations: [RecipeVariation]? = nil
     ) {
         self.id = id
         self.name = name
@@ -40,6 +60,17 @@ struct Recipe: Identifiable, Hashable, Codable {
         self.mealType = mealType
         self.ingredients = ingredients
         self.steps = steps
+        self.variations = variations
+    }
+
+    func applying(_ variation: RecipeVariation) -> Recipe {
+        var copy = self
+        copy.ingredients = variation.ingredients
+        copy.steps = variation.steps
+        copy.accentHex = variation.accentHex
+        copy.totalMinutes = variation.totalMinutes
+        copy.variations = nil
+        return copy
     }
 }
 

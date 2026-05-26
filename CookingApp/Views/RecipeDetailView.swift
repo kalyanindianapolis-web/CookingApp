@@ -5,6 +5,7 @@ struct RecipeDetailView: View {
     @State private var servings: Int
     @State private var showIngredientCheck = false
     @State private var showEditRecipe = false
+    @State private var selectedVariation: RecipeVariation? = nil
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var groceryStore: GroceryStore
     @EnvironmentObject var store: RecipeStore
@@ -14,8 +15,12 @@ struct RecipeDetailView: View {
         _servings = State(initialValue: recipe.defaultServings)
     }
 
+    private var effectiveRecipe: Recipe {
+        selectedVariation.map { recipe.applying($0) } ?? recipe
+    }
+
     var scaledIngredients: [Ingredient] {
-        recipe.ingredients.map { $0.scaled(to: servings, from: recipe.defaultServings) }
+        effectiveRecipe.ingredients.map { $0.scaled(to: servings, from: recipe.defaultServings) }
     }
 
     var body: some View {
@@ -25,6 +30,9 @@ struct RecipeDetailView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     titleBlock
                     statsRow
+                    if !(recipe.variations ?? []).isEmpty {
+                        variationPicker
+                    }
                     servingsControl
                     sectionHeader("Ingredients")
                     ingredientsList
@@ -46,7 +54,7 @@ struct RecipeDetailView: View {
             if store.isUserRecipe(recipe) { editButton }
         }
         .sheet(isPresented: $showIngredientCheck) {
-            IngredientCheckView(recipe: recipe)
+            IngredientCheckView(recipe: effectiveRecipe)
                 .environmentObject(groceryStore)
         }
         .sheet(isPresented: $showEditRecipe) {
@@ -105,8 +113,8 @@ struct RecipeDetailView: View {
 
     private var statsRow: some View {
         HStack(spacing: 10) {
-            statCard(value: "\(recipe.totalMinutes)m", label: "Time")
-            statCard(value: "\(recipe.steps.count)", label: "Steps")
+            statCard(value: "\(effectiveRecipe.totalMinutes)m", label: "Time")
+            statCard(value: "\(effectiveRecipe.steps.count)", label: "Steps")
             statCard(value: recipe.isMultiDish ? "Multi" : "Solo", label: "Dishes")
         }
     }
@@ -183,13 +191,13 @@ struct RecipeDetailView: View {
 
     private var stepsList: some View {
         VStack(spacing: 8) {
-            ForEach(recipe.steps) { step in
+            ForEach(effectiveRecipe.steps) { step in
                 HStack(alignment: .top, spacing: 12) {
                     Text("\(step.order)")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundStyle(.white)
                         .frame(width: 24, height: 24)
-                        .background(Color(hex: recipe.accentHex))
+                        .background(Color(hex: effectiveRecipe.accentHex))
                         .clipShape(Circle())
                     VStack(alignment: .leading, spacing: 4) {
                         Text(step.instruction).font(.footnote)
@@ -201,7 +209,7 @@ struct RecipeDetailView: View {
                         if let secs = step.timerSeconds {
                             Label("\(secs / 60) min timer", systemImage: "timer")
                                 .font(.caption)
-                                .foregroundStyle(Color(hex: recipe.accentHex))
+                                .foregroundStyle(Color(hex: effectiveRecipe.accentHex))
                         }
                     }
                 }
@@ -228,11 +236,38 @@ struct RecipeDetailView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(14)
-                .background(Color(hex: recipe.accentHex))
+                .background(Color(hex: effectiveRecipe.accentHex))
                 .clipShape(RoundedRectangle(cornerRadius: 14))
-                .shadow(color: Color(hex: recipe.accentHex).opacity(0.35), radius: 12, y: 6)
+                .shadow(color: Color(hex: effectiveRecipe.accentHex).opacity(0.35), radius: 12, y: 6)
         }
         .padding(.horizontal, 20).padding(.bottom, 24)
+    }
+
+    private var variationPicker: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                chip(label: "Base", isSelected: selectedVariation == nil) {
+                    selectedVariation = nil
+                }
+                ForEach(recipe.variations ?? []) { variation in
+                    chip(label: variation.name, isSelected: selectedVariation?.id == variation.id) {
+                        selectedVariation = variation
+                    }
+                }
+            }
+        }
+    }
+
+    private func chip(label: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .font(.system(size: 13, weight: .medium))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
+                .background(isSelected ? Color.primary : Color(uiColor: .systemGray5))
+                .foregroundStyle(isSelected ? Color(uiColor: .systemBackground) : Color.primary)
+                .clipShape(Capsule())
+        }
     }
 }
 
