@@ -153,7 +153,8 @@ struct AddGroceryItemSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var quantity = ""
-    @State private var category: GroceryCategory = .vegetables
+    @State private var category: GroceryCategory = .other
+    @State private var categoryWasManuallySet = false
     @FocusState private var nameFocused: Bool
 
     var body: some View {
@@ -172,6 +173,7 @@ struct AddGroceryItemSheet: View {
                     }
                     .pickerStyle(.wheel)
                     .frame(height: 140)
+                    .onChange(of: category) { categoryWasManuallySet = true }
                 }
             }
             .navigationTitle("New Item")
@@ -195,6 +197,12 @@ struct AddGroceryItemSheet: View {
                 }
             }
             .onAppear { nameFocused = true }
+            .onChange(of: name) {
+                if !categoryWasManuallySet {
+                    category = GroceryCategory.infer(from: name)
+                }
+                if name.isEmpty { categoryWasManuallySet = false }
+            }
         }
         .presentationDetents([.large])
     }

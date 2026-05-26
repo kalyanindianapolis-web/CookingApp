@@ -4,12 +4,14 @@ struct RecipeDetailView: View {
     let recipe: Recipe
     @State private var servings: Int
     @State private var showIngredientCheck = false
+    @State private var showEditRecipe = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var groceryStore: GroceryStore
+    @EnvironmentObject var store: RecipeStore
 
     init(recipe: Recipe) {
         self.recipe = recipe
-        _servings = State(initialValue: 2)
+        _servings = State(initialValue: recipe.defaultServings)
     }
 
     var scaledIngredients: [Ingredient] {
@@ -40,9 +42,16 @@ struct RecipeDetailView: View {
         }
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading) { backButton }
+        .overlay(alignment: .topTrailing) {
+            if store.isUserRecipe(recipe) { editButton }
+        }
         .sheet(isPresented: $showIngredientCheck) {
             IngredientCheckView(recipe: recipe)
                 .environmentObject(groceryStore)
+        }
+        .sheet(isPresented: $showEditRecipe) {
+            AddRecipeView(recipeToEdit: recipe)
+                .environmentObject(store)
         }
     }
 
@@ -69,6 +78,18 @@ struct RecipeDetailView: View {
                 .clipShape(Circle())
         }
         .padding(.leading, 16).padding(.top, 12)
+    }
+
+    private var editButton: some View {
+        Button { showEditRecipe = true } label: {
+            Image(systemName: "pencil")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(.primary)
+                .frame(width: 36, height: 36)
+                .background(.white.opacity(0.92))
+                .clipShape(Circle())
+        }
+        .padding(.trailing, 16).padding(.top, 12)
     }
 
     private var titleBlock: some View {
@@ -217,4 +238,6 @@ struct RecipeDetailView: View {
 
 #Preview {
     NavigationStack { RecipeDetailView(recipe: SeedRecipes.dalTadka) }
+        .environmentObject(RecipeStore())
+        .environmentObject(GroceryStore())
 }

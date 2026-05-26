@@ -30,6 +30,31 @@ enum GroceryCategory: String, Codable, CaseIterable {
     }
 }
 
+private extension String {
+    func hasAnyKeyword(_ keywords: [String]) -> Bool {
+        keywords.contains { self.contains($0) }
+    }
+}
+
+extension GroceryCategory {
+    static func infer(from name: String) -> GroceryCategory {
+        let n = name.lowercased()
+        if n.hasAnyKeyword(["dal", "toor", "chana", "masoor", "chickpea", "lentil", "rajma", "moong", "legume", "pulse"]) { return .legumes }
+        if n.hasAnyKeyword(["rice", "basmati", "wheat", "flour", "oat", "grain", "semolina", "rava", "poha"]) { return .grains }
+        if n.hasAnyKeyword(["paneer", "milk", "curd", "yogurt", "cream", "butter", "ghee", "cheese", "egg"]) { return .dairy }
+        if n.hasAnyKeyword(["cashew", "almond", "peanut", "walnut", "pistachio", "sesame", "melon seed", "nut", "seed"]) { return .nuts }
+        if n.hasAnyKeyword(["cauliflower", "potato", "aloo", "onion", "tomato", "capsicum", "bell pepper",
+                             "spinach", "carrot", "peas", "gobi", "ginger", "garlic", "green chilli", "green chili"]) { return .vegetables }
+        if n.hasAnyKeyword(["turmeric", "cumin", "coriander", "garam masala", "chilli", "chili", "pepper",
+                             "cardamom", "cinnamon", "clove", "star anise", "bay leaf", "asafoetida", "hing",
+                             "ajwain", "carom", "kasuri methi", "methi", "amchur", "mango powder", "kashmiri",
+                             "oregano", "mint", "masala"]) { return .herbs }
+        if n.hasAnyKeyword(["oil", "salt", "sugar", "vinegar", "baking soda", "lemon", "tamarind"]) { return .pantry }
+        if n.hasAnyKeyword(["bread", "bun", "naan", "paratha", "roti", "kulcha", "sandwich"]) { return .bakery }
+        return .other
+    }
+}
+
 struct GroceryItem: Identifiable, Codable {
     let id: UUID
     var name: String

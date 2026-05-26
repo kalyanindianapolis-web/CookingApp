@@ -17,6 +17,12 @@ class RecipeStore: ObservableObject {
         save()
     }
 
+    func update(_ recipe: Recipe) {
+        guard let idx = userRecipes.firstIndex(where: { $0.id == recipe.id }) else { return }
+        userRecipes[idx] = recipe
+        save()
+    }
+
     func delete(_ recipe: Recipe) {
         userRecipes.removeAll { $0.id == recipe.id }
         save()

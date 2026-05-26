@@ -136,7 +136,7 @@ struct IngredientCheckView: View {
             if !missing.isEmpty {
                 Button {
                     for ing in missing {
-                        groceryStore.add(name: ing.name, quantity: ing.displayAmount, category: .other)
+                        groceryStore.add(name: ing.name, quantity: ing.displayAmount, category: GroceryCategory.infer(from: ing.name))
                     }
                     dismiss()
                 } label: {

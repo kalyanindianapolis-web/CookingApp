@@ -4,21 +4,56 @@ struct AddRecipeView: View {
     @EnvironmentObject var store: RecipeStore
     @Environment(\.dismiss) private var dismiss
 
-    @State private var name = ""
-    @State private var sfSymbol = "fork.knife"
-    @State private var cuisine = "North Indian"
-    @State private var difficulty: Difficulty = .easy
-    @State private var totalMinutes = 30
-    @State private var defaultServings = 2
-    @State private var accentHex = "FF6B35"
-    @State private var isMultiDish = false
-    @State private var mealType: MealType = .lunchDinner
+    private let recipeToEdit: Recipe?
 
-    @State private var ingredients: [DraftIngredient] = [DraftIngredient()]
-    @State private var steps: [DraftStep] = [DraftStep(order: 1)]
+    @State private var name: String
+    @State private var sfSymbol: String
+    @State private var cuisine: String
+    @State private var difficulty: Difficulty
+    @State private var totalMinutes: Int
+    @State private var defaultServings: Int
+    @State private var accentHex: String
+    @State private var isMultiDish: Bool
+    @State private var mealType: MealType
+
+    @State private var ingredients: [DraftIngredient]
+    @State private var steps: [DraftStep]
 
     @State private var showSymbolPicker = false
     @State private var showValidationAlert = false
+
+    init(recipeToEdit: Recipe? = nil) {
+        self.recipeToEdit = recipeToEdit
+        if let r = recipeToEdit {
+            _name = State(initialValue: r.name)
+            _sfSymbol = State(initialValue: r.sfSymbol)
+            _cuisine = State(initialValue: r.cuisine)
+            _difficulty = State(initialValue: r.difficulty)
+            _totalMinutes = State(initialValue: r.totalMinutes)
+            _defaultServings = State(initialValue: r.defaultServings)
+            _accentHex = State(initialValue: r.accentHex)
+            _isMultiDish = State(initialValue: r.isMultiDish)
+            _mealType = State(initialValue: r.mealType)
+            _ingredients = State(initialValue: r.ingredients.map {
+                DraftIngredient(name: $0.name, amount: $0.amount == $0.amount.rounded() ? String(Int($0.amount)) : String($0.amount), unit: $0.unit)
+            })
+            _steps = State(initialValue: r.steps.map {
+                DraftStep(order: $0.order, instruction: $0.instruction, tip: $0.tip ?? "", timerMinutes: ($0.timerSeconds ?? 0) / 60)
+            })
+        } else {
+            _name = State(initialValue: "")
+            _sfSymbol = State(initialValue: "fork.knife")
+            _cuisine = State(initialValue: "North Indian")
+            _difficulty = State(initialValue: .easy)
+            _totalMinutes = State(initialValue: 30)
+            _defaultServings = State(initialValue: 2)
+            _accentHex = State(initialValue: "FF6B35")
+            _isMultiDish = State(initialValue: false)
+            _mealType = State(initialValue: .lunchDinner)
+            _ingredients = State(initialValue: [DraftIngredient()])
+            _steps = State(initialValue: [DraftStep(order: 1)])
+        }
+    }
 
     private let cuisineOptions = ["North Indian", "South Indian", "Hyderabadi", "Gujarati", "Bengali", "Punjabi", "Maharashtrian", "Other"]
     private let accentOptions: [(name: String, hex: String)] = [
@@ -34,7 +69,7 @@ struct AddRecipeView: View {
                 ingredientsSection
                 stepsSection
             }
-            .navigationTitle("New Recipe")
+            .navigationTitle(recipeToEdit == nil ? "New Recipe" : "Edit Recipe")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -181,6 +216,7 @@ struct AddRecipeView: View {
         }
 
         let recipe = Recipe(
+            id: recipeToEdit?.id ?? UUID(),
             name: trimmedName,
             cuisine: cuisine,
             difficulty: difficulty,
@@ -203,7 +239,11 @@ struct AddRecipeView: View {
             }
         )
 
-        store.add(recipe)
+        if recipeToEdit != nil {
+            store.update(recipe)
+        } else {
+            store.add(recipe)
+        }
         dismiss()
     }
 }
@@ -212,17 +252,30 @@ struct AddRecipeView: View {
 
 struct DraftIngredient: Identifiable {
     let id = UUID()
-    var name = ""
-    var amount = ""
-    var unit = ""
+    var name: String
+    var amount: String
+    var unit: String
+
+    init(name: String = "", amount: String = "", unit: String = "") {
+        self.name = name
+        self.amount = amount
+        self.unit = unit
+    }
 }
 
 struct DraftStep: Identifiable {
     let id = UUID()
     var order: Int
-    var instruction = ""
-    var tip = ""
-    var timerMinutes = 0
+    var instruction: String
+    var tip: String
+    var timerMinutes: Int
+
+    init(order: Int, instruction: String = "", tip: String = "", timerMinutes: Int = 0) {
+        self.order = order
+        self.instruction = instruction
+        self.tip = tip
+        self.timerMinutes = timerMinutes
+    }
 }
 
 // MARK: - Row subviews

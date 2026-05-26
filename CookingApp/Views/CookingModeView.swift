@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import AudioToolbox
 
 struct CookingModeView: View {
     let recipe: Recipe
@@ -10,6 +11,7 @@ struct CookingModeView: View {
     @State private var timerSecondsLeft = 0
     @State private var timerRunning = false
     @State private var timerCancellable: AnyCancellable?
+    @State private var timerDone = false
 
     private var currentStep: Step { recipe.steps[currentStepIndex] }
     private var progress: Double { Double(currentStepIndex + 1) / Double(recipe.steps.count) }
@@ -113,20 +115,29 @@ struct CookingModeView: View {
                 VStack(spacing: 12) {
                     Text(timeString(timerSecondsLeft))
                         .font(.system(size: 48, weight: .thin, design: .monospaced))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(timerDone ? .green : .white)
+                        .animation(.easeInOut(duration: 0.3), value: timerDone)
 
-                    Button {
-                        timerRunning ? pauseTimer() : startTimer()
-                    } label: {
-                        Image(systemName: timerRunning ? "pause.fill" : "play.fill")
-                            .font(.system(size: 20))
-                            .foregroundStyle(.black)
-                            .frame(width: 52, height: 52)
-                            .background(.white)
-                            .clipShape(Circle())
+                    if timerDone {
+                        Text("Timer done!")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.green)
+                            .transition(.opacity)
+                    } else {
+                        Button {
+                            timerRunning ? pauseTimer() : startTimer()
+                        } label: {
+                            Image(systemName: timerRunning ? "pause.fill" : "play.fill")
+                                .font(.system(size: 20))
+                                .foregroundStyle(.black)
+                                .frame(width: 52, height: 52)
+                                .background(.white)
+                                .clipShape(Circle())
+                        }
                     }
                 }
                 .padding(.bottom, 16)
+                .animation(.easeInOut(duration: 0.3), value: timerDone)
             }
         }
     }
@@ -187,6 +198,7 @@ struct CookingModeView: View {
     private func loadTimer() {
         timerSecondsLeft = currentStep.timerSeconds ?? 0
         timerRunning = false
+        timerDone = false
     }
 
     private func startTimer() {
@@ -198,6 +210,9 @@ struct CookingModeView: View {
                     timerSecondsLeft -= 1
                 } else {
                     stopTimer()
+                    timerDone = true
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    AudioServicesPlaySystemSound(1005)
                 }
             }
     }
