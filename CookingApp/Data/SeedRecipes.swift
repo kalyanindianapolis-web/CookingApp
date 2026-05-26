@@ -486,6 +486,138 @@ enum SeedRecipes {
                     Step(order: 10, instruction: "Heat oil in a wok for deep frying. Fry coated paneer on medium-high until crisp and golden brown. Drain on a wire sieve.", timerSeconds: 300),
                     Step(order: 11, instruction: "Toast the burger buns. Spread mint mayo on the bottom bun. Layer with romaine lettuce, the crispy paneer patty, a generous spoonful of makhani sauce, and onion rings. Cap and serve immediately.")
                 ]
+            ),
+            RecipeVariation(
+                name: "Spicy Burger",
+                accentHex: "B91C1C",
+                totalMinutes: 35,
+                ingredients: [
+                    // Sweet & spicy mayo
+                    Ingredient(name: "Mayonnaise", amount: 0.75, unit: "cup"),
+                    Ingredient(name: "Tomato ketchup", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Red chilli sauce", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Garlic (chopped)", amount: 0.25, unit: "tsp"),
+                    // Spicy paneer patty
+                    Ingredient(name: "Paneer", amount: 500, unit: "g"),
+                    Ingredient(name: "Refined flour (maida)", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Green chilli paste", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Amchur powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Salt & black pepper", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Breadcrumbs", amount: 1, unit: "cup"),
+                    Ingredient(name: "Oil for deep frying", amount: 1, unit: "as needed"),
+                    // Assembly
+                    Ingredient(name: "Burger buns", amount: 1, unit: "as needed"),
+                    Ingredient(name: "Butter (for toasting)", amount: 1, unit: "as needed"),
+                    Ingredient(name: "Romaine lettuce", amount: 1, unit: "as needed")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Make the sweet & spicy mayo: mix mayonnaise, red chilli sauce, tomato ketchup, and chopped garlic in a bowl until smooth. Set aside."),
+                    Step(order: 2, instruction: "Cut paneer into 4 cm × 6 cm rectangle slabs. Adjust thickness to your preference."),
+                    Step(order: 3, instruction: "In a mixing bowl, combine refined flour, red chilli powder, green chilli paste, ginger garlic paste, amchur powder, garam masala, and salt & pepper. Add water gradually and mix into a thick, lump-free batter."),
+                    Step(order: 4, instruction: "Season breadcrumbs with salt & black pepper. Dip paneer slabs in the batter, let excess drip off, then coat well with the seasoned breadcrumbs."),
+                    Step(order: 5, instruction: "Heat oil in a pan on medium-high. Deep fry the coated paneer until crisp and golden brown. Do not overcrowd the pan. Drain on absorbent paper.", timerSeconds: 300),
+                    Step(order: 6, instruction: "Slice burger buns in half and toast using butter on the inside (cut side only) until golden."),
+                    Step(order: 7, instruction: "Spread sweet & spicy mayo generously on the bottom bun. Add romaine lettuce, place the crispy paneer patty on top, and close with the top bun. Serve hot with mildly seasoned fries.", tip: "Add a cheese slice before closing for an extra indulgent burger.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Do Pyaaza",
+                accentHex: "A16207",
+                totalMinutes: 40,
+                ingredients: [
+                    // Shallow frying paneer
+                    Ingredient(name: "Paneer", amount: 750, unit: "g"),
+                    Ingredient(name: "Oil for shallow frying", amount: 1, unit: "as needed"),
+                    // Gravy
+                    Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Oil (gravy)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Bay leaves", amount: 2, unit: "nos."),
+                    Ingredient(name: "Cinnamon stick", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Green cardamom", amount: 2, unit: "nos."),
+                    Ingredient(name: "Cloves", amount: 3, unit: "nos."),
+                    Ingredient(name: "Black peppercorns", amount: 3, unit: "nos."),
+                    Ingredient(name: "Black cardamom (badi elaichi)", amount: 1, unit: "no."),
+                    Ingredient(name: "Asafoetida (hing)", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Onions (sliced)", amount: 5, unit: "medium"),
+                    Ingredient(name: "Ginger garlic paste", amount: 3, unit: "tbsp"),
+                    Ingredient(name: "Turmeric powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Tomatoes (chopped)", amount: 4, unit: "medium"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Curd", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Coriander powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Fennel powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kasuri methi", amount: 1, unit: "tsp"),
+                    // Tempering
+                    Ingredient(name: "Ghee (tempering)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Jeera (tempering)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Coriander seeds (crushed)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Green chillies (slit)", amount: 2, unit: "nos."),
+                    Ingredient(name: "Dry Kashmiri red chillies", amount: 1, unit: "no."),
+                    Ingredient(name: "Garam masala (tempering)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Onion petals", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Fresh coriander leaves", amount: 1, unit: "tbsp")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Cut paneer into 4 × 4 cm slabs or cubes. Shallow fry in oil until golden brown and crisp on both sides. Transfer immediately to salted lukewarm water and soak for 10 minutes.", timerSeconds: 600),
+                    Step(order: 2, instruction: "Set a wok on medium heat. Add ghee, oil, and all whole spices (cumin, bay leaves, cinnamon, cardamom, cloves, peppercorns, black cardamom). Sauté for a minute. Add hing and sliced onions. Cook until onions are almost golden brown."),
+                    Step(order: 3, instruction: "Add ginger garlic paste and cook until the onions turn fully golden brown. Add turmeric powder and cook for a minute.", timerSeconds: 300),
+                    Step(order: 4, instruction: "Add tomatoes and salt. Cook until completely mushy and the ghee separates from the masala.", timerSeconds: 480),
+                    Step(order: 5, instruction: "In a separate bowl, mix curd with red chilli powder, coriander powder, fennel powder, and cumin powder. Lower the flame to low. Add the curd mixture to the wok and stir continuously for 2–3 minutes. Cook on medium-low until curd is cooked and ghee separates.", tip: "Lower the flame before adding curd to prevent it from splitting.", timerSeconds: 180),
+                    Step(order: 6, instruction: "Add hot water to adjust gravy consistency. Bring to a boil and simmer for 3–4 minutes.", timerSeconds: 240),
+                    Step(order: 7, instruction: "Drain the soaked paneer and add to the gravy. Mix gently. Add garam masala and kasuri methi. Cook for 1–2 minutes.", timerSeconds: 90),
+                    Step(order: 8, instruction: "For tempering: heat ghee in a small tadka pan. Add jeera, crushed coriander seeds, dry Kashmiri red chilli, onion petals, slit green chillies, and garam masala. Sauté for 1 minute. Pour the tempering immediately over the paneer gravy.", timerSeconds: 60),
+                    Step(order: 9, instruction: "Stir gently, cover, and cook on low-medium heat for 1–2 minutes. Finish with fresh coriander. Serve hot with laccha paratha, roti, or any Indian bread.", timerSeconds: 90)
+                ]
+            ),
+            RecipeVariation(
+                name: "Palak",
+                accentHex: "15803D",
+                totalMinutes: 45,
+                ingredients: [
+                    Ingredient(name: "Spinach", amount: 1, unit: "big bunch"),
+                    Ingredient(name: "Oil (for masala)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Cloves", amount: 4, unit: "nos."),
+                    Ingredient(name: "Bay leaf", amount: 2, unit: "nos."),
+                    Ingredient(name: "Green cardamom", amount: 3, unit: "nos."),
+                    Ingredient(name: "Cinnamon stick", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Black cardamom", amount: 1, unit: "no."),
+                    Ingredient(name: "Garlic cloves", amount: 7, unit: "nos."),
+                    Ingredient(name: "Ginger", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Green chillies", amount: 2, unit: "nos."),
+                    Ingredient(name: "Onion (sliced)", amount: 2, unit: "medium"),
+                    Ingredient(name: "Tomatoes", amount: 2, unit: "medium"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Fresh coriander", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Oil (for final cooking)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Jeera (cumin seeds)", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Ginger (julienne)", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Coriander powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Turmeric powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Curd", amount: 3, unit: "tbsp"),
+                    Ingredient(name: "Paneer (cubed)", amount: 450, unit: "g"),
+                    Ingredient(name: "Paneer (grated)", amount: 50, unit: "g"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kasuri methi", amount: 1, unit: "tsp")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Blanch the entire bunch of spinach in boiling water for 2 minutes. Immediately transfer to ice-cold water to stop cooking and preserve the colour. Drain and set aside.", tip: "The ice bath locks in the vivid green colour of the spinach.", timerSeconds: 120),
+                    Step(order: 2, instruction: "Heat 2 tbsp oil in a wok. Add whole spices (cloves, bay leaves, cardamom, cinnamon, black cardamom) and sauté for 1 minute. Add garlic, ginger, green chillies, and sliced onions. Cook until onions are translucent.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Add tomatoes and salt. Cook until completely mushy.", timerSeconds: 300),
+                    Step(order: 4, instruction: "Add fresh coriander and the blanched spinach. Mix well and cook for 2–3 minutes. Add a splash of water to cool slightly, then blend the entire mixture into a fine, smooth paste.", timerSeconds: 180),
+                    Step(order: 5, instruction: "Heat 1 tbsp oil in a wok. Add jeera and let it splutter. Add ginger julienne and sauté for 1 minute. Add the spinach paste and mix well.", timerSeconds: 60),
+                    Step(order: 6, instruction: "Add red chilli powder, coriander powder, and turmeric. Stir and cook on low flame for 2–3 minutes.", timerSeconds: 180),
+                    Step(order: 7, instruction: "Add curd and stir continuously without stopping the moment it goes in. Cover and cook until the oil releases, stirring occasionally. Add water to adjust gravy consistency.", tip: "Stir immediately after adding curd so it blends in without splitting.", timerSeconds: 360),
+                    Step(order: 8, instruction: "Add the paneer cubes to the gravy and mix gently without breaking them. Add the grated paneer, stir, and cook for 2–3 minutes.", timerSeconds: 180),
+                    Step(order: 9, instruction: "Add garam masala and kasuri methi. Taste and adjust salt. Serve hot with naan, roti, or rice.")
+                ]
             )
         ],
         baseLabel: "Lababdar"
