@@ -3,7 +3,7 @@ import Foundation
 enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
-        paneerDahiSandwich, paneerLababdar,
+        paneerDahiSandwich, paneerLababdar, kajuMasala,
         chiaPudding
     ]
 
@@ -315,6 +315,61 @@ enum SeedRecipes {
             Step(order: 10, instruction: "Add capsicum and cook on high for 1–2 minutes.", timerSeconds: 90),
             Step(order: 11, instruction: "Strain the base gravy directly into the pan. Stir well and cook on high for 5 minutes. Taste, adjust seasoning, and add the pinch of sugar.", tip: "Straining gives the dish its silky, restaurant-style texture.", timerSeconds: 300),
             Step(order: 12, instruction: "Add sautéed paneer, fresh cream, butter, kasuri methi powder, garam masala, and grated paneer. Stir well. Finish with fresh coriander and serve hot with naan or roti.", tip: "Grated paneer at the end naturally thickens and enriches the gravy.")
+        ]
+    )
+
+    // MARK: - Kaju Masala
+
+    static let kajuMasala = Recipe(
+        name: "Kaju Masala",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 50,
+        defaultServings: 4,
+        sfSymbol: "hexagon.fill",
+        accentHex: "D97706",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Cashew paste
+            Ingredient(name: "Onions (for paste)", amount: 3, unit: "medium"),
+            Ingredient(name: "Cashew nuts (for paste)", amount: 0.75, unit: "cup"),
+            // Gravy
+            Ingredient(name: "Ghee", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Cashew nuts (to fry)", amount: 0.75, unit: "cup"),
+            Ingredient(name: "Oil", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Cardamom", amount: 3, unit: "nos."),
+            Ingredient(name: "Cinnamon", amount: 1, unit: "inch piece"),
+            Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+            Ingredient(name: "Garlic (chopped)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Green chillies (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Onions (chopped)", amount: 2, unit: "medium"),
+            Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Coriander powder", amount: 2, unit: "tsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Tomatoes (chopped)", amount: 4, unit: "medium"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Kasuri methi", amount: 1, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "tsp"),
+            Ingredient(name: "Butter", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cream", amount: 2.5, unit: "tbsp"),
+            Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "handful")
+        ],
+        steps: [
+            Step(order: 1, instruction: "For the paste: bring a pot of water to boil. Add 3 onions and 3/4 cup cashew nuts. Boil on high flame for 10–12 minutes.", timerSeconds: 720),
+            Step(order: 2, instruction: "Strain the boiled cashews and onions, rinse well with fresh water. Transfer to a blender, add a little water, and grind into a fine, smooth paste. Set aside.", tip: "The smoother the paste, the silkier your gravy will be."),
+            Step(order: 3, instruction: "Set a wok on low heat. Add ghee and the remaining 3/4 cup cashew nuts. Shallow fry on low flame until golden brown, watching closely as they colour quickly. Remove onto absorbent paper.", tip: "Cashews can burn in seconds — stay attentive and use large-size ones for best results."),
+            Step(order: 4, instruction: "In the same wok, add 1 tbsp oil. Add cumin seeds, cardamom, cinnamon, bay leaf, chopped garlic, and green chillies. Stir and cook on low flame until the garlic is nicely cooked.", timerSeconds: 120),
+            Step(order: 5, instruction: "Add the chopped onions. Cook on medium flame until golden brown.", timerSeconds: 480),
+            Step(order: 6, instruction: "Add ginger garlic paste, turmeric powder, and Kashmiri red chilli powder. Stir and cook on medium-low for 1–2 minutes.", timerSeconds: 90),
+            Step(order: 7, instruction: "Add coriander powder and cumin powder. Splash in a little water to prevent burning. Cook on medium-low until the ghee is released.", timerSeconds: 120),
+            Step(order: 8, instruction: "Add the chopped tomatoes and salt. Stir well, cover, and cook on low flame for 10–15 minutes, stirring in intervals, until the ghee separates.", tip: "Full ghee release here means the masala is properly cooked — don't rush it.", timerSeconds: 750),
+            Step(order: 9, instruction: "Add the prepared onion-cashew paste. Stir and cook on medium flame for 8–10 minutes, stirring continuously, until the gravy comes together.", timerSeconds: 540),
+            Step(order: 10, instruction: "Add the fried cashew nuts, kasuri methi, garam masala, butter, and cream. Stir and cook for 2–3 minutes on medium flame. Taste and adjust salt.", timerSeconds: 150),
+            Step(order: 11, instruction: "Finish with freshly chopped coriander. Serve hot with naan, roti, or any Indian bread.")
         ]
     )
 
