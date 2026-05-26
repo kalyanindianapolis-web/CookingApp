@@ -32,6 +32,7 @@ struct Recipe: Identifiable, Hashable, Codable {
     var ingredients: [Ingredient]
     var steps: [Step]
     var variations: [RecipeVariation]?
+    var baseLabel: String?
 
     init(
         id: UUID = UUID(),
@@ -46,7 +47,8 @@ struct Recipe: Identifiable, Hashable, Codable {
         mealType: MealType = .lunchDinner,
         ingredients: [Ingredient],
         steps: [Step],
-        variations: [RecipeVariation]? = nil
+        variations: [RecipeVariation]? = nil,
+        baseLabel: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -61,6 +63,7 @@ struct Recipe: Identifiable, Hashable, Codable {
         self.ingredients = ingredients
         self.steps = steps
         self.variations = variations
+        self.baseLabel = baseLabel
     }
 
     func applying(_ variation: RecipeVariation) -> Recipe {

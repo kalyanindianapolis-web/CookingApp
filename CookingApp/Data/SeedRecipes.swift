@@ -3,7 +3,7 @@ import Foundation
 enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
-        paneerDahiSandwich, paneerLababdar, kajuMasala,
+        paneerDahiSandwich, paneer, kajuMasala,
         chiaPudding
     ]
 
@@ -316,6 +316,110 @@ enum SeedRecipes {
             Step(order: 11, instruction: "Strain the base gravy directly into the pan. Stir well and cook on high for 5 minutes. Taste, adjust seasoning, and add the pinch of sugar.", tip: "Straining gives the dish its silky, restaurant-style texture.", timerSeconds: 300),
             Step(order: 12, instruction: "Add sautéed paneer, fresh cream, butter, kasuri methi powder, garam masala, and grated paneer. Stir well. Finish with fresh coriander and serve hot with naan or roti.", tip: "Grated paneer at the end naturally thickens and enriches the gravy.")
         ]
+    )
+
+    // MARK: - Paneer (grouped)
+
+    static let paneer = Recipe(
+        name: "Paneer",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 45,
+        defaultServings: 5,
+        sfSymbol: "crown.fill",
+        accentHex: "E53935",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: paneerLababdar.ingredients,
+        steps: paneerLababdar.steps,
+        variations: [
+            RecipeVariation(
+                name: "Butter Masala",
+                accentHex: "FF6D00",
+                totalMinutes: 40,
+                ingredients: [
+                    // Paste
+                    Ingredient(name: "Tomatoes (for paste)", amount: 4, unit: "nos."),
+                    Ingredient(name: "Garlic (for paste)", amount: 9, unit: "cloves"),
+                    Ingredient(name: "Ginger (for paste)", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Coriander stems", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Green chilli (for paste)", amount: 1, unit: "no."),
+                    Ingredient(name: "Kashmiri red chilli powder (paste)", amount: 1.5, unit: "tbsp"),
+                    Ingredient(name: "Coriander powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Cumin powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Cashews (soaked)", amount: 15, unit: "nos."),
+                    // Sautéed paneer
+                    Ingredient(name: "Oil (paneer)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Butter (paneer)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Paneer (cubed)", amount: 500, unit: "g"),
+                    Ingredient(name: "Kashmiri red chilli powder (paneer)", amount: 1, unit: "pinch"),
+                    // Gravy
+                    Ingredient(name: "Oil (gravy)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Butter (gravy)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Green cardamom", amount: 3, unit: "nos."),
+                    Ingredient(name: "Cinnamon", amount: 0.5, unit: "inch piece"),
+                    Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+                    Ingredient(name: "Garlic (chopped)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Green chilli (chopped)", amount: 1, unit: "no."),
+                    Ingredient(name: "Onion (chopped)", amount: 3, unit: "medium"),
+                    Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder (gravy)", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Butter (finishing)", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Fresh cream", amount: 3.5, unit: "tbsp"),
+                    Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "handful")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Soak cashews in boiling water for 10–15 minutes.", timerSeconds: 750),
+                    Step(order: 2, instruction: "Add all paste ingredients (tomatoes, garlic, ginger, coriander stems, green chilli, Kashmiri chilli powder, coriander powder, cumin powder, soaked cashews) to a blender. Grind into a fine, smooth paste. Set aside.", tip: "Drain the cashews before adding — excess water makes the paste thin."),
+                    Step(order: 3, instruction: "Heat a pan on high. Add oil and butter. Once hot, add paneer cubes with a pinch of salt and Kashmiri chilli powder. Toss on high flame for 1–2 minutes until lightly golden. Remove and set aside.", tip: "Sautéing the paneer first helps it hold its shape in the gravy.", timerSeconds: 90),
+                    Step(order: 4, instruction: "Heat a wok or kadhai. Add oil and butter. Once hot, add cumin seeds, cardamom, cinnamon, and bay leaf. Add chopped garlic and green chilli. Add onions and cook on medium-high until light golden brown.", timerSeconds: 480),
+                    Step(order: 5, instruction: "Add turmeric and Kashmiri red chilli powder. Splash in hot water, stir, and cook the masala for 2–3 minutes.", timerSeconds: 150),
+                    Step(order: 6, instruction: "Add the prepared paste, salt, and sugar. Stir well and cook on medium-high until the oil separates.", tip: "Keep stirring — the paste will spit as it cooks down.", timerSeconds: 480),
+                    Step(order: 7, instruction: "Add hot water to adjust gravy consistency. Cook for 2–3 minutes. Taste and adjust seasoning.", timerSeconds: 150),
+                    Step(order: 8, instruction: "Add sautéed paneer, butter, roasted kasuri methi powder, garam masala, and fresh cream. Stir gently and cook for just 1–2 minutes. Finish with fresh coriander.", timerSeconds: 90),
+                    Step(order: 9, instruction: "Serve hot with naan, tandoori roti, or rumali roti.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Chilli",
+                accentHex: "2E7D32",
+                totalMinutes: 35,
+                ingredients: [
+                    Ingredient(name: "Paneer (cubed)", amount: 250, unit: "g"),
+                    Ingredient(name: "Salt & black pepper", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Cornstarch (coating)", amount: 0.25, unit: "cup"),
+                    Ingredient(name: "Oil (for frying)", amount: 3, unit: "tbsp"),
+                    Ingredient(name: "Garlic (chopped)", amount: 14, unit: "cloves"),
+                    Ingredient(name: "Ginger (chopped)", amount: 1, unit: "inch piece"),
+                    Ingredient(name: "Green chillies (slit)", amount: 9, unit: "nos."),
+                    Ingredient(name: "Spring onion bulbs", amount: 6, unit: "stalks"),
+                    Ingredient(name: "Capsicum (diced)", amount: 2, unit: "medium"),
+                    Ingredient(name: "Spring onion greens (chopped)", amount: 0.25, unit: "cup"),
+                    Ingredient(name: "Sugar", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Soy sauce", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Red chilli sauce", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Cornflour (sauce)", amount: 5, unit: "tbsp"),
+                    Ingredient(name: "Water (for cornflour)", amount: 100, unit: "ml"),
+                    Ingredient(name: "Spring onion greens (garnish)", amount: 1, unit: "handful")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "In a mixing bowl, toss paneer cubes with salt, black pepper, and cornstarch until evenly coated."),
+                    Step(order: 2, instruction: "Set a pan on medium heat, add oil and shallow fry the coated paneer on all sides until golden brown. Remove and set aside.", timerSeconds: 300),
+                    Step(order: 3, instruction: "Set the same pan on high heat. Add a little more oil, then add garlic, ginger, green chillies, and spring onion bulbs. Sauté on high flame for 3–4 minutes.", timerSeconds: 240),
+                    Step(order: 4, instruction: "Add capsicum, spring onion greens, and sugar. Sauté for 1 minute.", timerSeconds: 60),
+                    Step(order: 5, instruction: "Add soy sauce and red chilli sauce. Sauté for 1 minute.", timerSeconds: 60),
+                    Step(order: 6, instruction: "Mix cornflour with 100 ml water until smooth. Pour into the pan, season with salt and black pepper, and cook until the sauce thickens.", tip: "Keep stirring as you add the cornflour mixture to avoid lumps.", timerSeconds: 120),
+                    Step(order: 7, instruction: "Add the fried paneer and mix gently to coat well with the sauce."),
+                    Step(order: 8, instruction: "Finish with freshly chopped spring onion greens and take off the heat immediately. Serve as a party appetizer with schezwan sauce on the side.", tip: "Paneer Chilli must be eaten immediately — it loses its texture as it sits.")
+                ]
+            )
+        ],
+        baseLabel: "Lababdar"
     )
 
     // MARK: - Kaju Masala

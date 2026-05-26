@@ -246,7 +246,7 @@ struct RecipeDetailView: View {
     private var variationPicker: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                chip(label: "Base", isSelected: selectedVariation == nil) {
+                chip(label: recipe.baseLabel ?? "Base", isSelected: selectedVariation == nil) {
                     selectedVariation = nil
                 }
                 ForEach(recipe.variations ?? []) { variation in
