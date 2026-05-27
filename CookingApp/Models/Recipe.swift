@@ -7,14 +7,16 @@ struct RecipeVariation: Identifiable, Hashable, Codable {
     let totalMinutes: Int
     let ingredients: [Ingredient]
     let steps: [Step]
+    let imageName: String?
 
-    init(id: UUID = UUID(), name: String, accentHex: String, totalMinutes: Int, ingredients: [Ingredient], steps: [Step]) {
+    init(id: UUID = UUID(), name: String, accentHex: String, totalMinutes: Int, ingredients: [Ingredient], steps: [Step], imageName: String? = nil) {
         self.id = id
         self.name = name
         self.accentHex = accentHex
         self.totalMinutes = totalMinutes
         self.ingredients = ingredients
         self.steps = steps
+        self.imageName = imageName
     }
 }
 
@@ -75,6 +77,7 @@ struct Recipe: Identifiable, Hashable, Codable {
         copy.steps = variation.steps
         copy.accentHex = variation.accentHex
         copy.totalMinutes = variation.totalMinutes
+        copy.imageName = variation.imageName ?? self.imageName
         copy.variations = nil
         return copy
     }

@@ -389,7 +389,8 @@ enum SeedRecipes {
                     Step(order: 7, instruction: "Add hot water to adjust gravy consistency. Cook for 2–3 minutes. Taste and adjust seasoning.", timerSeconds: 150),
                     Step(order: 8, instruction: "Add sautéed paneer, butter, roasted kasuri methi powder, garam masala, and fresh cream. Stir gently and cook for just 1–2 minutes. Finish with fresh coriander.", timerSeconds: 90),
                     Step(order: 9, instruction: "Serve hot with naan, tandoori roti, or rumali roti.")
-                ]
+                ],
+                imageName: "recipe_paneer_butter_masala"
             ),
             RecipeVariation(
                 name: "Chilli",
@@ -422,7 +423,8 @@ enum SeedRecipes {
                     Step(order: 6, instruction: "Mix cornflour with 100 ml water until smooth. Pour into the pan, season with salt and black pepper, and cook until the sauce thickens.", tip: "Keep stirring as you add the cornflour mixture to avoid lumps.", timerSeconds: 120),
                     Step(order: 7, instruction: "Add the fried paneer and mix gently to coat well with the sauce."),
                     Step(order: 8, instruction: "Finish with freshly chopped spring onion greens and take off the heat immediately. Serve as a party appetizer with schezwan sauce on the side.", tip: "Paneer Chilli must be eaten immediately — it loses its texture as it sits.")
-                ]
+                ],
+                imageName: "recipe_paneer_chilli"
             ),
             RecipeVariation(
                 name: "Makhani Burger",
@@ -491,7 +493,8 @@ enum SeedRecipes {
                     Step(order: 9, instruction: "Season breadcrumbs with salt. Cut paneer into slabs less than 1 cm thick. Dip each slab in batter, let excess drip off, then coat evenly in breadcrumbs."),
                     Step(order: 10, instruction: "Heat oil in a wok for deep frying. Fry coated paneer on medium-high until crisp and golden brown. Drain on a wire sieve.", timerSeconds: 300),
                     Step(order: 11, instruction: "Toast the burger buns. Spread mint mayo on the bottom bun. Layer with romaine lettuce, the crispy paneer patty, a generous spoonful of makhani sauce, and onion rings. Cap and serve immediately.")
-                ]
+                ],
+                imageName: "recipe_paneer_makhani_burger"
             ),
             RecipeVariation(
                 name: "Spicy Burger",
@@ -527,7 +530,8 @@ enum SeedRecipes {
                     Step(order: 5, instruction: "Heat oil in a pan on medium-high. Deep fry the coated paneer until crisp and golden brown. Do not overcrowd the pan. Drain on absorbent paper.", timerSeconds: 300),
                     Step(order: 6, instruction: "Slice burger buns in half and toast using butter on the inside (cut side only) until golden."),
                     Step(order: 7, instruction: "Spread sweet & spicy mayo generously on the bottom bun. Add romaine lettuce, place the crispy paneer patty on top, and close with the top bun. Serve hot with mildly seasoned fries.", tip: "Add a cheese slice before closing for an extra indulgent burger.")
-                ]
+                ],
+                imageName: "recipe_paneer_spicy_burger"
             ),
             RecipeVariation(
                 name: "Do Pyaaza",
@@ -580,7 +584,8 @@ enum SeedRecipes {
                     Step(order: 7, instruction: "Drain the soaked paneer and add to the gravy. Mix gently. Add garam masala and kasuri methi. Cook for 1–2 minutes.", timerSeconds: 90),
                     Step(order: 8, instruction: "For tempering: heat ghee in a small tadka pan. Add jeera, crushed coriander seeds, dry Kashmiri red chilli, onion petals, slit green chillies, and garam masala. Sauté for 1 minute. Pour the tempering immediately over the paneer gravy.", timerSeconds: 60),
                     Step(order: 9, instruction: "Stir gently, cover, and cook on low-medium heat for 1–2 minutes. Finish with fresh coriander. Serve hot with laccha paratha, roti, or any Indian bread.", timerSeconds: 90)
-                ]
+                ],
+                imageName: "recipe_paneer_do_pyaaza"
             ),
             RecipeVariation(
                 name: "Palak",
@@ -623,7 +628,8 @@ enum SeedRecipes {
                     Step(order: 7, instruction: "Add curd and stir continuously without stopping the moment it goes in. Cover and cook until the oil releases, stirring occasionally. Add water to adjust gravy consistency.", tip: "Stir immediately after adding curd so it blends in without splitting.", timerSeconds: 360),
                     Step(order: 8, instruction: "Add the paneer cubes to the gravy and mix gently without breaking them. Add the grated paneer, stir, and cook for 2–3 minutes.", timerSeconds: 180),
                     Step(order: 9, instruction: "Add garam masala and kasuri methi. Taste and adjust salt. Serve hot with naan, roti, or rice.")
-                ]
+                ],
+                imageName: "recipe_palak_paneer"
             ),
             RecipeVariation(
                 name: "Kaju Masala",
@@ -668,11 +674,12 @@ enum SeedRecipes {
                     Step(order: 9, instruction: "Once the gravy is crumbly and the ghee has separated, add hot water to adjust consistency. Cook for 2–3 minutes.", timerSeconds: 150),
                     Step(order: 10, instruction: "Add the fried paneer, fried cashews (reserve a few for garnish), slit green chilli, ginger julienne, garam masala, and kasuri methi powder. Stir and cook for 3–4 minutes.", timerSeconds: 210),
                     Step(order: 11, instruction: "Taste and adjust salt. Finish with fresh coriander. Garnish with reserved fried cashews. Serve with tandoori roti or naan.")
-                ]
+                ],
+                imageName: "recipe_paneer_kaju_masala"
             )
         ],
         baseLabel: "Lababdar",
-        imageName: "recipe_paneer"
+        imageName: "recipe_paneer_lababdar"
     )
 
     // MARK: - Kaju Masala
@@ -833,7 +840,8 @@ enum SeedRecipes {
                     Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 4, instruction: "Peel the mango and cut into small chunks. Reserve a few chunks for topping, then blend the rest into a smooth puree."),
                     Step(order: 5, instruction: "In a jar, add alternating layers of chia pudding and mango puree. Top with mango chunks and coconut flakes.")
-                ]
+                ],
+                imageName: "recipe_chia_mango"
             ),
             RecipeVariation(
                 name: "Orange Creamsicle",
@@ -855,7 +863,8 @@ enum SeedRecipes {
                     Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
                     Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 5, instruction: "Top with a spoonful of Greek yogurt, mandarin slices, and coconut flakes. Finish by grating orange zest over the top.")
-                ]
+                ],
+                imageName: "recipe_chia_orange"
             ),
             RecipeVariation(
                 name: "Very Berry",
@@ -876,7 +885,8 @@ enum SeedRecipes {
                     Step(order: 3, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
                     Step(order: 4, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 5, instruction: "Add toppings: fresh berries, granola, and hemp hearts.")
-                ]
+                ],
+                imageName: "recipe_chia_berry"
             ),
             RecipeVariation(
                 name: "Apple Pie",
@@ -900,7 +910,8 @@ enum SeedRecipes {
                     Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 4, instruction: "Chop apple into small cubes. Cook with coconut oil, maple syrup, and cinnamon in a saucepan over medium heat for 4–5 minutes until caramelized.", timerSeconds: 300),
                     Step(order: 5, instruction: "Spoon caramelized apple chunks on top of the chia pudding and finish with a pinch of cinnamon.")
-                ]
+                ],
+                imageName: "recipe_chia_apple"
             ),
             RecipeVariation(
                 name: "Pumpkin Spice",
@@ -921,7 +932,8 @@ enum SeedRecipes {
                     Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
                     Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 4, instruction: "Add toppings: a spoonful of Greek yogurt and a pinch of cinnamon.")
-                ]
+                ],
+                imageName: "recipe_chia_pumpkin"
             ),
             RecipeVariation(
                 name: "Chocolate Banana",
@@ -943,7 +955,8 @@ enum SeedRecipes {
                     Step(order: 2, instruction: "Let sit for 5 minutes, then stir again to break up any clumps.", timerSeconds: 300),
                     Step(order: 3, instruction: "Cover and refrigerate for at least 2 hours.", tip: "Store in the fridge for up to 5 days, or freeze for 3–4 weeks.", timerSeconds: 7200),
                     Step(order: 4, instruction: "Slice the banana and add on top along with chocolate chips and crushed almonds.")
-                ]
+                ],
+                imageName: "recipe_chia_chocolate"
             )
         ],
         imageName: "recipe_chia_pudding"
