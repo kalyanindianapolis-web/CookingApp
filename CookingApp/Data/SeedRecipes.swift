@@ -53,7 +53,8 @@ enum SeedRecipes {
             Step(order: 6, instruction: "Add chopped tomato and salt. Cook until mushy. Add all powdered spices (turmeric, Kashmiri chilli, coriander, garam masala) and a splash of water. Carefully tilt the pan toward the flame for a few seconds.", tip: "Tilting the pan so the flame enters creates a smoky dhaba flavour — do this carefully and only briefly."),
             Step(order: 7, instruction: "Add the boiled dal and stir well. Bring to a boil. Add kasuri methi powder, dry mango powder, butter, and fresh coriander. Mix well."),
             Step(order: 8, instruction: "For the 2nd tadka: heat a small pan, add 1 tbsp ghee. Fry sliced onion until light golden. Add red chilli, asafoetida, and Kashmiri chilli powder. Immediately pour over the dal and serve hot.", timerSeconds: 180)
-        ]
+        ],
+        imageName: "recipe_dal_tadka"
     )
 
     static let jeeraRice = Recipe(
@@ -79,7 +80,8 @@ enum SeedRecipes {
             Step(order: 2, instruction: "Bring a large pot of water to a rolling boil. Add salt and lemon juice with the slice. Add soaked, drained rice. Cook until 90% done — about 4–5 minutes.", timerSeconds: 300),
             Step(order: 3, instruction: "Drain through a sieve and fluff gently with forks to release steam. Spread out and cool completely.", tip: "Cooling the rice prevents it from going mushy when tossed in the wok."),
             Step(order: 4, instruction: "Heat a wok on high and add ghee. Once hot, add cumin seeds and let them crackle. Add cooled rice, salt, and fresh coriander. Toss on high flame for a few seconds and serve.", timerSeconds: 60)
-        ]
+        ],
+        imageName: "recipe_jeera_rice"
     )
 
     static let bagaraRice = Recipe(
@@ -116,7 +118,8 @@ enum SeedRecipes {
             Step(order: 5, instruction: "Add the soaked, drained rice and salt. Fry together for 2 minutes so the rice is well coated.", timerSeconds: 120),
             Step(order: 6, instruction: "Add hot water. Top with extra chopped coriander and mint. Stir gently to mix.", tip: "Use hot water — adding cold water can make the rice gummy."),
             Step(order: 7, instruction: "Close the pressure cooker lid. Cook on high flame until 2 whistles, then take off the flame. Let the steam release naturally before opening.", timerSeconds: 600)
-        ]
+        ],
+        imageName: "recipe_bagara_rice"
     )
 
     static let chanaMasala = Recipe(
@@ -172,7 +175,8 @@ enum SeedRecipes {
             Step(order: 10, instruction: "Mash a few chickpeas against the pot with the back of a spoon to naturally thicken the gravy.", tip: "This is faster than simmering longer."),
             Step(order: 11, instruction: "Dry roast kasuri methi in a separate pan on medium, then crush between your palms. Add to the gravy along with ginger julienne, sliced green chili, garam masala, and fresh coriander. Stir well.", tip: "Crushing kasuri methi between warm palms releases its full aroma."),
             Step(order: 12, instruction: "Serve hot with tandoori roti, bread kulcha, or jeera rice.")
-        ]
+        ],
+        imageName: "recipe_chana_masala"
     )
 
     static let alooGobi = Recipe(
@@ -211,7 +215,8 @@ enum SeedRecipes {
             Step(order: 6, instruction: "Uncover, stir, then add the ginger–chilli paste and drained cauliflower. Mix well. Cover and cook for 2–3 minutes to let the vegetables steam and release moisture.", timerSeconds: 180),
             Step(order: 7, instruction: "Remove lid. Add salt, turmeric, coriander powder, garam masala, and cumin powder. Stir gently to coat. Cover and cook on low for 10–15 minutes, stirring occasionally, until potatoes and cauliflower are fully tender.", tip: "Low and slow is key — don't rush with high heat or the vegetables will brown unevenly.", timerSeconds: 720),
             Step(order: 8, instruction: "Taste and adjust salt. Finish with dry mango powder and fresh coriander. Mix gently and serve hot with chapati, laccha paratha, or puris.")
-        ]
+        ],
+        imageName: "recipe_aloo_gobi"
     )
 
     static let paneerDahiSandwich = Recipe(
@@ -250,7 +255,8 @@ enum SeedRecipes {
             Step(order: 8, instruction: "Heat a pan and apply butter on the surface. Place the sandwich and press firmly with a flat plate. Toast until the bottom is golden and crisp.", tip: "Pressing with a plate ensures even contact and a perfectly golden crust.", timerSeconds: 180),
             Step(order: 9, instruction: "Apply butter on the top side, flip the sandwich, press again with the plate, and toast until this side is also golden and crisp.", timerSeconds: 180),
             Step(order: 10, instruction: "Transfer to a chopping board, cut, and serve hot. Crispy on the outside, creamy and fresh on the inside.")
-        ]
+        ],
+        imageName: "recipe_paneer_sandwich"
     )
 
     static let paneerLababdar = Recipe(
@@ -665,7 +671,8 @@ enum SeedRecipes {
                 ]
             )
         ],
-        baseLabel: "Lababdar"
+        baseLabel: "Lababdar",
+        imageName: "recipe_paneer"
     )
 
     // MARK: - Kaju Masala
@@ -720,7 +727,8 @@ enum SeedRecipes {
             Step(order: 9, instruction: "Add the prepared onion-cashew paste. Stir and cook on medium flame for 8–10 minutes, stirring continuously, until the gravy comes together.", timerSeconds: 540),
             Step(order: 10, instruction: "Add the fried cashew nuts, kasuri methi, garam masala, butter, and cream. Stir and cook for 2–3 minutes on medium flame. Taste and adjust salt.", timerSeconds: 150),
             Step(order: 11, instruction: "Finish with freshly chopped coriander. Serve hot with naan, roti, or any Indian bread.")
-        ]
+        ],
+        imageName: "recipe_paneer"
     )
 
     // MARK: - Rajma Masala
@@ -779,7 +787,8 @@ enum SeedRecipes {
             Step(order: 7, instruction: "Add the cooked rajma and stir well. Simmer for 6–8 minutes until the gravy is semi-thick. Mash a few rajma against the pot to naturally thicken the gravy faster.", tip: "Mashing 10–15 beans is faster than simmering for another 10 minutes.", timerSeconds: 480),
             Step(order: 8, instruction: "Dry roast kasuri methi in a small pan on medium flame, then crush it between your palms and add to the gravy. In the same pan, heat ghee and pour into the rajma along with yellow chilli powder, ginger julienne, sliced green chilli, garam masala, and fresh coriander. Stir well."),
             Step(order: 9, instruction: "Serve hot with tandoori roti, bread kulcha, or jeera rice.")
-        ]
+        ],
+        imageName: "recipe_rajma"
     )
 
     // MARK: - Chia Pudding
@@ -936,6 +945,7 @@ enum SeedRecipes {
                     Step(order: 4, instruction: "Slice the banana and add on top along with chocolate chips and crushed almonds.")
                 ]
             )
-        ]
+        ],
+        imageName: "recipe_chia_pudding"
     )
 }

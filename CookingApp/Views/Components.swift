@@ -23,10 +23,16 @@ struct RecipeCard: View {
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
-                Color(hex: recipe.accentHex).opacity(0.15)
-                Image(systemName: recipe.sfSymbol)
-                    .font(.system(size: 26, weight: .semibold))
-                    .foregroundStyle(Color(hex: recipe.accentHex))
+                if let imageName = recipe.imageName {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Color(hex: recipe.accentHex).opacity(0.15)
+                    Image(systemName: recipe.sfSymbol)
+                        .font(.system(size: 26, weight: .semibold))
+                        .foregroundStyle(Color(hex: recipe.accentHex))
+                }
             }
             .frame(width: 60, height: 60)
             .clipShape(RoundedRectangle(cornerRadius: 12))

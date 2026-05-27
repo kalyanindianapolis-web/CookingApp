@@ -65,15 +65,26 @@ struct RecipeDetailView: View {
 
     private var heroImage: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color(hex: recipe.accentHex), Color(hex: recipe.accentHex).opacity(0.7)],
-                startPoint: .topLeading, endPoint: .bottomTrailing
-            )
-            Image(systemName: recipe.sfSymbol)
-            .font(.system(size: 72, weight: .semibold))
-            .foregroundStyle(.white.opacity(0.9))
+            if let imageName = recipe.imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+                LinearGradient(
+                    colors: [.black.opacity(0.35), .clear],
+                    startPoint: .bottom, endPoint: .center
+                )
+            } else {
+                LinearGradient(
+                    colors: [Color(hex: recipe.accentHex), Color(hex: recipe.accentHex).opacity(0.7)],
+                    startPoint: .topLeading, endPoint: .bottomTrailing
+                )
+                Image(systemName: recipe.sfSymbol)
+                    .font(.system(size: 72, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.9))
+            }
         }
         .frame(height: 220)
+        .clipped()
     }
 
     private var backButton: some View {
