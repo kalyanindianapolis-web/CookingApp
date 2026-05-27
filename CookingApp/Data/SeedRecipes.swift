@@ -618,6 +618,51 @@ enum SeedRecipes {
                     Step(order: 8, instruction: "Add the paneer cubes to the gravy and mix gently without breaking them. Add the grated paneer, stir, and cook for 2–3 minutes.", timerSeconds: 180),
                     Step(order: 9, instruction: "Add garam masala and kasuri methi. Taste and adjust salt. Serve hot with naan, roti, or rice.")
                 ]
+            ),
+            RecipeVariation(
+                name: "Kaju Masala",
+                accentHex: "CA8A04",
+                totalMinutes: 50,
+                ingredients: [
+                    Ingredient(name: "Cashews (for puree, soaked)", amount: 22, unit: "nos."),
+                    Ingredient(name: "Cashews (for frying)", amount: 32, unit: "nos."),
+                    Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Paneer (cubed)", amount: 350, unit: "g"),
+                    Ingredient(name: "Tomato (roughly chopped)", amount: 1, unit: "no."),
+                    Ingredient(name: "Oil", amount: 1.5, unit: "tbsp"),
+                    Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+                    Ingredient(name: "Green cardamom", amount: 2, unit: "nos."),
+                    Ingredient(name: "Cinnamon", amount: 2, unit: "inch piece"),
+                    Ingredient(name: "Onion (chopped)", amount: 4, unit: "medium"),
+                    Ingredient(name: "Ginger garlic green chilli paste", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Spicy red chilli powder", amount: 2, unit: "tsp"),
+                    Ingredient(name: "Coriander powder", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Coriander stems", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Curd (whisked)", amount: 0.5, unit: "cup"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Green chilli (slit)", amount: 2, unit: "nos."),
+                    Ingredient(name: "Ginger julienne", amount: 1, unit: "handful"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "pinch"),
+                    Ingredient(name: "Fresh coriander", amount: 1, unit: "handful")
+                ],
+                steps: [
+                    Step(order: 1, instruction: "Soak 20–25 cashews in hot water, cover and set aside while you do the next steps."),
+                    Step(order: 2, instruction: "Set a pan over high heat, add ghee. Fry the remaining 30–35 cashews on medium heat, stirring, until light golden. Transfer to a bowl.", tip: "Cashews colour fast — keep stirring and pull them off the heat as soon as they turn golden."),
+                    Step(order: 3, instruction: "In the same pan, shallow fry the paneer cubes until golden brown on both sides. Transfer to a bowl. Reserve the remaining ghee in the pan.", timerSeconds: 120),
+                    Step(order: 4, instruction: "Drain the soaked cashews. Blend them with the chopped tomato and a little water into a fine, smooth puree. Set aside."),
+                    Step(order: 5, instruction: "Heat the reserved ghee in a kadhai on high. Add oil, whole spices (cumin, bay leaf, cardamom, cinnamon), and chopped onions. Cook on medium-high until onions are light golden brown.", timerSeconds: 480),
+                    Step(order: 6, instruction: "Add ginger garlic green chilli paste. Cook for 2 minutes until the mixture turns golden brown.", timerSeconds: 120),
+                    Step(order: 7, instruction: "Lower the flame. Add all powdered spices (turmeric, Kashmiri chilli, spicy chilli, coriander, cumin) with a splash of hot water. Cook on high for 2–3 minutes until the ghee separates. Add coriander stems and stir.", timerSeconds: 150),
+                    Step(order: 8, instruction: "Add the tomato-cashew puree and whisked curd with salt. Stir well and cook on medium-high until the gravy turns crumbly and the ghee separates. Do not add any water at this stage.", tip: "Cooking without water concentrates the flavour — be patient and let the fat separate naturally.", timerSeconds: 600),
+                    Step(order: 9, instruction: "Once the gravy is crumbly and the ghee has separated, add hot water to adjust consistency. Cook for 2–3 minutes.", timerSeconds: 150),
+                    Step(order: 10, instruction: "Add the fried paneer, fried cashews (reserve a few for garnish), slit green chilli, ginger julienne, garam masala, and kasuri methi powder. Stir and cook for 3–4 minutes.", timerSeconds: 210),
+                    Step(order: 11, instruction: "Taste and adjust salt. Finish with fresh coriander. Garnish with reserved fried cashews. Serve with tandoori roti or naan.")
+                ]
             )
         ],
         baseLabel: "Lababdar"
