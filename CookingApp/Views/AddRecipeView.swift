@@ -38,7 +38,7 @@ struct AddRecipeView: View {
                 DraftIngredient(name: $0.name, amount: $0.amount == $0.amount.rounded() ? String(Int($0.amount)) : String($0.amount), unit: $0.unit)
             })
             _steps = State(initialValue: r.steps.map {
-                DraftStep(order: $0.order, instruction: $0.instruction, tip: $0.tip ?? "", timerMinutes: ($0.timerSeconds ?? 0) / 60)
+                DraftStep(order: $0.order, instruction: $0.instruction, tip: $0.tip ?? "", timerMinutes: Int((Double($0.timerSeconds ?? 0) / 60).rounded()))
             })
         } else {
             _name = State(initialValue: "")
@@ -78,6 +78,12 @@ struct AddRecipeView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { saveRecipe() }
                         .fontWeight(.semibold)
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
                 }
             }
             .alert("Missing Info", isPresented: $showValidationAlert) {

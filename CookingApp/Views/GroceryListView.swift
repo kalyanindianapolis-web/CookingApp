@@ -32,6 +32,9 @@ struct GroceryListView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header
+                if !groceryStore.checkedItems.isEmpty {
+                    clearCheckedButton
+                }
                 ForEach(categorisedItems, id: \.0) { category, items in
                     sectionHeader("\(category.emoji) \(category.rawValue)")
                     itemsSection(items)
@@ -39,6 +42,23 @@ struct GroceryListView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 100)
+        }
+    }
+
+    private var clearCheckedButton: some View {
+        Button(action: groceryStore.clearChecked) {
+            HStack(spacing: 8) {
+                Image(systemName: "checkmark.circle")
+                    .font(.system(size: 14))
+                Text("Clear \(groceryStore.checkedItems.count) checked item\(groceryStore.checkedItems.count == 1 ? "" : "s")")
+                    .font(.system(size: 14, weight: .medium))
+                Spacer()
+            }
+            .foregroundStyle(.red)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(Color(uiColor: .systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
 
@@ -120,7 +140,7 @@ struct GroceryListView: View {
         .onTapGesture { groceryStore.toggle(item) }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive) {
-                groceryStore.delete(at: IndexSet([0]), from: [item])
+                groceryStore.delete(item)
             } label: {
                 Label("Delete", systemImage: "trash")
             }

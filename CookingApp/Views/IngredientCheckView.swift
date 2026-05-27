@@ -28,6 +28,10 @@ struct IngredientCheckView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     summaryBanner
 
+                    if missing.isEmpty && !recipe.ingredients.isEmpty {
+                        successBanner
+                    }
+
                     if !available.isEmpty {
                         ingredientSection(
                             title: "✅ You have it",
@@ -66,6 +70,25 @@ struct IngredientCheckView: View {
                     .environmentObject(groceryStore)
             }
         }
+    }
+
+    private var successBanner: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "checkmark.seal.fill")
+                .font(.system(size: 28))
+                .foregroundStyle(.green)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("You're all set!")
+                    .font(.system(size: 15, weight: .semibold))
+                Text("All ingredients are on your grocery list")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(Color.green.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 
     private var summaryBanner: some View {

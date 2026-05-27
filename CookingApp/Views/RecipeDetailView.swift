@@ -105,7 +105,7 @@ struct RecipeDetailView: View {
             Text(recipe.name)
                 .font(.system(size: 24, weight: .bold))
                 .tracking(-0.5)
-            Text("\(recipe.cuisine) · \(recipe.difficulty.rawValue) · \(recipe.totalMinutes) min total")
+            Text("\(recipe.cuisine) · \(recipe.difficulty.rawValue) · \(effectiveRecipe.totalMinutes) min total")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }

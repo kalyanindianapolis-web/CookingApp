@@ -12,6 +12,8 @@ struct CookingModeView: View {
     @State private var timerRunning = false
     @State private var timerCancellable: AnyCancellable?
     @State private var timerDone = false
+    @State private var showTimerWarning = false
+    @State private var pendingStepIndex: Int? = nil
 
     private var currentStep: Step { recipe.steps[currentStepIndex] }
     private var progress: Double { Double(currentStepIndex + 1) / Double(recipe.steps.count) }
@@ -36,6 +38,19 @@ struct CookingModeView: View {
         }
         .preferredColorScheme(.dark)
         .onAppear { loadTimer() }
+        .alert("Timer Still Running", isPresented: $showTimerWarning) {
+            Button("Leave Step", role: .destructive) {
+                if let idx = pendingStepIndex {
+                    stopTimer()
+                    currentStepIndex = idx
+                    loadTimer()
+                    pendingStepIndex = nil
+                }
+            }
+            Button("Stay", role: .cancel) { pendingStepIndex = nil }
+        } message: {
+            Text("The timer is still running. Leave this step anyway?")
+        }
     }
 
     // MARK: - Subviews
@@ -190,9 +205,14 @@ struct CookingModeView: View {
     // MARK: - Timer logic
 
     private func go(to index: Int) {
-        stopTimer()
-        currentStepIndex = index
-        loadTimer()
+        if timerRunning {
+            pendingStepIndex = index
+            showTimerWarning = true
+        } else {
+            stopTimer()
+            currentStepIndex = index
+            loadTimer()
+        }
     }
 
     private func loadTimer() {

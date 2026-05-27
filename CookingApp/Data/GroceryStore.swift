@@ -28,6 +28,11 @@ class GroceryStore: ObservableObject {
         save()
     }
 
+    func delete(_ item: GroceryItem) {
+        items.removeAll { $0.id == item.id }
+        save()
+    }
+
     func clearChecked() {
         items.removeAll { $0.isChecked }
         save()

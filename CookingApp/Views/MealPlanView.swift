@@ -8,6 +8,7 @@ struct MealPlanView: View {
     @State private var selectedDate = Calendar.current.startOfDay(for: Date())
     @State private var weekOffset = 0
     @State private var pickerContext: PickerContext? = nil
+    @State private var showAddedBanner = false
 
     struct PickerContext: Identifiable {
         let id = UUID()
@@ -68,6 +69,24 @@ struct MealPlanView: View {
                 addDayToGroceryButton
                     .background(.ultraThinMaterial)
             }
+            .overlay(alignment: .top) {
+                if showAddedBanner {
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                        Text("Added to grocery list")
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(uiColor: .systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .shadow(color: .black.opacity(0.1), radius: 8, y: 4)
+                    .padding(.top, 60)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
+            }
+            .animation(.spring(duration: 0.3), value: showAddedBanner)
             .sheet(item: $pickerContext) { ctx in
                 RecipePickerSheet(slot: ctx.slot) { recipe in
                     mealPlanStore.set(recipe: recipe, for: ctx.date, slot: ctx.slot)
@@ -207,6 +226,10 @@ struct MealPlanView: View {
                     category: GroceryCategory.infer(from: ing.name)
                 )
             }
+        }
+        showAddedBanner = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            showAddedBanner = false
         }
     }
 }
