@@ -58,13 +58,22 @@
 - [x] Recipe list (Home) with search, cuisine filter, meal type filter
 - [x] Recipe detail view with hero image, stats row, ingredients, steps
 - [x] Servings scaler — auto-scales ingredient amounts with fraction display
-- [x] Variation picker — horizontal chip row; swaps ingredients/steps/accent colour
+- [x] Variation picker — horizontal chip row; swaps ingredients/steps/accent colour/photo
 - [x] `baseLabel` support — grouped recipes can name their first chip (e.g. "Lababdar" not "Base")
 - [x] Ingredient check view — shows which ingredients you have vs. missing; add missing to grocery list
 - [x] Cooking mode — dark full-screen step-by-step view with per-step countdown timers
 - [x] Grocery list — categorised, tap to check/uncheck, swipe to delete, clear checked items button
 - [x] Meal planner — weekly calendar strip, assign breakfast/lunch/dinner per day, add day's ingredients to grocery
 - [x] Add / edit custom recipes — name, icon, cuisine, difficulty, time, servings, accent colour, ingredients, steps with optional timer
+
+### Photos
+- [x] `imageName: String?` on both `Recipe` and `RecipeVariation` (optional, Codable backward-compatible)
+- [x] All 9 recipe cards have real food photos from Unsplash (free license)
+- [x] Each of the 8 Paneer variations has its own unique photo
+- [x] Each of the 6 Chia Seed Pudding variations has its own unique photo
+- [x] Tapping a variation chip swaps the hero photo as well as ingredients/steps
+- [x] RecipeCard thumbnail shows the photo; falls back to SF Symbol icon for user-added recipes
+- [x] Hero image falls back to gradient + SF Symbol when no photo is set
 
 ### UX Polish
 - [x] Smart grocery category inference (`GroceryCategory.infer(from:)`)
@@ -93,6 +102,47 @@
 
 ---
 
+## Photo Asset Map
+
+All images are stored in `CookingApp/Assets.xcassets/` as `.imageset` folders. Free Unsplash licence.
+
+### Standalone recipe cards
+| Asset name | Recipe |
+|---|---|
+| `recipe_dal_tadka` | Dal Tadka |
+| `recipe_jeera_rice` | Jeera Rice |
+| `recipe_bagara_rice` | Bagara Rice |
+| `recipe_chana_masala` | Chana Masala |
+| `recipe_aloo_gobi` | Aloo Gobi |
+| `recipe_paneer_sandwich` | Paneer Dahi Sandwich |
+| `recipe_rajma` | Rajma Masala |
+| `recipe_chia_pudding` | Chia Seed Pudding (base card) |
+
+### Paneer variation photos (swap in when chip is tapped)
+| Asset name | Variation |
+|---|---|
+| `recipe_paneer_lababdar` | Lababdar (base card + base chip) |
+| `recipe_paneer_butter_masala` | Butter Masala |
+| `recipe_paneer_chilli` | Chilli Paneer |
+| `recipe_paneer_makhani_burger` | Makhani Burger |
+| `recipe_paneer_spicy_burger` | Spicy Burger |
+| `recipe_paneer_do_pyaaza` | Do Pyaaza |
+| `recipe_palak_paneer` | Palak Paneer |
+| `recipe_paneer_kaju_masala` | Kaju Masala |
+
+### Chia Seed Pudding variation photos
+| Asset name | Variation |
+|---|---|
+| `recipe_chia_base` | Base (plain chia, available as asset) |
+| `recipe_chia_mango` | Mango Coconut |
+| `recipe_chia_orange` | Orange Creamsicle |
+| `recipe_chia_berry` | Very Berry |
+| `recipe_chia_apple` | Apple Pie |
+| `recipe_chia_pumpkin` | Pumpkin Spice |
+| `recipe_chia_chocolate` | Chocolate Banana |
+
+---
+
 ## Known Limitations / What's Left
 
 ### Recipes to add
@@ -104,11 +154,11 @@
 - [ ] **Meal plan → variations**: when a parent recipe (Paneer, Chia) is added to a meal slot, there's no way to pick which variation you actually plan to cook — the slot just shows the parent recipe name
 - [ ] **Grocery deduplication across meals**: if two recipes on the same day share an ingredient, quantities are not summed — only one entry is added (first-seen wins)
 - [ ] **Recipe search by ingredient**: HomeView search checks ingredient names but only across the base recipe — not variations
-- [ ] **Photo support**: recipes currently use SF Symbols + accent colour; no real food photos
 - [ ] **Nutrition info**: no calorie or macro tracking
 - [ ] **Share / export recipe**: no way to share a recipe card outside the app
 - [ ] **Reorder ingredients / steps**: AddRecipeView has swipe-to-delete but no drag reorder
 - [ ] **Step timer precision**: `DraftStep.timerMinutes` is whole minutes only; sub-minute timers (e.g. 90 s) round to nearest minute on edit
+- [ ] **User recipe photos**: AddRecipeView has no photo picker — user-added recipes show SF Symbol fallback only
 
 ### Technical
 - [ ] **Security**: GitHub remote URL contains an embedded PAT token — revoke at https://github.com/settings/tokens and run: `git remote set-url origin https://github.com/kalyanindianapolis-web/CookingApp.git`
@@ -120,23 +170,29 @@
 
 ### `RecipeVariation` (Identifiable, Hashable, Codable)
 ```swift
-id, name, accentHex, totalMinutes, ingredients: [Ingredient], steps: [Step]
+id, name, accentHex, totalMinutes, ingredients: [Ingredient], steps: [Step], imageName: String?
 ```
 
-### `Recipe` — key fields for variations
+### `Recipe` — key fields for photos and variations
 ```swift
+var imageName: String?              // asset name in xcassets; nil = SF Symbol fallback
 var variations: [RecipeVariation]?  // nil = no picker shown
 var baseLabel: String?              // labels the first chip (default "Base")
-func applying(_ variation: RecipeVariation) -> Recipe  // returns merged copy
+
+func applying(_ variation: RecipeVariation) -> Recipe
+// copies variation's imageName; falls back to parent's imageName if variation has none
 ```
 
 ### Codable backward compat
-`variations` and `baseLabel` are optional — old UserDefaults JSON (before these fields existed) decodes fine (missing key → nil).
+All new fields (`imageName`, `variations`, `baseLabel`) are optional — old UserDefaults JSON decodes fine (missing key → nil). No migration needed.
 
 ---
 
 ## Commit History (recent)
 ```
+9420215  Add unique photos for each Paneer and Chia Seed Pudding variation
+e278aa5  Add real food photos for all 9 recipe cards from Unsplash
+0fa5cf2  Add PROJECT_STATUS.md with full feature inventory and what's left
 7e0f730  Fix swipe-delete, clear-checked, timer warning, and UX polish
 b16c52d  Add Paneer Kaju Masala as a paneer variation
 06e31a9  Add Dhaba Style Rajma Masala recipe
@@ -144,7 +200,4 @@ a7771ae  Add Spicy Burger, Do Pyaaza, and Palak as paneer variations
 4129822  Add Paneer Makhani Burger as a paneer variation
 1deb13e  Group paneer dishes under one recipe with variations
 c3204a7  Add Kaju Masala recipe
-0bb2ddb  Merge chia pudding recipes into one with 6 variations
-99a210d  Add 7 chia pudding breakfast recipes
-f35da95  Add meal planner tab, edit recipe, smart grocery categorization, and UI fixes
 ```

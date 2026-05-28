@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 import Combine
 
 class RecipeStore: ObservableObject {
@@ -6,40 +7,69 @@ class RecipeStore: ObservableObject {
 
     var allRecipes: [Recipe] { SeedRecipes.all + userRecipes }
 
-    private let storageKey = "userRecipes"
+    private let context = PersistenceController.shared.context
+    private var cancellable: AnyCancellable?
 
     init() {
         load()
+        // Refresh when CloudKit syncs remote changes into the context
+        cancellable = NotificationCenter.default
+            .publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self else { return }
+                let affected = [
+                    notification.userInfo?[NSInsertedObjectsKey],
+                    notification.userInfo?[NSUpdatedObjectsKey],
+                    notification.userInfo?[NSDeletedObjectsKey]
+                ]
+                .compactMap { $0 as? Set<NSManagedObject> }
+                .flatMap { $0 }
+
+                if affected.contains(where: { $0 is RecipeEntity }) {
+                    self.load()
+                }
+            }
     }
 
     func add(_ recipe: Recipe) {
-        userRecipes.append(recipe)
-        save()
+        let entity = RecipeEntity(context: context)
+        entity.id = recipe.id
+        entity.jsonData = try? JSONEncoder().encode(recipe)
+        PersistenceController.shared.save()
+        load()
     }
 
     func update(_ recipe: Recipe) {
-        guard let idx = userRecipes.firstIndex(where: { $0.id == recipe.id }) else { return }
-        userRecipes[idx] = recipe
-        save()
+        let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
+        request.predicate = NSPredicate(format: "id == %@", recipe.id as CVarArg)
+        if let entity = try? context.fetch(request).first {
+            entity.jsonData = try? JSONEncoder().encode(recipe)
+            PersistenceController.shared.save()
+            load()
+        }
     }
 
     func delete(_ recipe: Recipe) {
-        userRecipes.removeAll { $0.id == recipe.id }
-        save()
+        let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
+        request.predicate = NSPredicate(format: "id == %@", recipe.id as CVarArg)
+        if let entity = try? context.fetch(request).first {
+            context.delete(entity)
+            PersistenceController.shared.save()
+            load()
+        }
     }
 
     func isUserRecipe(_ recipe: Recipe) -> Bool {
         userRecipes.contains { $0.id == recipe.id }
     }
 
-    private func save() {
-        guard let data = try? JSONEncoder().encode(userRecipes) else { return }
-        UserDefaults.standard.set(data, forKey: storageKey)
-    }
-
     private func load() {
-        guard let data = UserDefaults.standard.data(forKey: storageKey),
-              let recipes = try? JSONDecoder().decode([Recipe].self, from: data) else { return }
-        userRecipes = recipes
+        let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
+        let entities = (try? context.fetch(request)) ?? []
+        userRecipes = entities.compactMap { entity in
+            guard let data = entity.jsonData else { return nil }
+            return try? JSONDecoder().decode(Recipe.self, from: data)
+        }
     }
 }

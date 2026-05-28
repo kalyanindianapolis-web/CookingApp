@@ -65,7 +65,7 @@ struct RecipeDetailView: View {
 
     private var heroImage: some View {
         ZStack {
-            if let imageName = recipe.imageName {
+            if let imageName = effectiveRecipe.imageName {
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
@@ -75,7 +75,7 @@ struct RecipeDetailView: View {
                 )
             } else {
                 LinearGradient(
-                    colors: [Color(hex: recipe.accentHex), Color(hex: recipe.accentHex).opacity(0.7)],
+                    colors: [Color(hex: effectiveRecipe.accentHex), Color(hex: effectiveRecipe.accentHex).opacity(0.7)],
                     startPoint: .topLeading, endPoint: .bottomTrailing
                 )
                 Image(systemName: recipe.sfSymbol)

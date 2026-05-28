@@ -38,4 +38,15 @@ struct MealPlanEntry: Identifiable, Codable {
         self.cuisine = recipe.cuisine
         self.totalMinutes = recipe.totalMinutes
     }
+
+    init(id: UUID, date: Date, slot: MealSlotType, recipeId: UUID, recipeName: String, accentHex: String, cuisine: String, totalMinutes: Int) {
+        self.id = id
+        self.date = date
+        self.slot = slot
+        self.recipeId = recipeId
+        self.recipeName = recipeName
+        self.accentHex = accentHex
+        self.cuisine = cuisine
+        self.totalMinutes = totalMinutes
+    }
 }

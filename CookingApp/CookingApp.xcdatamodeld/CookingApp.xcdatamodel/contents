@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="24A335" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GroceryItemEntity" representedClassName="GroceryItemEntity" codeGenerationType="class" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isChecked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="MealPlanEntryEntity" representedClassName="MealPlanEntryEntity" codeGenerationType="class" syncable="YES">
+        <attribute name="accentHex" optional="YES" attributeType="String"/>
+        <attribute name="cuisine" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="recipeId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="recipeName" optional="YES" attributeType="String"/>
+        <attribute name="slot" optional="YES" attributeType="String"/>
+        <attribute name="totalMinutes" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="RecipeEntity" representedClassName="RecipeEntity" codeGenerationType="class" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="jsonData" optional="YES" attributeType="Binary"/>
+    </entity>
+</model>
