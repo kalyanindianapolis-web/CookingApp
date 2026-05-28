@@ -4,7 +4,7 @@ enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
-        chiaPudding
+        paniPuriPani, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -960,5 +960,38 @@ enum SeedRecipes {
             )
         ],
         imageName: "recipe_chia_pudding"
+    )
+
+    // MARK: - Pani Puri Pani
+
+    static let paniPuriPani = Recipe(
+        name: "Pani Puri Pani",
+        cuisine: "Indian Street Food",
+        difficulty: .easy,
+        totalMinutes: 25,
+        defaultServings: 4,
+        sfSymbol: "leaf.fill",
+        accentHex: "16A34A",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            Ingredient(name: "Fresh mint leaves", amount: 1, unit: "cup"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "cup"),
+            Ingredient(name: "Ginger", amount: 1, unit: "inch piece"),
+            Ingredient(name: "Green chilies", amount: 9, unit: "nos."),
+            Ingredient(name: "Jaggery", amount: 0.5, unit: "tbsp"),
+            Ingredient(name: "Pani puri masala", amount: 1, unit: "to taste"),
+            Ingredient(name: "Cold water", amount: 3, unit: "cups"),
+            Ingredient(name: "Ice cubes", amount: 1, unit: "handful (optional)")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Add mint, coriander, ginger, green chilies, and jaggery to a blender with a small splash of water. Blend until it begins to break down.", tip: "Use as little water as possible in this first blend — the paste should be thick."),
+            Step(order: 2, instruction: "Scrape down the sides and blend again until completely smooth. The paste should be bright green with no visible leaf pieces."),
+            Step(order: 3, instruction: "Add a little more water and blend once more to loosen the paste.", timerSeconds: 30),
+            Step(order: 4, instruction: "Strain the blended paste through a fine sieve into a large bowl, pressing firmly with a spoon to extract all the liquid. Discard the pulp.", tip: "Straining makes the pani crystal-clear and removes any fibrous bits."),
+            Step(order: 5, instruction: "Add cold water to the strained liquid — start with 2 cups and adjust to your preferred strength and spice level."),
+            Step(order: 6, instruction: "Add pani puri masala and stir well. Taste and adjust masala, jaggery (sweetness), or green chili heat as needed."),
+            Step(order: 7, instruction: "Add ice cubes if serving immediately. Let the pani rest for 10–15 minutes before serving so the flavours come together.", tip: "The pani tastes best ice cold — refrigerate for at least 30 minutes if not serving right away.", timerSeconds: 900)
+        ]
     )
 }
