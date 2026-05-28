@@ -4,12 +4,24 @@ import CloudKit
 class PersistenceController {
     static let shared = PersistenceController()
 
-    let container: NSPersistentCloudKitContainer
+    // Stored as base type so it works with or without CloudKit entitlement.
+    // Cast to NSPersistentCloudKitContainer in SharingManager when needed.
+    let container: NSPersistentContainer
 
     var context: NSManagedObjectContext { container.viewContext }
 
+    // True only when the iCloud container identifier entitlement is present.
+    static var cloudKitEnabled: Bool {
+        let ids = Bundle.main.object(forInfoDictionaryKey: "com.apple.developer.icloud-container-identifiers") as? [String]
+        return ids?.isEmpty == false
+    }
+
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "CookingApp")
+        if Self.cloudKitEnabled {
+            container = NSPersistentCloudKitContainer(name: "CookingApp")
+        } else {
+            container = NSPersistentContainer(name: "CookingApp")
+        }
 
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
@@ -22,10 +34,7 @@ class PersistenceController {
 
         container.loadPersistentStores { _, error in
             if let error {
-                // CloudKit entitlements not configured yet — this is expected during
-                // development. The app stores data locally; iCloud sync activates
-                // once you add the iCloud capability in Xcode Signing & Capabilities.
-                print("Core Data load error (CloudKit may not be configured): \(error)")
+                print("Core Data load error: \(error)")
             }
         }
 
