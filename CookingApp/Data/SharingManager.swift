@@ -15,7 +15,11 @@ class SharingManager: NSObject, ObservableObject, UICloudSharingControllerDelega
     init(persistence: PersistenceController = .shared) {
         self.persistence = persistence
         super.init()
-        Task { await fetchExistingShare() }
+        // Only query CloudKit when the entitlement is present; calling these APIs
+        // without the entitlement throws a fatal NSException.
+        if PersistenceController.cloudKitEnabled {
+            Task { await fetchExistingShare() }
+        }
     }
 
     // MARK: - Share sheet

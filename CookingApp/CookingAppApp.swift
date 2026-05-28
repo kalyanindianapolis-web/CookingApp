@@ -21,6 +21,12 @@ struct CookingAppApp: App {
 
     @ViewBuilder
     private var rootView: some View {
+        #if targetEnvironment(simulator)
+        // Skip auth gate on simulator — no Apple ID is available.
+        // On a real device, Sign in with Apple is required.
+        mainTabView
+            .onOpenURL { url in sharing.acceptShare(url: url) }
+        #else
         if auth.isSignedIn {
             mainTabView
                 .onOpenURL { url in
@@ -30,6 +36,7 @@ struct CookingAppApp: App {
             AuthView()
                 .environmentObject(auth)
         }
+        #endif
     }
 
     private var mainTabView: some View {

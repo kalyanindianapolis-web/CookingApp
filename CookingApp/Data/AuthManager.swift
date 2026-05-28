@@ -16,7 +16,11 @@ class AuthManager: NSObject, ObservableObject {
         super.init()
         displayName = UserDefaults.standard.string(forKey: displayNameKey) ?? ""
         checkSignInState()
-        checkiCloudStatus()
+        // Only check iCloud status when the CloudKit entitlement is present.
+        // Calling CKContainer.default() without the entitlement crashes the app.
+        if PersistenceController.cloudKitEnabled {
+            checkiCloudStatus()
+        }
     }
 
     func checkSignInState() {
