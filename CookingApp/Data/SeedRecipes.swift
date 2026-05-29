@@ -5,7 +5,8 @@ enum SeedRecipes {
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
-        thechaKPaneerRice, paneerHotGarlicRice, chiaPudding
+        thechaKPaneerRice, paneerHotGarlicRice,
+        chilliCheeseCornSandwich, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -1229,6 +1230,56 @@ enum SeedRecipes {
             Step(order: 13, instruction: "Pour the soy sauce and vinegar around the hot edge of the wok (not into the centre) — this flash-chars them and deepens the flavour. Toss to combine.", tip: "Adding sauces to the edge rather than the centre gives a deeper caramelised flavour."),
             Step(order: 14, instruction: "Add the cooked rice, salt, a pinch of sugar, and a large pinch of white pepper. Stir-fry on high for 2–3 minutes, tossing continuously so every grain gets coated and slightly toasted.", timerSeconds: 150),
             Step(order: 15, instruction: "Add a small splash of hot water and toss vigorously. The steam loosens any stuck grains and keeps the rice moist and fluffy. Serve immediately alongside the hot garlic paneer.")
+        ]
+    )
+
+    // MARK: - Veg Chilli Cheese Corn Sandwich
+
+    static let chilliCheeseCornSandwich = Recipe(
+        name: "Chilli Cheese Corn Sandwich",
+        cuisine: "Indian Street Food",
+        difficulty: .easy,
+        totalMinutes: 20,
+        defaultServings: 4,
+        sfSymbol: "fork.knife",
+        accentHex: "EA580C",
+        isMultiDish: false,
+        mealType: .breakfast,
+        ingredients: [
+            // Sandwich chutney
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "bunch"),
+            Ingredient(name: "Curry leaves", amount: 10, unit: "leaves"),
+            Ingredient(name: "Green chillies", amount: 11, unit: "nos."),
+            Ingredient(name: "Garlic", amount: 12, unit: "cloves"),
+            Ingredient(name: "Sandwich masala", amount: 1, unit: "tsp"),
+            Ingredient(name: "Bread slice (for chutney)", amount: 1, unit: "slice"),
+            Ingredient(name: "Ice cubes", amount: 1, unit: "no."),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            // Filling
+            Ingredient(name: "Onion", amount: 2, unit: "medium"),
+            Ingredient(name: "Capsicum", amount: 1, unit: "medium"),
+            Ingredient(name: "Red bell pepper", amount: 1, unit: "medium"),
+            Ingredient(name: "Sweet corn", amount: 1, unit: "cup"),
+            Ingredient(name: "Oregano", amount: 1, unit: "tsp"),
+            Ingredient(name: "Red chilli flakes", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Processed cheese (grated)", amount: 100, unit: "g"),
+            // Assembly
+            Ingredient(name: "Sandwich bread slices", amount: 1, unit: "as needed"),
+            Ingredient(name: "Soft butter", amount: 1, unit: "as needed"),
+            Ingredient(name: "Paneer (grated, optional)", amount: 1, unit: "as needed")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Make the sandwich chutney: add fresh coriander, curry leaves, green chillies, garlic, sandwich masala, a pinch of salt, 1 bread slice (this thickens it), 1–2 ice cubes, and a tiny splash of water into a blender jar. Grind into a thick, fine paste. Use as little water as possible.", tip: "The bread slice is the secret — it keeps the chutney thick and spreadable without getting watery. The ice cube keeps the colour bright green."),
+            Step(order: 2, instruction: "Taste the chutney and adjust salt. Set it aside."),
+            Step(order: 3, instruction: "Finely chop the onion, capsicum, and red bell pepper (a string chopper makes this fast). Add them to a mixing bowl along with the sweet corn.", tip: "Don't add the seasoning too early or the filling will go watery. Season just before assembling."),
+            Step(order: 4, instruction: "Add 2 tbsp of the prepared chutney to the filling along with oregano, red chilli flakes, a large pinch of sandwich masala, and the grated cheese. Mix everything together well. The filling is ready."),
+            Step(order: 5, instruction: "Heat a grill pan or tawa over medium flame."),
+            Step(order: 6, instruction: "Take 3 bread slices. Spread soft butter generously on one side of each slice. Then spread a layer of chutney over the butter on all three slices."),
+            Step(order: 7, instruction: "On 2 of the slices, spread a thick, even layer of the prepared filling. If using paneer, grate it over the filling and sprinkle a pinch of sandwich masala on top."),
+            Step(order: 8, instruction: "Stack the 2 filled slices on top of each other, then cover with the 3rd slice (chutney side facing in). Press gently to seal.", tip: "A triple-decker gives you two layers of filling in every bite — the street stall way."),
+            Step(order: 9, instruction: "Add a knob of butter to the hot pan. Place the assembled sandwich on it and press down firmly with a flat plate or a spatula to replicate a grill press. Toast on medium heat until the bottom is deeply golden and crisp.", timerSeconds: 180),
+            Step(order: 10, instruction: "Spread butter on the top slice, flip the sandwich carefully, and toast the second side the same way — press down again and cook until golden.", timerSeconds: 180),
+            Step(order: 11, instruction: "Once both sides are evenly golden and crisp, remove from the pan. Cut into halves or quarters and serve immediately with the remaining chutney and ketchup on the side.")
         ]
     )
 }
