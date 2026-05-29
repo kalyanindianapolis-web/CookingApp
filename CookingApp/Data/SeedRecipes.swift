@@ -4,7 +4,7 @@ enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
-        paniPuriPani, chiaPudding
+        paniPuriPani, masalaPuri, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -992,6 +992,65 @@ enum SeedRecipes {
             Step(order: 5, instruction: "Add cold water to the strained liquid — start with 2 cups and adjust to your preferred strength and spice level."),
             Step(order: 6, instruction: "Add pani puri masala and stir well. Taste and adjust masala, jaggery (sweetness), or green chili heat as needed."),
             Step(order: 7, instruction: "Add ice cubes if serving immediately. Let the pani rest for 10–15 minutes before serving so the flavours come together.", tip: "The pani tastes best ice cold — refrigerate for at least 30 minutes if not serving right away.", timerSeconds: 900)
+        ]
+    )
+
+    // MARK: - Masala Puri
+
+    static let masalaPuri = Recipe(
+        name: "Masala Puri",
+        cuisine: "Indian Street Food",
+        difficulty: .medium,
+        totalMinutes: 40,
+        defaultServings: 6,
+        sfSymbol: "circle.grid.2x2.fill",
+        accentHex: "C2410C",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Boiled matar
+            Ingredient(name: "Dry green peas", amount: 1, unit: "cup"),
+            Ingredient(name: "Salt (for peas)", amount: 1, unit: "to taste"),
+            // Paste
+            Ingredient(name: "Oil (paste)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Star anise", amount: 1, unit: "no."),
+            Ingredient(name: "Cinnamon", amount: 1, unit: "inch piece"),
+            Ingredient(name: "Black peppercorns", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Cloves", amount: 4, unit: "nos."),
+            Ingredient(name: "Onion (sliced)", amount: 1, unit: "large"),
+            Ingredient(name: "Garlic", amount: 9, unit: "cloves"),
+            Ingredient(name: "Ginger", amount: 2, unit: "inch piece"),
+            Ingredient(name: "Green chilli", amount: 4, unit: "nos."),
+            Ingredient(name: "Tomato (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Tamarind", amount: 1, unit: "small lemon-sized ball"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+            Ingredient(name: "Mint leaves", amount: 13, unit: "leaves"),
+            // Masala
+            Ingredient(name: "Oil (masala)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Coriander powder", amount: 2, unit: "tsp"),
+            Ingredient(name: "Chaat masala", amount: 1, unit: "tsp"),
+            Ingredient(name: "Potato (boiled & mashed)", amount: 1, unit: "no."),
+            Ingredient(name: "Hot water", amount: 1.25, unit: "litres"),
+            // Serving
+            Ingredient(name: "Puris", amount: 1, unit: "as needed"),
+            Ingredient(name: "Lemon juice", amount: 1, unit: "to taste"),
+            Ingredient(name: "Sev", amount: 1, unit: "as needed"),
+            Ingredient(name: "Onion (finely chopped)", amount: 1, unit: "small"),
+            Ingredient(name: "Carrot (grated)", amount: 1, unit: "small")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Soak dry green peas in plenty of water for at least 6–7 hours or overnight. Drain and discard the soaking water.", tip: "Soaking overnight gives the softest, most evenly cooked peas.", timerSeconds: 25200),
+            Step(order: 2, instruction: "Transfer soaked peas to a pressure cooker. Add fresh water (1 inch above the peas) and salt. Pressure cook for 3–4 whistles on medium-high flame.", timerSeconds: 900),
+            Step(order: 3, instruction: "Switch off the flame and let the pressure release naturally before opening the lid. Set the boiled peas aside.", timerSeconds: 900),
+            Step(order: 4, instruction: "For the paste: heat 2 tbsp oil in a pan on high. Add star anise, cinnamon, peppercorns, and cloves, then add sliced onion, ginger, and garlic. Stir and cook on medium-high until the onions turn translucent.", timerSeconds: 300),
+            Step(order: 5, instruction: "Add the chopped tomatoes, a pinch of salt, and a splash of water. Cover and cook on medium flame until the tomatoes are completely mushy.", tip: "Full mushiness is important — undercooked tomatoes make a grainy paste.", timerSeconds: 480),
+            Step(order: 6, instruction: "Switch off the flame and let the mixture cool completely. Transfer to a blender along with tamarind, fresh coriander, and mint leaves. Grind into a fine, smooth paste."),
+            Step(order: 7, instruction: "For the masala: heat 2 tbsp oil in a deep pan on high. Once hot, add the prepared paste and cook, stirring, for 1–2 minutes.", timerSeconds: 90),
+            Step(order: 8, instruction: "Add turmeric, Kashmiri red chilli, coriander powder, and chaat masala. Mix well and cook on medium-low for 2–3 minutes until the oil starts to separate.", tip: "Don't rush this step — toasted spices build the base flavour of the whole dish.", timerSeconds: 150),
+            Step(order: 9, instruction: "Add the boiled mashed potato and stir well. Pour in hot water gradually, mixing as you go. Continue cooking for 7–8 minutes until the masala thickens to a gravy consistency.", timerSeconds: 480),
+            Step(order: 10, instruction: "To serve: crush a few puris into a plate, top with boiled green peas, then ladle the masala gravy over. Finish with a squeeze of lemon, a pinch of chaat masala, sev, chopped onions, and grated carrot. Add green or tamarind chutney if desired.")
         ]
     )
 }
