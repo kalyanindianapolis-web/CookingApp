@@ -4,7 +4,8 @@ enum SeedRecipes {
     static let all: [Recipe] = [
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
-        paniPuriPani, masalaPuri, chiaPudding
+        paniPuriPani, masalaPuri, phuchkaAndChurmur,
+        thechaKPaneerRice, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -1051,6 +1052,119 @@ enum SeedRecipes {
             Step(order: 8, instruction: "Add turmeric, Kashmiri red chilli, coriander powder, and chaat masala. Mix well and cook on medium-low for 2–3 minutes until the oil starts to separate.", tip: "Don't rush this step — toasted spices build the base flavour of the whole dish.", timerSeconds: 150),
             Step(order: 9, instruction: "Add the boiled mashed potato and stir well. Pour in hot water gradually, mixing as you go. Continue cooking for 7–8 minutes until the masala thickens to a gravy consistency.", timerSeconds: 480),
             Step(order: 10, instruction: "To serve: crush a few puris into a plate, top with boiled green peas, then ladle the masala gravy over. Finish with a squeeze of lemon, a pinch of chaat masala, sev, chopped onions, and grated carrot. Add green or tamarind chutney if desired.")
+        ]
+    )
+
+    // MARK: - Kolkata Phuchka & Churmur
+
+    static let phuchkaAndChurmur = Recipe(
+        name: "Phuchka & Churmur",
+        cuisine: "Indian Street Food",
+        difficulty: .hard,
+        totalMinutes: 45,
+        defaultServings: 10,
+        sfSymbol: "drop.circle.fill",
+        accentHex: "92400E",
+        isMultiDish: true,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Tamarind base
+            Ingredient(name: "Tamarind", amount: 112, unit: "g"),
+            // Green chilli pastes
+            Ingredient(name: "Green chillies (for boiling)", amount: 22, unit: "nos."),
+            Ingredient(name: "Green chillies (raw paste)", amount: 12, unit: "nos."),
+            // Bhaja masala
+            Ingredient(name: "Cumin seeds", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Fennel seeds", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Coriander seeds", amount: 2, unit: "tsp"),
+            Ingredient(name: "Green cardamom", amount: 4, unit: "nos."),
+            // Mint paste
+            Ingredient(name: "Mint leaves", amount: 1, unit: "handful"),
+            // Tetul Jal (phuchka water)
+            Ingredient(name: "Cold water", amount: 2, unit: "litres"),
+            Ingredient(name: "Black salt", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Chaat masala", amount: 1, unit: "tsp"),
+            Ingredient(name: "Red chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Lemon", amount: 1, unit: "no."),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful"),
+            // Aloo Makha (potato filling)
+            Ingredient(name: "Potatoes (boiled)", amount: 3, unit: "medium"),
+            Ingredient(name: "White peas (soaked & boiled)", amount: 0.25, unit: "cup"),
+            Ingredient(name: "Bengal gram / kala chana (soaked & boiled)", amount: 0.25, unit: "cup"),
+            Ingredient(name: "Tamarind pulp (for filling)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Coriander powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            // Serving
+            Ingredient(name: "Phuchka puris (semolina)", amount: 1, unit: "as needed")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Soak tamarind in just enough hot water to submerge it. Cover and leave for 15–20 minutes while you prepare the other components.", tip: "Squeeze and knead it halfway through soaking to help it dissolve faster.", timerSeconds: 1200),
+            Step(order: 2, instruction: "Boil 20–25 green chillies in water for 6–8 minutes until soft. Drain, cool completely, then grind with very little water into a coarse paste. Set aside.", timerSeconds: 420),
+            Step(order: 3, instruction: "Grind the remaining 10–15 raw green chillies with very little water into a separate paste. Using both cooked and raw pastes adds depth — cooked paste gives a rounder heat, raw paste adds sharp freshness."),
+            Step(order: 4, instruction: "For Bhaja Masala: heat a dry pan on high, lower to the lowest flame, and add cumin seeds. Toast, stirring constantly, for 4–5 minutes until they darken slightly and smell nutty.", tip: "Bhaja masala is the soul of phuchka. Go slow — burnt cumin turns bitter.", timerSeconds: 270),
+            Step(order: 5, instruction: "Add the fennel seeds, coriander seeds, and green cardamom to the pan. Continue to toast on low, stirring constantly, until all the spices deepen in colour and release a strong fragrance.", timerSeconds: 180),
+            Step(order: 6, instruction: "Transfer the toasted spices to a bowl and cool completely. Grind into a fine powder. This is your Bhaja Masala — store any extra in an airtight jar."),
+            Step(order: 7, instruction: "Make the mint paste: blend a handful of mint leaves with just enough water to get a smooth paste. Set aside."),
+            Step(order: 8, instruction: "Once the tamarind has soaked, squeeze and mash it thoroughly with your hands, then strain through a sieve into a large bowl, pressing firmly to extract all the pulp. Reserve 3–4 tbsp of pulp separately for the filling."),
+            Step(order: 9, instruction: "Make the Tetul Jal (phuchka water): into the strained tamarind pulp bowl, add 2 litres of cold water, 2 tbsp boiled chilli paste, 1 tbsp raw chilli paste, 1 tbsp bhaja masala, the mint paste, black salt, chaat masala, red chilli powder, and lemon juice. Stir thoroughly. Taste and adjust — it should be intensely sour, well-spiced, and quite spicy.", tip: "Start with less raw chilli paste and adjust to your heat tolerance."),
+            Step(order: 10, instruction: "Refrigerate the phuchka water until ice cold. Slice the remaining lemon into rounds and add chopped coriander just before serving."),
+            Step(order: 11, instruction: "Make the Aloo Makha (potato filling): mash the 3 boiled potatoes in a bowl. Add salt, black salt, chaat masala, coriander powder, bhaja masala, red chilli powder, both chilli pastes, lemon juice, tamarind pulp, and chopped coriander. Mash everything together. If the filling is too dry, add 1–2 tbsp of the phuchka water to loosen it.", tip: "The filling should be well-seasoned and bold — it's eaten just a spoonful at a time."),
+            Step(order: 12, instruction: "Add the soaked & boiled white peas and Bengal gram to the aloo makha. Fold in gently and taste once more — adjust salt or spice as needed."),
+            Step(order: 13, instruction: "To serve Phuchka: gently crack a small hole in the top of each puri with your thumb, fill with a spoonful of aloo makha, then dunk it into the ice-cold phuchka water or pour the water in with a ladle. Eat immediately in one bite.", tip: "Kolkata-style phuchka uses larger semolina puris. Standard puris work too, but the texture is different."),
+            Step(order: 14, instruction: "To make Churmur (1 portion): dice 1 boiled potato and place in a bowl. Add 1 tbsp Bengal gram, 1 tbsp white peas, bhaja masala, chilli powder, salt, black salt, both chilli pastes, 1 tbsp tamarind pulp, and lemon juice. Crush 4–5 puris over the top, mix roughly, and add a splash of tetul jal to adjust consistency. Top with fresh coriander and serve immediately.", tip: "Churmur is the deconstructed version — all the same flavours but eaten as a chaat bowl rather than individual bites.")
+        ]
+    )
+
+    // MARK: - Zanzanit Thecha Paneer Rice
+
+    static let thechaKPaneerRice = Recipe(
+        name: "Thecha Paneer Rice",
+        cuisine: "Maharashtrian",
+        difficulty: .easy,
+        totalMinutes: 35,
+        defaultServings: 2,
+        sfSymbol: "flame.fill",
+        accentHex: "65A30D",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Roasted peanuts
+            Ingredient(name: "Peanuts (for topping)", amount: 2, unit: "tbsp"),
+            // Thecha paste
+            Ingredient(name: "Green chillies", amount: 5, unit: "nos."),
+            Ingredient(name: "Fresh coriander stems", amount: 1, unit: "handful"),
+            Ingredient(name: "Garlic", amount: 11, unit: "cloves"),
+            Ingredient(name: "Peanuts (for thecha)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds (for thecha)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Groundnut oil (for thecha)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            // Vegetables
+            Ingredient(name: "Cabbage (thinly sliced)", amount: 0.33, unit: "small head"),
+            Ingredient(name: "Tomato (sliced)", amount: 1, unit: "medium"),
+            Ingredient(name: "Capsicum (thinly sliced)", amount: 1, unit: "small"),
+            Ingredient(name: "Onion (thinly sliced)", amount: 1, unit: "medium"),
+            Ingredient(name: "Paneer (cubed)", amount: 225, unit: "g"),
+            // Rice
+            Ingredient(name: "Groundnut oil", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Curry leaves", amount: 1, unit: "handful"),
+            Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
+            Ingredient(name: "Cooked rice (Sona Masuri or Kolam)", amount: 4, unit: "cups"),
+            Ingredient(name: "Lemon juice", amount: 0.5, unit: "lemon"),
+            Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "handful")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Dry roast 2 tbsp peanuts in a hot pan until they are toasted with golden-brown spots. Transfer to a bowl and cool completely. These will be crushed and used as a topping."),
+            Step(order: 2, instruction: "In the same pan (off heat), add 5 green chillies, coriander stems, garlic cloves, and 2 tbsp peanuts. Dry roast everything over medium-high heat until they develop dark brown spots and some light charring.", tip: "Charring is key — it's what gives thecha its distinctive smoky, roasted flavour."),
+            Step(order: 3, instruction: "Switch off the flame. Add a pinch of cumin seeds and 1 tsp groundnut oil to the pan, toss quickly in the residual heat, then transfer everything to a bowl to cool completely."),
+            Step(order: 4, instruction: "Once cooled, transfer the roasted mixture to a blender. Add fresh coriander, a pinch of salt, and a splash of water. Grind into a fine, smooth paste. Your thecha is ready."),
+            Step(order: 5, instruction: "Prep the vegetables: julienne the cabbage, halve the tomato and slice lengthwise, slice the capsicum into thin strips (cut skin-side down for safety), and thinly slice the onions. Cut the paneer into small cubes."),
+            Step(order: 6, instruction: "Coarsely crush the toasted peanuts using a mortar and pestle or the back of a glass. Set aside."),
+            Step(order: 7, instruction: "Heat a kadhai on high until very hot. Add 1 tbsp groundnut oil. Once the oil shimmers, add cumin seeds and curry leaves — let them crackle for 20–30 seconds.", timerSeconds: 25),
+            Step(order: 8, instruction: "Add the sliced onions and sauté for 1 minute. Add all the remaining vegetables (cabbage, tomato, capsicum) and stir-fry on high flame for 2–3 minutes, keeping them slightly crunchy.", tip: "High flame and quick tossing is the secret — you want some char on the veggies, not steamed softness.", timerSeconds: 180),
+            Step(order: 9, instruction: "Add the thecha paste, paneer cubes, a pinch of salt, and a pinch of sugar. Toss well so everything is evenly coated in the green paste."),
+            Step(order: 10, instruction: "Add the cooked rice and fold gently until every grain is coated with the thecha. Taste and adjust salt. Sona Masuri, Ambemohar, or Kolam rice works best here — their stickiness holds the flavours.", tip: "Day-old rice that's been refrigerated gives the best texture — less clumping when tossed on high heat."),
+            Step(order: 11, instruction: "Finish with crushed peanuts, a squeeze of lemon juice, and chopped coriander. Toss lightly and serve hot with cold curd or chilled chaas (buttermilk) on the side.")
         ]
     )
 }
