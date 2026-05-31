@@ -4,8 +4,9 @@ import CloudKit
 struct SettingsView: View {
     @EnvironmentObject var auth: AuthManager
     @EnvironmentObject var sharing: SharingManager
+    @EnvironmentObject var remoteLoader: RemoteRecipeLoader
     @State private var showSignOutAlert = false
-    @State private var showShareSheet = false
+    @State private var haURLInput: String = ""
 
     var body: some View {
         NavigationStack {
@@ -14,9 +15,11 @@ struct SettingsView: View {
                 if auth.isSignedIn {
                     householdSection
                 }
+                homeAssistantSection
                 aboutSection
             }
             .navigationTitle("Settings")
+            .onAppear { haURLInput = remoteLoader.haURL }
         }
     }
 
@@ -105,6 +108,58 @@ struct SettingsView: View {
             Text("Household")
         } footer: {
             Text("Shared data: meal plan, grocery list, and custom recipes. Seed recipes are built into the app and are the same for everyone.")
+        }
+    }
+
+    // MARK: - Home Assistant
+
+    private var homeAssistantSection: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("JSON URL")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                TextField("http://homeassistant.local:8123/local/recipes.json", text: $haURLInput)
+                    .font(.system(size: 13))
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.URL)
+                    .onSubmit { remoteLoader.haURL = haURLInput }
+            }
+            .padding(.vertical, 4)
+
+            HStack {
+                Button {
+                    remoteLoader.haURL = haURLInput
+                    remoteLoader.fetchIfReachable()
+                } label: {
+                    Label("Fetch now", systemImage: "arrow.clockwise")
+                }
+
+                Spacer()
+
+                if remoteLoader.isFetching {
+                    ProgressView()
+                } else if !remoteLoader.recipes.isEmpty {
+                    Text("\(remoteLoader.recipes.count) recipes loaded")
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                } else {
+                    Text("Not connected")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            if let date = remoteLoader.lastFetched {
+                Text("Last synced: \(date.formatted(date: .omitted, time: .shortened))")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+        } header: {
+            Text("Home Assistant Recipes")
+        } footer: {
+            Text("Place a recipes.json file in your HA /config/www/ folder. The app fetches it silently when on your home network.")
         }
     }
 

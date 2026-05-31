@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Example Recipe",
+    "cuisine": "North Indian",
+    "difficulty": "Easy",
+    "totalMinutes": 30,
+    "defaultServings": 4,
+    "sfSymbol": "fork.knife",
+    "accentHex": "F59E0B",
+    "isMultiDish": false,
+    "mealType": "Lunch & Dinner",
+    "ingredients": [
+      { "name": "Ingredient one", "amount": 1, "unit": "cup" },
+      { "name": "Ingredient two", "amount": 2, "unit": "tbsp" },
+      { "name": "Salt", "amount": 1, "unit": "to taste" }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "First step goes here.",
+        "tip": "Optional tip for this step."
+      },
+      {
+        "order": 2,
+        "instruction": "Second step — add a timer if needed.",
+        "timerSeconds": 300
+      },
+      {
+        "order": 3,
+        "instruction": "Final step."
+      }
+    ]
+  }
+]

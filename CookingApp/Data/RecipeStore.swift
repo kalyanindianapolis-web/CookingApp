@@ -4,8 +4,18 @@ import Combine
 
 class RecipeStore: ObservableObject {
     @Published private(set) var userRecipes: [Recipe] = []
+    @Published private(set) var remoteRecipes: [Recipe] = []
 
-    var allRecipes: [Recipe] { SeedRecipes.all + userRecipes }
+    // Seed + HA remote (deduplicated by id) + user-added
+    var allRecipes: [Recipe] {
+        let seedIDs = Set(SeedRecipes.all.map(\.id))
+        let deduped = remoteRecipes.filter { !seedIDs.contains($0.id) }
+        return SeedRecipes.all + deduped + userRecipes
+    }
+
+    func updateRemoteRecipes(_ recipes: [Recipe]) {
+        remoteRecipes = recipes
+    }
 
     private let context = PersistenceController.shared.context
     private var cancellable: AnyCancellable?

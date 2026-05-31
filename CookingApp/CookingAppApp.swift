@@ -8,6 +8,9 @@ struct CookingAppApp: App {
     @StateObject private var mealPlanStore = MealPlanStore()
     @StateObject private var auth = AuthManager()
     @StateObject private var sharing = SharingManager()
+    @StateObject private var remoteLoader = RemoteRecipeLoader()
+
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         PersistenceController.shared.migrateLegacyDataIfNeeded()
@@ -16,22 +19,28 @@ struct CookingAppApp: App {
     var body: some Scene {
         WindowGroup {
             rootView
+                // Push remote recipes into RecipeStore whenever the loader updates
+                .onChange(of: remoteLoader.recipes) { _, recipes in
+                    store.updateRemoteRecipes(recipes)
+                }
+                // Re-fetch every time the app comes to the foreground
+                .onChange(of: scenePhase) { _, phase in
+                    if phase == .active {
+                        remoteLoader.fetchIfReachable()
+                    }
+                }
         }
     }
 
     @ViewBuilder
     private var rootView: some View {
         #if targetEnvironment(simulator)
-        // Skip auth gate on simulator — no Apple ID is available.
-        // On a real device, Sign in with Apple is required.
         mainTabView
             .onOpenURL { url in sharing.acceptShare(url: url) }
         #else
         if auth.isSignedIn {
             mainTabView
-                .onOpenURL { url in
-                    sharing.acceptShare(url: url)
-                }
+                .onOpenURL { url in sharing.acceptShare(url: url) }
         } else {
             AuthView()
                 .environmentObject(auth)
@@ -55,5 +64,6 @@ struct CookingAppApp: App {
         .environmentObject(mealPlanStore)
         .environmentObject(auth)
         .environmentObject(sharing)
+        .environmentObject(remoteLoader)
     }
 }
