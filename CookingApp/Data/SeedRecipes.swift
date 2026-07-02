@@ -6,7 +6,7 @@ enum SeedRecipes {
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
         thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
-        crispyVeggieBurger, chilliCheeseCornSandwich, chiaPudding
+        crispyVeggieBurger, paneerKajuMasala, chilliCheeseCornSandwich, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -1403,5 +1403,66 @@ enum SeedRecipes {
             Step(order: 13, instruction: "On the top bun spread a little mayonnaise, add shredded lettuce, place a crispy patty, then cap with the bottom bun. Flip upright and serve immediately while crisp — tweak the fillings to your taste.")
         ],
         imageName: "recipe_veggie_burger"
+    )
+
+    // MARK: - Paneer Kaju Masala
+
+    static let paneerKajuMasala = Recipe(
+        name: "Paneer Kaju Masala",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 50,
+        defaultServings: 4,
+        sfSymbol: "fork.knife",
+        accentHex: "C2410C",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Cashews & paneer
+            Ingredient(name: "Cashews (for soaking)", amount: 25, unit: "nos."),
+            Ingredient(name: "Cashews (for frying)", amount: 35, unit: "nos."),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required"),
+            Ingredient(name: "Ghee", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Paneer (cubes)", amount: 350, unit: "g"),
+            Ingredient(name: "Tomato (roughly chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Oil", amount: 2, unit: "tbsp"),
+            // Whole spices
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+            Ingredient(name: "Green cardamom", amount: 3, unit: "nos."),
+            Ingredient(name: "Cinnamon", amount: 2, unit: "inch"),
+            // Base
+            Ingredient(name: "Onion (chopped)", amount: 4, unit: "medium"),
+            Ingredient(name: "Ginger garlic green chilli paste", amount: 2, unit: "tbsp"),
+            // Powdered spices
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Spicy red chilli powder", amount: 2, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Coriander stems", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Curd", amount: 0.5, unit: "cup"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            // Finishing
+            Ingredient(name: "Green chilli (slit)", amount: 2, unit: "nos."),
+            Ingredient(name: "Ginger julienne", amount: 1, unit: "handful"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "pinch"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Soak 20–25 cashews in a bowl of hot water. Cover and leave them to soak while you prep everything else.", timerSeconds: 600),
+            Step(order: 2, instruction: "Heat 2 tbsp ghee in a pan over high, then lower to medium. Fry the remaining 30–35 cashews, stirring, until light golden. Transfer to a bowl."),
+            Step(order: 3, instruction: "In the same pan, shallow-fry the paneer cubes until golden brown on two sides. Transfer and set aside — keep the remaining ghee in the pan for the gravy.", tip: "Don't over-fry the paneer or it turns rubbery — just a light golden crust."),
+            Step(order: 4, instruction: "Drain the soaked cashews, add them to a mixer jar with the tomato and a little water, and blend into a fine, smooth puree."),
+            Step(order: 5, instruction: "In a kadhai, heat the remaining ghee plus 1–2 tbsp oil. Add the whole spices (cumin, bay leaf, green cardamom, cinnamon) and the chopped onions. Cook on medium-high until the onions turn light golden brown."),
+            Step(order: 6, instruction: "Add the ginger-garlic-green chilli paste and cook for about 2 minutes until the mixture turns golden brown.", timerSeconds: 120),
+            Step(order: 7, instruction: "Lower the flame and add all the powdered spices (turmeric, Kashmiri chilli, spicy chilli, coriander, cumin) with a splash of hot water. Stir, then cook on high for 2–3 minutes until the ghee separates. Add the coriander stems and stir.", timerSeconds: 150),
+            Step(order: 8, instruction: "Add the cashew-tomato puree along with the whisked curd and salt. Cook on medium-high until the gravy becomes crumbly and the ghee separates.", tip: "Do not add any water at this stage — let it cook down and release the ghee first."),
+            Step(order: 9, instruction: "Now add hot water to adjust the gravy to your preferred consistency and cook for 2–3 minutes.", timerSeconds: 150),
+            Step(order: 10, instruction: "Add the fried paneer and cashews (reserve a few cashews for garnish), slit green chillies, ginger julienne, garam masala, and roasted kasuri methi powder. Stir well and cook for 3–4 minutes.", timerSeconds: 210),
+            Step(order: 11, instruction: "Taste and adjust salt, then finish with fresh coriander and the reserved fried cashews. Serve hot with tandoori roti or naan.")
+        ],
+        imageName: "recipe_paneer_kaju"
     )
 }
