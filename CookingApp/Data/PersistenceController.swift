@@ -10,10 +10,13 @@ class PersistenceController {
 
     var context: NSManagedObjectContext { container.viewContext }
 
-    // True only when the iCloud container identifier entitlement is present.
+    // ubiquityIdentityToken is non-nil only when the app is actually entitled
+    // for iCloud AND the user is signed in. It never crashes (unlike
+    // CKContainer.default() called without the entitlement), so it's a safe
+    // gate: false on unsigned/simulator builds and when iCloud is unavailable,
+    // true only when it's safe to use CloudKit.
     static var cloudKitEnabled: Bool {
-        let ids = Bundle.main.object(forInfoDictionaryKey: "com.apple.developer.icloud-container-identifiers") as? [String]
-        return ids?.isEmpty == false
+        FileManager.default.ubiquityIdentityToken != nil
     }
 
     init(inMemory: Bool = false) {
