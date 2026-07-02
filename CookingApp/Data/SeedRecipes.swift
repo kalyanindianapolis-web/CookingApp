@@ -1520,7 +1520,8 @@ enum SeedRecipes {
             Step(order: 9, instruction: "Add hot water to adjust the consistency — it should be slightly runny, not too thick or watery. Bring to a gentle simmer.", timerSeconds: 300),
             Step(order: 10, instruction: "Taste and adjust salt. Add the sugar and lemon juice for the sweet-and-tangy balance that defines this dish. Mix and taste again."),
             Step(order: 11, instruction: "Finish with fresh coriander. Serve hot with rice and Gujarati kadhi.")
-        ]
+        ],
+        imageName: "recipe_green_moong_dal"
     )
 
     // MARK: - Dal Makhani
@@ -1568,7 +1569,8 @@ enum SeedRecipes {
             Step(order: 7, instruction: "Add the cooked dal, mix well, and add hot water so it's slightly thin — it needs room to cook down. Simmer for at least 25 minutes until it thickens.", timerSeconds: 1500),
             Step(order: 8, instruction: "Once thickened, add the fresh cream, roasted kasuri methi powder, garam masala, and butter. Stir well, taste, and adjust salt."),
             Step(order: 9, instruction: "Your dal makhani is ready. Serve with laccha parathas and rice.")
-        ]
+        ],
+        imageName: "recipe_dal_makhani"
     )
 
     // MARK: - Lasooni Palak Paneer
@@ -1634,7 +1636,8 @@ enum SeedRecipes {
             Step(order: 9, instruction: "Add the fried garlic and fresh cream, stir, then add the fried paneer, grated nutmeg, and lemon juice. Stir and cook briefly."),
             Step(order: 10, instruction: "For the tempering: heat ghee in a small pan, fry the roughly chopped garlic until light golden, then add the Kashmiri red chilli, asafoetida, and Kashmiri red chilli powder. Immediately pour the tadka over the palak paneer."),
             Step(order: 11, instruction: "Your lasooni palak paneer is ready. Serve with tandoori roti, laccha paratha, or naan.")
-        ]
+        ],
+        imageName: "recipe_lasooni_palak"
     )
 
     // MARK: - Tawa Pulao
@@ -1698,7 +1701,8 @@ enum SeedRecipes {
             Step(order: 6, instruction: "Add the par-boiled rice along with garam masala, kasuri methi, fresh coriander, and lemon juice. Stir everything well and finish with more chopped coriander."),
             Step(order: 7, instruction: "For the red garlic chutney (optional side): on a hot tawa add butter, oil, cumin seeds, Kashmiri chilli powder, pav bhaji masala, and cumin powder. Stir."),
             Step(order: 8, instruction: "Add the remaining red chilli-garlic paste, salt, and black salt. Stir, add hot water, and cook 7–8 minutes until the oil separates. Serve the tawa pulao hot with the chutney.", timerSeconds: 450)
-        ]
+        ],
+        imageName: "recipe_tawa_pulao"
     )
 
     // MARK: - Bhutta (4 flavours)
@@ -1836,6 +1840,7 @@ enum SeedRecipes {
                 ]
             )
         ],
-        baseLabel: "Classic"
+        baseLabel: "Classic",
+        imageName: "recipe_bhutta"
     )
 }
