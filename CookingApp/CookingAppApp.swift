@@ -15,6 +15,8 @@ struct CookingAppApp: App {
 
     init() {
         PersistenceController.shared.migrateLegacyDataIfNeeded()
+        // Show cook-timer alerts even when the app is foregrounded on another screen.
+        CookTimerNotifier.configureForegroundPresentation()
     }
 
     var body: some Scene {
