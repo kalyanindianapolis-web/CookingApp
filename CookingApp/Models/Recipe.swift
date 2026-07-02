@@ -118,6 +118,41 @@ struct Ingredient: Identifiable, Hashable, Codable {
         return Ingredient(name: name, amount: amount * factor, unit: unit)
     }
 
+    // Preparation states to drop from the grocery name (how it's cut/prepped),
+    // longest phrases first so they're removed before their sub-words. Identity
+    // words (green, red, fresh, dried, powder, basmati, …) are intentionally
+    // absent so we still buy the right thing.
+    private static let prepTerms: [String] = [
+        "very finely chopped", "finely chopped", "thinly chopped", "roughly chopped",
+        "finely diced", "thinly sliced", "finely grated", "cut into cubes",
+        "cut into pieces", "soaked overnight", "at room temperature", "room temperature",
+        "for garnish", "for tempering", "for tadka", "to taste",
+        "chopped", "diced", "minced", "sliced", "grated", "crushed", "slit",
+        "halved", "quartered", "cubed", "julienned", "julienne", "shredded",
+        "peeled", "deseeded", "deveined", "soaked", "drained", "rinsed",
+        "beaten", "whisked", "melted", "softened", "torn", "optional"
+    ]
+
+    /// The core ingredient name for the grocery list — strips parenthetical prep
+    /// like "(slit)" / "(chopped)" and appended prep words like "thinly chopped",
+    /// while keeping shopping-relevant descriptors. Falls back to the full name
+    /// if trimming would leave nothing.
+    var groceryName: String {
+        // 1. Drop anything in parentheses: "Green chilli (slit)" -> "Green chilli".
+        var s = name.replacingOccurrences(
+            of: #"\s*\([^)]*\)"#, with: "", options: .regularExpression)
+        // 2. Drop appended prep words: "Capsicum thinly chopped" -> "Capsicum".
+        for term in Self.prepTerms {
+            let pattern = #"\b"# + NSRegularExpression.escapedPattern(for: term) + #"\b"#
+            s = s.replacingOccurrences(
+                of: pattern, with: "", options: [.regularExpression, .caseInsensitive])
+        }
+        // 3. Tidy up leftover whitespace and stray separators.
+        s = s.replacingOccurrences(of: #"\s{2,}"#, with: " ", options: .regularExpression)
+        s = s.trimmingCharacters(in: CharacterSet(charactersIn: " ,-–\t"))
+        return s.isEmpty ? name : s
+    }
+
     private static let fractions: [(Double, String)] = [
         (0, ""), (1/8, "1/8"), (1/4, "1/4"), (1/3, "1/3"),
         (3/8, "3/8"), (1/2, "1/2"), (5/8, "5/8"),

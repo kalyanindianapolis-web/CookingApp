@@ -217,13 +217,13 @@ struct MealPlanView: View {
         var seen: Set<String> = []
         for recipe in recipes {
             for ing in recipe.ingredients {
-                let key = ing.name.lowercased()
+                let key = ing.groceryName.lowercased()
                 guard !seen.contains(key) else { continue }
                 seen.insert(key)
                 groceryStore.add(
-                    name: ing.name,
+                    name: ing.groceryName,
                     quantity: ing.displayAmount,
-                    category: GroceryCategory.infer(from: ing.name)
+                    category: GroceryCategory.infer(from: ing.groceryName)
                 )
             }
         }

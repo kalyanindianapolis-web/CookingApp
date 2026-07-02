@@ -15,7 +15,7 @@ struct IngredientCheckView: View {
     }
 
     private func isAvailable(_ ingredient: Ingredient) -> Bool {
-        let target = ingredient.name.lowercased()
+        let target = ingredient.groceryName.lowercased()
         return groceryStore.items.contains {
             let listed = $0.name.lowercased()
             return listed.contains(target) || target.contains(listed)
@@ -159,7 +159,7 @@ struct IngredientCheckView: View {
             if !missing.isEmpty {
                 Button {
                     for ing in missing {
-                        groceryStore.add(name: ing.name, quantity: ing.displayAmount, category: GroceryCategory.infer(from: ing.name))
+                        groceryStore.add(name: ing.groceryName, quantity: ing.displayAmount, category: GroceryCategory.infer(from: ing.groceryName))
                     }
                     dismiss()
                 } label: {
