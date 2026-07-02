@@ -5,7 +5,7 @@ enum SeedRecipes {
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
-        thechaKPaneerRice, paneerHotGarlicRice,
+        thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
         chilliCheeseCornSandwich, chiaPudding
     ]
 
@@ -1280,6 +1280,63 @@ enum SeedRecipes {
             Step(order: 9, instruction: "Add a knob of butter to the hot pan. Place the assembled sandwich on it and press down firmly with a flat plate or a spatula to replicate a grill press. Toast on medium heat until the bottom is deeply golden and crisp.", timerSeconds: 180),
             Step(order: 10, instruction: "Spread butter on the top slice, flip the sandwich carefully, and toast the second side the same way — press down again and cook until golden.", timerSeconds: 180),
             Step(order: 11, instruction: "Once both sides are evenly golden and crisp, remove from the pan. Cut into halves or quarters and serve immediately with the remaining chutney and ketchup on the side.")
+        ]
+    )
+
+    // MARK: - Malai Kofta (no oil, cream or butter)
+
+    static let malaiKofta = Recipe(
+        name: "Malai Kofta",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 50,
+        defaultServings: 4,
+        sfSymbol: "fork.knife",
+        accentHex: "D97706",
+        isMultiDish: true,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Gravy
+            Ingredient(name: "Onion (roughly sliced)", amount: 3, unit: "medium"),
+            Ingredient(name: "Ginger", amount: 2, unit: "inch piece"),
+            Ingredient(name: "Garlic", amount: 12, unit: "cloves"),
+            Ingredient(name: "Green chilli", amount: 2, unit: "nos."),
+            Ingredient(name: "Fresh coriander stems", amount: 1, unit: "handful"),
+            Ingredient(name: "Bay leaf", amount: 2, unit: "nos."),
+            Ingredient(name: "Cinnamon", amount: 1, unit: "inch"),
+            Ingredient(name: "Black cardamom", amount: 1, unit: "no."),
+            Ingredient(name: "Green cardamom", amount: 3, unit: "nos."),
+            Ingredient(name: "California walnuts", amount: 50, unit: "g"),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required"),
+            Ingredient(name: "Salt", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Honey (optional)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "White pepper powder", amount: 1, unit: "pinch"),
+            // Kofta
+            Ingredient(name: "California walnuts (toasted)", amount: 12, unit: "nos."),
+            Ingredient(name: "Low fat paneer", amount: 150, unit: "g"),
+            Ingredient(name: "Mixed bell pepper (finely chopped)", amount: 4, unit: "tbsp"),
+            Ingredient(name: "Raisins (chopped)", amount: 8, unit: "nos."),
+            Ingredient(name: "Ginger (chopped)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Green chilli (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "White pepper powder (kofta)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Cardamom powder", amount: 1, unit: "pinch"),
+            Ingredient(name: "Salt (kofta)", amount: 1, unit: "to taste")
+        ],
+        steps: [
+            Step(order: 1, instruction: "For the gravy: add the roughly sliced onions, ginger, garlic, green chillies, and coriander stems into a kadhai.", tip: "No oil needed — this is a zero-oil, no-cream, no-butter gravy."),
+            Step(order: 2, instruction: "Add the bay leaves, cinnamon, black cardamom, green cardamom, walnuts, a large pinch of salt, and enough hot water to just cover everything. Cover and cook on medium flame for 10–15 minutes until the onions are completely soft.", timerSeconds: 900),
+            Step(order: 3, instruction: "Discard all the whole spices. Switch off the flame and let the mixture cool completely, then blend into a fine, smooth gravy in a mixer jar."),
+            Step(order: 4, instruction: "Strain the blended gravy back into the kadhai through a strainer — you'll get a rich, silky, creamy texture."),
+            Step(order: 5, instruction: "Bring the gravy to a gentle simmer (do not let it boil) for 5–6 minutes until it becomes nice and semi-thick. Taste and adjust salt.", timerSeconds: 360),
+            Step(order: 6, instruction: "Add the honey, garam masala, and white pepper powder. Stir well. Your zero-oil Malai Kofta gravy is ready."),
+            Step(order: 7, instruction: "For the koftas: toast the walnuts in a pan on the lowest flame until evenly browned. Cool completely, then coarsely crush to a breadcrumb-like texture — a portion goes into the mixture, the rest is for coating.", tip: "Go slow on low heat so the walnuts brown evenly without burning."),
+            Step(order: 8, instruction: "Grate the paneer with a fine grater. Using the heel of your palm, rub and press the paneer for 3–4 minutes until it's completely smooth and starts binding together.", tip: "This rubbing step is what makes crack-free koftas — don't skip it.", timerSeconds: 210),
+            Step(order: 9, instruction: "Add 2 tbsp of the crushed toasted walnuts, finely chopped bell pepper, chopped raisins, ginger, green chilli, white pepper powder, cardamom powder, and salt. Mix well until evenly combined."),
+            Step(order: 10, instruction: "Take portions of about 30 g each and shape into smooth, crack-free roundels, pressing gently to keep them tight and even."),
+            Step(order: 11, instruction: "Spread the remaining crushed toasted walnuts on a plate and roll each kofta in them, pressing lightly so they coat evenly all around."),
+            Step(order: 12, instruction: "Airfry the koftas in a preheated basket at 180°C for 10 minutes (an oven works too). No airfryer or oven? Heat a deep pan, place a ring or bowl in the centre with a plate of koftas on top, cover, and cook 10–12 minutes until warmed through.", timerSeconds: 600),
+            Step(order: 13, instruction: "To serve, pour the hot, silky gravy into a bowl or plate and gently place the koftas on top. Optionally garnish with a little saffron water. Rich, creamy, guilt-free Malai Kofta — no oil, cream, butter, or maida.")
         ]
     )
 }
