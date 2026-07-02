@@ -47,6 +47,9 @@ class GroceryStore: ObservableObject {
         entity.quantity = quantity
         entity.isChecked = false
         entity.category = category.rawValue
+        let household = PersistenceController.shared.currentHousehold(in: context)
+        entity.household = household
+        PersistenceController.shared.placeInHouseholdStore(entity, household: household, in: context)
         PersistenceController.shared.save()
         load()
     }

@@ -46,6 +46,9 @@ class RecipeStore: ObservableObject {
         let entity = RecipeEntity(context: context)
         entity.id = recipe.id
         entity.jsonData = try? JSONEncoder().encode(recipe)
+        let household = PersistenceController.shared.currentHousehold(in: context)
+        entity.household = household
+        PersistenceController.shared.placeInHouseholdStore(entity, household: household, in: context)
         PersistenceController.shared.save()
         load()
     }

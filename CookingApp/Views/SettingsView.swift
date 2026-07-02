@@ -90,7 +90,8 @@ struct SettingsView: View {
                 Button(role: .destructive) {
                     sharing.leaveHousehold()
                 } label: {
-                    Label("Stop Sharing Household", systemImage: "xmark.circle")
+                    Label(sharing.isOwner ? "Stop Sharing Household" : "Leave Household",
+                          systemImage: "xmark.circle")
                 }
             } else {
                 VStack(alignment: .leading, spacing: 6) {
@@ -187,21 +188,60 @@ struct SettingsView: View {
 
 struct ShareHouseholdButton: View {
     @ObservedObject var sharing: SharingManager
+    @State private var payload: SharePayload?
+    @State private var isPreparing = false
 
     var body: some View {
         Button {
-            guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let root = scene.windows.first?.rootViewController else { return }
+            isPreparing = true
             Task {
-                await sharing.presentShareSheet(from: root)
+                if let (share, container) = await sharing.prepareShare() {
+                    payload = SharePayload(share: share, container: container)
+                }
+                isPreparing = false
             }
         } label: {
-            Label(
-                sharing.isShared ? "Manage Sharing" : "Share Household",
-                systemImage: sharing.isShared ? "person.badge.plus" : "square.and.arrow.up"
-            )
+            HStack {
+                Label(
+                    sharing.isShared ? "Manage Sharing" : "Share Household",
+                    systemImage: sharing.isShared ? "person.badge.plus" : "square.and.arrow.up"
+                )
+                if isPreparing {
+                    Spacer()
+                    ProgressView()
+                }
+            }
+        }
+        .disabled(isPreparing)
+        .sheet(item: $payload) { payload in
+            CloudSharingView(share: payload.share, container: payload.container, delegate: sharing)
+                .ignoresSafeArea()
         }
     }
+}
+
+/// Identifiable wrapper so a prepared share can drive a `.sheet(item:)`.
+struct SharePayload: Identifiable {
+    let id = UUID()
+    let share: CKShare
+    let container: CKContainer
+}
+
+/// Hosts `UICloudSharingController` for reliable presentation from SwiftUI —
+/// avoids the fragile key-window lookup that made the button do nothing.
+struct CloudSharingView: UIViewControllerRepresentable {
+    let share: CKShare
+    let container: CKContainer
+    let delegate: UICloudSharingControllerDelegate
+
+    func makeUIViewController(context: Context) -> UICloudSharingController {
+        let controller = UICloudSharingController(share: share, container: container)
+        controller.delegate = delegate
+        controller.availablePermissions = [.allowReadWrite, .allowPrivate]
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UICloudSharingController, context: Context) {}
 }
 
 #Preview {
