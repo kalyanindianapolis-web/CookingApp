@@ -1337,7 +1337,8 @@ enum SeedRecipes {
             Step(order: 11, instruction: "Spread the remaining crushed toasted walnuts on a plate and roll each kofta in them, pressing lightly so they coat evenly all around."),
             Step(order: 12, instruction: "Airfry the koftas in a preheated basket at 180°C for 10 minutes (an oven works too). No airfryer or oven? Heat a deep pan, place a ring or bowl in the centre with a plate of koftas on top, cover, and cook 10–12 minutes until warmed through.", timerSeconds: 600),
             Step(order: 13, instruction: "To serve, pour the hot, silky gravy into a bowl or plate and gently place the koftas on top. Optionally garnish with a little saffron water. Rich, creamy, guilt-free Malai Kofta — no oil, cream, butter, or maida.")
-        ]
+        ],
+        imageName: "recipe_malai_kofta"
     )
 
     // MARK: - Crispy Veggie Burger
@@ -1400,6 +1401,7 @@ enum SeedRecipes {
             Step(order: 11, instruction: "Heat oil for deep-frying on medium. Fry the coated patties on a medium flame until crisp and golden brown. Your crispy veggie patties are ready.", tip: "Keep the flame at medium — too hot and the coating browns before the inside heats through."),
             Step(order: 12, instruction: "To assemble: melt a little butter in a pan and toast the burger buns cut-side down until golden brown."),
             Step(order: 13, instruction: "On the top bun spread a little mayonnaise, add shredded lettuce, place a crispy patty, then cap with the bottom bun. Flip upright and serve immediately while crisp — tweak the fillings to your taste.")
-        ]
+        ],
+        imageName: "recipe_veggie_burger"
     )
 }
