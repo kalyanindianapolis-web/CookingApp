@@ -3,6 +3,7 @@ import AuthenticationServices
 
 struct AuthView: View {
     @EnvironmentObject var auth: AuthManager
+    @State private var errorMessage: String?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -32,16 +33,31 @@ struct AuthView: View {
                 } onCompletion: { result in
                     switch result {
                     case .success(let authorization):
+                        errorMessage = nil
                         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
                             auth.handleCredential(credential)
                         }
-                    case .failure:
-                        break
+                    case .failure(let error):
+                        // Surface the failure instead of swallowing it. A missing
+                        // "Sign in with Apple" entitlement shows up here.
+                        let nsError = error as NSError
+                        if nsError.code == ASAuthorizationError.canceled.rawValue {
+                            errorMessage = nil   // user tapped Cancel; not an error
+                        } else {
+                            errorMessage = nsError.localizedDescription
+                        }
                     }
                 }
                 .signInWithAppleButtonStyle(.black)
                 .frame(height: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
+
+                if let errorMessage {
+                    Text(errorMessage)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                        .multilineTextAlignment(.center)
+                }
 
                 Text("Sign in uses your Apple ID. Your data is stored in iCloud.")
                     .font(.caption2)
