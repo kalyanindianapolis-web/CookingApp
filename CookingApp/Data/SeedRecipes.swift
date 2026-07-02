@@ -6,7 +6,7 @@ enum SeedRecipes {
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
         thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
-        chilliCheeseCornSandwich, chiaPudding
+        crispyVeggieBurger, chilliCheeseCornSandwich, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -1337,6 +1337,69 @@ enum SeedRecipes {
             Step(order: 11, instruction: "Spread the remaining crushed toasted walnuts on a plate and roll each kofta in them, pressing lightly so they coat evenly all around."),
             Step(order: 12, instruction: "Airfry the koftas in a preheated basket at 180°C for 10 minutes (an oven works too). No airfryer or oven? Heat a deep pan, place a ring or bowl in the centre with a plate of koftas on top, cover, and cook 10–12 minutes until warmed through.", timerSeconds: 600),
             Step(order: 13, instruction: "To serve, pour the hot, silky gravy into a bowl or plate and gently place the koftas on top. Optionally garnish with a little saffron water. Rich, creamy, guilt-free Malai Kofta — no oil, cream, butter, or maida.")
+        ]
+    )
+
+    // MARK: - Crispy Veggie Burger
+
+    static let crispyVeggieBurger = Recipe(
+        name: "Crispy Veggie Burger",
+        cuisine: "Indian Street Food",
+        difficulty: .medium,
+        totalMinutes: 55,
+        defaultServings: 8,
+        sfSymbol: "fork.knife",
+        accentHex: "EA580C",
+        isMultiDish: true,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Patty mixture
+            Ingredient(name: "Poha (rice flakes)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Oil", amount: 1, unit: "tsp"),
+            Ingredient(name: "Butter", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Onion (chopped)", amount: 0.5, unit: "medium"),
+            Ingredient(name: "Garlic (chopped)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "French beans (chopped)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Carrots (chopped)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Green peas (boiled)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Green chillies (finely chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Turmeric powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Red chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Dry mango powder (amchur)", amount: 2, unit: "tsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Boiled potatoes", amount: 6, unit: "medium"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Fresh coriander leaves", amount: 1, unit: "handful"),
+            // Crispy coating
+            Ingredient(name: "Refined flour (maida)", amount: 1, unit: "cup"),
+            Ingredient(name: "Corn flour", amount: 0.5, unit: "cup"),
+            Ingredient(name: "Salt (batter)", amount: 1, unit: "to taste"),
+            Ingredient(name: "Cold water", amount: 1, unit: "as required"),
+            Ingredient(name: "Oil (batter)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Bread crumbs", amount: 1, unit: "as required"),
+            Ingredient(name: "Black pepper (for coating)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Oil (for frying)", amount: 1, unit: "as required"),
+            // Assembly
+            Ingredient(name: "Butter (for toasting)", amount: 1, unit: "as needed"),
+            Ingredient(name: "Burger buns", amount: 8, unit: "nos."),
+            Ingredient(name: "Mayonnaise", amount: 1, unit: "as needed"),
+            Ingredient(name: "Fresh lettuce", amount: 1, unit: "as needed")
+        ],
+        steps: [
+            Step(order: 1, instruction: "For the patty mixture: rinse the poha in a strainer with fresh water and let it rest for a couple of minutes. Once softened, mash it and set aside."),
+            Step(order: 2, instruction: "Heat a pan on medium, add the oil and butter. Once the butter melts, add the onions and garlic and cook on medium-high until the onions turn translucent."),
+            Step(order: 3, instruction: "Add the french beans, carrots, boiled green peas, and green chillies. Stir and cook on high flame for 2–3 minutes.", timerSeconds: 150),
+            Step(order: 4, instruction: "Lower the heat and add the turmeric, red chilli, amchur, and cumin powders plus a pinch of garam masala. Stir well. Grate in the boiled potatoes, add salt to taste, and cook on medium-high while mixing and mashing the potatoes."),
+            Step(order: 5, instruction: "Add the soaked, mashed poha and the chopped coriander. Use a potato masher to lightly mash and combine everything well."),
+            Step(order: 6, instruction: "Switch off the flame, transfer to a bowl, and let it cool to room temperature. Cover with cling wrap and refrigerate for 12–15 minutes so it firms up for shaping.", tip: "Chilling is what lets the patties hold their shape when you fry them.", timerSeconds: 780),
+            Step(order: 7, instruction: "For the crispy patties: in a large bowl, whisk the maida, corn flour, and salt with cold water (as needed) and 1 tbsp oil into a semi-thick, lump-free batter."),
+            Step(order: 8, instruction: "In a wide bowl, season the bread crumbs with salt and black pepper."),
+            Step(order: 9, instruction: "Take a spoonful of the chilled mixture, roll it into a ball, then press into a tikki slightly smaller than your burger buns. Shape all the patties.", tip: "Keep them a touch smaller than the bun — they're easier to coat and fry evenly."),
+            Step(order: 10, instruction: "Dip each tikki in the batter, then immediately coat it in the seasoned bread crumbs. Coat all the patties the same way."),
+            Step(order: 11, instruction: "Heat oil for deep-frying on medium. Fry the coated patties on a medium flame until crisp and golden brown. Your crispy veggie patties are ready.", tip: "Keep the flame at medium — too hot and the coating browns before the inside heats through."),
+            Step(order: 12, instruction: "To assemble: melt a little butter in a pan and toast the burger buns cut-side down until golden brown."),
+            Step(order: 13, instruction: "On the top bun spread a little mayonnaise, add shredded lettuce, place a crispy patty, then cap with the bottom bun. Flip upright and serve immediately while crisp — tweak the fillings to your taste.")
         ]
     )
 }
