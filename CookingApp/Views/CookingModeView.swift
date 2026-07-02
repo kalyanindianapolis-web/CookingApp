@@ -5,6 +5,7 @@ import AudioToolbox
 struct CookingModeView: View {
     let recipe: Recipe
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var groceryStore: GroceryStore
 
     @State private var currentStepIndex = 0
@@ -12,8 +13,12 @@ struct CookingModeView: View {
     @State private var timerRunning = false
     @State private var timerCancellable: AnyCancellable?
     @State private var timerDone = false
+    @State private var timerEndDate: Date? = nil
     @State private var showTimerWarning = false
     @State private var pendingStepIndex: Int? = nil
+
+    // Stable id for this cooking session's scheduled local notification.
+    private let timerNotificationID = UUID().uuidString
 
     private var currentStep: Step { recipe.steps[currentStepIndex] }
     private var progress: Double { Double(currentStepIndex + 1) / Double(recipe.steps.count) }
@@ -37,7 +42,19 @@ struct CookingModeView: View {
             .padding(.bottom, 32)
         }
         .preferredColorScheme(.dark)
-        .onAppear { loadTimer() }
+        .onAppear {
+            loadTimer()
+            CookTimerNotifier.requestAuthorization()
+            UIApplication.shared.isIdleTimerDisabled = true   // keep screen awake while cooking
+        }
+        .onDisappear {
+            stopTimer()
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // Re-sync the countdown against wall-clock time when returning to the app.
+            if phase == .active, timerRunning { tick() }
+        }
         .alert("Timer Still Running", isPresented: $showTimerWarning) {
             Button("Leave Step", role: .destructive) {
                 if let idx = pendingStepIndex {
@@ -219,33 +236,54 @@ struct CookingModeView: View {
         timerSecondsLeft = currentStep.timerSeconds ?? 0
         timerRunning = false
         timerDone = false
+        timerEndDate = nil
+        CookTimerNotifier.cancel(id: timerNotificationID)
     }
 
     private func startTimer() {
         timerRunning = true
+        timerEndDate = Date().addingTimeInterval(TimeInterval(timerSecondsLeft))
+        // Schedule a local notification so the alert still fires if the app is
+        // backgrounded (the Combine timer below is suspended when not active).
+        CookTimerNotifier.schedule(id: timerNotificationID, after: timerSecondsLeft, recipeName: recipe.name)
         timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
-            .sink { _ in
-                if timerSecondsLeft > 0 {
-                    timerSecondsLeft -= 1
-                } else {
-                    stopTimer()
-                    timerDone = true
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    AudioServicesPlaySystemSound(1005)
-                }
-            }
+            .sink { _ in tick() }
+    }
+
+    /// Derives remaining time from the target end date so the countdown stays
+    /// accurate across backgrounding.
+    private func tick() {
+        guard let end = timerEndDate else { return }
+        let remaining = Int(ceil(end.timeIntervalSinceNow))
+        if remaining > 0 {
+            timerSecondsLeft = remaining
+        } else {
+            timerSecondsLeft = 0
+            finishTimer()
+        }
+    }
+
+    private func finishTimer() {
+        stopTimer()
+        timerDone = true
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        AudioServicesPlaySystemSound(1005)
     }
 
     private func pauseTimer() {
         timerRunning = false
         timerCancellable?.cancel()
+        timerEndDate = nil
+        CookTimerNotifier.cancel(id: timerNotificationID)
     }
 
     private func stopTimer() {
         timerRunning = false
         timerCancellable?.cancel()
         timerCancellable = nil
+        timerEndDate = nil
+        CookTimerNotifier.cancel(id: timerNotificationID)
     }
 
     private func timeString(_ seconds: Int) -> String {
