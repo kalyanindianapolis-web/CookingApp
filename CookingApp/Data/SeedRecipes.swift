@@ -6,7 +6,9 @@ enum SeedRecipes {
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
         thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
-        crispyVeggieBurger, paneerKajuMasala, chilliCheeseCornSandwich, chiaPudding
+        crispyVeggieBurger, paneerKajuMasala, greenMoongDal, dalMakhani,
+        lasooniPalakPaneer, tawaPulao, bhutta,
+        chilliCheeseCornSandwich, chiaPudding
     ]
 
     static let dalTadka = Recipe(
@@ -1464,5 +1466,376 @@ enum SeedRecipes {
             Step(order: 11, instruction: "Taste and adjust salt, then finish with fresh coriander and the reserved fried cashews. Serve hot with tandoori roti or naan.")
         ],
         imageName: "recipe_paneer_kaju"
+    )
+
+    // MARK: - Gujarati Green Moong Dal (Rassawala Mag)
+
+    static let greenMoongDal = Recipe(
+        name: "Gujarati Green Moong Dal",
+        cuisine: "Gujarati",
+        difficulty: .easy,
+        totalMinutes: 30,
+        defaultServings: 4,
+        sfSymbol: "leaf.fill",
+        accentHex: "16A34A",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Pressure cooking
+            Ingredient(name: "Whole green moong", amount: 1, unit: "cup"),
+            Ingredient(name: "Tomato", amount: 2, unit: "medium"),
+            Ingredient(name: "Water", amount: 1, unit: "as required"),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Oil", amount: 1, unit: "tsp"),
+            Ingredient(name: "Salt", amount: 1, unit: "large pinch"),
+            // Garlic & chilli paste
+            Ingredient(name: "Garlic (for paste)", amount: 10, unit: "cloves"),
+            Ingredient(name: "Green chilli (roughly cut)", amount: 3, unit: "nos."),
+            Ingredient(name: "Salt (for paste)", amount: 1, unit: "pinch"),
+            // Tempering & cooking
+            Ingredient(name: "Garlic (roughly chopped)", amount: 8, unit: "cloves"),
+            Ingredient(name: "Groundnut oil", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Mustard seeds", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Cumin seeds", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Asafoetida (hing)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Dry red chilli", amount: 2, unit: "nos."),
+            Ingredient(name: "Curry leaves", amount: 12, unit: "nos."),
+            Ingredient(name: "Turmeric powder (tempering)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Red chilli powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Cumin powder", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Sugar", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Lemon juice", amount: 0.5, unit: "lemon"),
+            Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "handful")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Rinse the whole green moong in a strainer once or twice. No soaking needed for this recipe."),
+            Step(order: 2, instruction: "Transfer the moong to a pressure cooker. Cut a cross on top of each tomato, remove the eye, and add them in whole. Add water until it sits about an inch above the moong, plus salt, turmeric, and oil.", tip: "Adding tomatoes whole and mashing them later keeps the dal fresh and light."),
+            Step(order: 3, instruction: "Close the lid and cook on medium flame for 4–5 whistles, then switch off and let the cooker depressurise naturally."),
+            Step(order: 4, instruction: "Open the lid — the moong should be fully cooked and the tomatoes completely soft. Peel off the tomato skins (they slip off easily now) and mash the tomatoes into the moong with a fork. Set this base aside."),
+            Step(order: 5, instruction: "In a mortar and pestle, pound the garlic, roughly cut green chillies, and a pinch of salt into a coarse paste. Roughly chop the remaining garlic separately."),
+            Step(order: 6, instruction: "Heat a kadhai on high until hot. Add the groundnut oil, then the mustard seeds, cumin seeds, hing, dry red chillies, and curry leaves — let them crackle."),
+            Step(order: 7, instruction: "Add the roughly chopped garlic and sauté until lightly golden, then add the coarse paste and stir a few seconds until the raw smell goes. Don't overcook it."),
+            Step(order: 8, instruction: "Lower the flame completely. Add the turmeric, red chilli, coriander, and cumin powders. Stir lightly, then add the cooked moong and mix well so it comes together with the tempering."),
+            Step(order: 9, instruction: "Add hot water to adjust the consistency — it should be slightly runny, not too thick or watery. Bring to a gentle simmer.", timerSeconds: 300),
+            Step(order: 10, instruction: "Taste and adjust salt. Add the sugar and lemon juice for the sweet-and-tangy balance that defines this dish. Mix and taste again."),
+            Step(order: 11, instruction: "Finish with fresh coriander. Serve hot with rice and Gujarati kadhi.")
+        ]
+    )
+
+    // MARK: - Dal Makhani
+
+    static let dalMakhani = Recipe(
+        name: "Dal Makhani",
+        cuisine: "Punjabi",
+        difficulty: .medium,
+        totalMinutes: 90,
+        defaultServings: 5,
+        sfSymbol: "flame.fill",
+        accentHex: "7C2D12",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Boiled dal
+            Ingredient(name: "Whole urad dal", amount: 1, unit: "cup"),
+            Ingredient(name: "Rajma", amount: 0.25, unit: "cup"),
+            Ingredient(name: "Chana dal", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Garlic", amount: 5, unit: "cloves"),
+            Ingredient(name: "Water", amount: 1, unit: "as required"),
+            Ingredient(name: "Salt", amount: 1, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tsp"),
+            // Tempering & final cooking
+            Ingredient(name: "Butter", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Oil", amount: 1, unit: "tsp"),
+            Ingredient(name: "Ginger garlic paste", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Kashmiri red chilli powder (tempering)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Garam masala", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Tomato puree", amount: 5, unit: "tomatoes"),
+            Ingredient(name: "Salt (tempering)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required"),
+            Ingredient(name: "Fresh cream", amount: 5, unit: "tbsp"),
+            Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Garam masala (finish)", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Butter (finish)", amount: 3, unit: "tbsp")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Add the urad dal, rajma, and chana dal to a large bowl. Wash by rubbing between your palms 3–4 times until the water runs clear, then soak for 10–12 hours.", tip: "The long soak is what gives dal makhani its creamy texture — don't skip it."),
+            Step(order: 2, instruction: "Wash the soaked dal again until the water runs clear, discard the water, and add the dal to a pressure cooker."),
+            Step(order: 3, instruction: "Add the garlic, water, salt, and Kashmiri red chilli powder. Pressure cook on high for 4 whistles, then switch off and let it depressurise naturally."),
+            Step(order: 4, instruction: "Lightly mash the dal with a potato masher — just until the rajma disappears, not into a paste. Transfer to a bowl and set aside."),
+            Step(order: 5, instruction: "In the same cooker or a stock pot, heat the butter with the oil until the butter melts. Add the ginger garlic paste and cook on medium for 2 minutes.", timerSeconds: 120),
+            Step(order: 6, instruction: "Lower the flame, add the Kashmiri red chilli powder and garam masala, then the tomato puree and salt. Cook on high until the oil separates and the puree turns crumbly."),
+            Step(order: 7, instruction: "Add the cooked dal, mix well, and add hot water so it's slightly thin — it needs room to cook down. Simmer for at least 25 minutes until it thickens.", timerSeconds: 1500),
+            Step(order: 8, instruction: "Once thickened, add the fresh cream, roasted kasuri methi powder, garam masala, and butter. Stir well, taste, and adjust salt."),
+            Step(order: 9, instruction: "Your dal makhani is ready. Serve with laccha parathas and rice.")
+        ]
+    )
+
+    // MARK: - Lasooni Palak Paneer
+
+    static let lasooniPalakPaneer = Recipe(
+        name: "Lasooni Palak Paneer",
+        cuisine: "North Indian",
+        difficulty: .medium,
+        totalMinutes: 45,
+        defaultServings: 5,
+        sfSymbol: "leaf.fill",
+        accentHex: "166534",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Spinach puree
+            Ingredient(name: "Spinach (washed)", amount: 250, unit: "g"),
+            Ingredient(name: "Salt", amount: 1, unit: "pinch"),
+            Ingredient(name: "Mint", amount: 15, unit: "leaves"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "small handful"),
+            Ingredient(name: "Green chilli", amount: 3, unit: "nos."),
+            Ingredient(name: "Ginger", amount: 1, unit: "inch"),
+            // Paneer
+            Ingredient(name: "Oil (for paneer)", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Paneer (cubed)", amount: 500, unit: "g"),
+            // Gravy
+            Ingredient(name: "Oil (for garlic)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Garlic (halved)", amount: 20, unit: "cloves"),
+            Ingredient(name: "Ghee", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Black peppercorns", amount: 1, unit: "tsp"),
+            Ingredient(name: "Black cardamom", amount: 1, unit: "no."),
+            Ingredient(name: "Cloves", amount: 4, unit: "nos."),
+            Ingredient(name: "Cinnamon", amount: 0.5, unit: "inch"),
+            Ingredient(name: "Onion (chopped)", amount: 2, unit: "medium"),
+            Ingredient(name: "Garlic (roughly chopped)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Spicy red chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Tomato (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Salt (gravy)", amount: 1, unit: "to taste"),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required"),
+            Ingredient(name: "Fresh cream", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Nutmeg (grated)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Lemon juice", amount: 0.5, unit: "lemon"),
+            // Tempering
+            Ingredient(name: "Ghee (tempering)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Garlic (tempering)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Kashmiri red chilli", amount: 1, unit: "no."),
+            Ingredient(name: "Asafoetida (hing)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 0.5, unit: "tsp")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Bring a deep pan of water to a roaring boil. Add a pinch of salt, then the spinach leaves; keep them submerged for 10–15 seconds, then immediately transfer to a bowl of ice-cold water.", tip: "The blanch-and-shock keeps the spinach a vivid green.", timerSeconds: 15),
+            Step(order: 2, instruction: "Once cooled, squeeze out excess water and blend the spinach with the mint, coriander, green chilli, ginger, and a little water into a fine puree. Set aside."),
+            Step(order: 3, instruction: "Heat oil in a hot pan and shallow-fry the paneer cubes until light golden on both sides. Transfer to a bowl and set aside."),
+            Step(order: 4, instruction: "In a kadhai, heat the oil and fry the halved garlic cloves on medium until light golden brown. Strain them out and reserve both the fried garlic and the garlic-infused oil."),
+            Step(order: 5, instruction: "In the same kadhai, add the garlic oil plus ghee. Add the whole spices (cumin, peppercorns, black cardamom, cloves, cinnamon) and the chopped onions. Cook on medium-high until the onions turn golden brown."),
+            Step(order: 6, instruction: "Add the roughly chopped garlic and cook 1–2 minutes. Lower the flame, add the powdered spices, stir once, then immediately add a splash of hot water, raise the flame, and cook 1–2 minutes.", timerSeconds: 120),
+            Step(order: 7, instruction: "Add the tomatoes and salt; cook until mushy and the oil separates (add a splash of hot water if it gets too dry)."),
+            Step(order: 8, instruction: "Lower the flame and add the spinach puree. Cook on medium for 8–10 minutes.", timerSeconds: 540),
+            Step(order: 9, instruction: "Add the fried garlic and fresh cream, stir, then add the fried paneer, grated nutmeg, and lemon juice. Stir and cook briefly."),
+            Step(order: 10, instruction: "For the tempering: heat ghee in a small pan, fry the roughly chopped garlic until light golden, then add the Kashmiri red chilli, asafoetida, and Kashmiri red chilli powder. Immediately pour the tadka over the palak paneer."),
+            Step(order: 11, instruction: "Your lasooni palak paneer is ready. Serve with tandoori roti, laccha paratha, or naan.")
+        ]
+    )
+
+    // MARK: - Tawa Pulao
+
+    static let tawaPulao = Recipe(
+        name: "Tawa Pulao",
+        cuisine: "Indian Street Food",
+        difficulty: .medium,
+        totalMinutes: 40,
+        defaultServings: 4,
+        sfSymbol: "flame.fill",
+        accentHex: "DC2626",
+        isMultiDish: true,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Rice
+            Ingredient(name: "Sela basmati (soaked)", amount: 1, unit: "cup"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            // Chilli garlic paste
+            Ingredient(name: "Kashmiri red chilli (deseeded & soaked)", amount: 35, unit: "nos."),
+            Ingredient(name: "Garlic", amount: 150, unit: "g"),
+            Ingredient(name: "Green chilli", amount: 8, unit: "nos."),
+            // Tawa pulao
+            Ingredient(name: "Butter", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Oil", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "tsp"),
+            Ingredient(name: "Onion (sliced)", amount: 1, unit: "medium"),
+            Ingredient(name: "Capsicum (julienne)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Tomato (sliced)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Cabbage (julienne)", amount: 0.33, unit: "cup"),
+            Ingredient(name: "Beetroot (grated)", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Potato (boiled & diced)", amount: 1, unit: "no."),
+            Ingredient(name: "Green peas (boiled)", amount: 0.25, unit: "cup"),
+            Ingredient(name: "Turmeric powder (pulao)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Pav bhaji masala", amount: 1.5, unit: "tbsp"),
+            Ingredient(name: "Salt (pulao)", amount: 1, unit: "to taste"),
+            Ingredient(name: "Red chilli garlic paste (pulao)", amount: 10, unit: "tbsp"),
+            Ingredient(name: "Garam masala", amount: 1, unit: "pinch"),
+            Ingredient(name: "Kasuri methi", amount: 1, unit: "tsp"),
+            Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "small handful"),
+            Ingredient(name: "Lemon juice", amount: 1, unit: "tsp"),
+            // Red garlic chutney
+            Ingredient(name: "Butter (chutney)", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Oil (chutney)", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Cumin seeds (chutney)", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Kashmiri red chilli powder (chutney)", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Pav bhaji masala (chutney)", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Cumin powder", amount: 1, unit: "pinch"),
+            Ingredient(name: "Black salt", amount: 1, unit: "pinch"),
+            Ingredient(name: "Hot water", amount: 250, unit: "ml")
+        ],
+        steps: [
+            Step(order: 1, instruction: "For the rice: wash the basmati well and soak for 15–20 minutes. Bring a large pot of water to a roaring boil with salt and turmeric.", timerSeconds: 900),
+            Step(order: 2, instruction: "Drain the rice and add it to the boiling water. Par-boil only — do not cook fully — stirring occasionally, about 3–4 minutes. Strain and spread on a plate, then fluff with a fork to stop the cooking and let it cool.", tip: "Par-boiled, cooled rice keeps the grains separate on the tawa.", timerSeconds: 240),
+            Step(order: 3, instruction: "For the chilli-garlic paste: blend the deseeded, soaked Kashmiri red chillies with the garlic, green chillies, and water into a fine paste."),
+            Step(order: 4, instruction: "For the tawa pulao: heat a tawa on high, add butter, oil, and cumin seeds. Add the sliced onions and cook until light golden brown."),
+            Step(order: 5, instruction: "Add all the remaining vegetables and stir well. Add the powdered spices, salt, and 8–10 tbsp of the red chilli-garlic paste; add hot water and cook on high for 2–3 minutes.", timerSeconds: 180),
+            Step(order: 6, instruction: "Add the par-boiled rice along with garam masala, kasuri methi, fresh coriander, and lemon juice. Stir everything well and finish with more chopped coriander."),
+            Step(order: 7, instruction: "For the red garlic chutney (optional side): on a hot tawa add butter, oil, cumin seeds, Kashmiri chilli powder, pav bhaji masala, and cumin powder. Stir."),
+            Step(order: 8, instruction: "Add the remaining red chilli-garlic paste, salt, and black salt. Stir, add hot water, and cook 7–8 minutes until the oil separates. Serve the tawa pulao hot with the chutney.", timerSeconds: 450)
+        ]
+    )
+
+    // MARK: - Bhutta (4 flavours)
+
+    // Shared prep used by every flavour.
+    private static let bhuttaBaseIngredients: [Ingredient] = [
+        Ingredient(name: "Corn cob", amount: 4, unit: "nos."),
+        Ingredient(name: "Hot water (for boiling)", amount: 1, unit: "as required"),
+        Ingredient(name: "Salt (for boiling)", amount: 1, unit: "pinch"),
+        Ingredient(name: "Butter (melted, for smoking)", amount: 1, unit: "as required"),
+        Ingredient(name: "Charcoal", amount: 1, unit: "piece")
+    ]
+
+    private static let bhuttaBoilStep = Step(order: 1, instruction: "Bring a large pot of water to a rolling boil with a pinch of salt. Add the peeled corn cobs, cover, and boil for 8–10 minutes until fork-tender. Remove and cool.", timerSeconds: 540)
+    private static let bhuttaSmokedButterStep = Step(order: 2, instruction: "Make smoked butter: place a small piece of burning charcoal into a bowl of melted butter, cover, and let it smoke for 3–4 minutes. Discard the charcoal and strain. Both components are used by every flavour.", tip: "This smoked butter is also great on naan and tikkas.", timerSeconds: 210)
+
+    static let bhutta = Recipe(
+        name: "Bhutta",
+        cuisine: "Indian Street Food",
+        difficulty: .easy,
+        totalMinutes: 30,
+        defaultServings: 4,
+        sfSymbol: "flame.fill",
+        accentHex: "F59E0B",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: bhuttaBaseIngredients + [
+            Ingredient(name: "Lemon juice", amount: 1, unit: "lemon"),
+            Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tsp"),
+            Ingredient(name: "Salt (finish)", amount: 1, unit: "to taste"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful")
+        ],
+        steps: [
+            bhuttaBoilStep,
+            bhuttaSmokedButterStep,
+            Step(order: 3, instruction: "Classic style: rub the warm cob with smoked butter, drizzle lemon juice, sprinkle a Kashmiri red chilli + salt mix, add fresh coriander, and serve immediately. Pick a flavour below for a twist.")
+        ],
+        variations: [
+            RecipeVariation(
+                name: "Tandoori",
+                accentHex: "B91C1C",
+                totalMinutes: 30,
+                ingredients: bhuttaBaseIngredients + [
+                    Ingredient(name: "Mustard oil", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Garam masala", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Coriander powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Spicy red chilli powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Cumin powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Chaat masala", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Black salt", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Roasted kasuri methi powder", amount: 0.25, unit: "tsp"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Lemon juice", amount: 1, unit: "lemon"),
+                    Ingredient(name: "Hung curd", amount: 2, unit: "tbsp")
+                ],
+                steps: [
+                    bhuttaBoilStep,
+                    bhuttaSmokedButterStep,
+                    Step(order: 3, instruction: "Whisk all the tandoori marinade ingredients into a smooth marinade (enough for 3–4 bhuttas). Apply generously over a boiled cob."),
+                    Step(order: 4, instruction: "Place a steel net (papad jaali) on the stove on high flame and set the cob on it. Cook over the direct flame, rotating, until the marinade cooks and you get charred marks. Brush with butter as it cooks if you like."),
+                    Step(order: 5, instruction: "Drizzle with smoked butter, add lemon juice, a Kashmiri red chilli + salt mix, and fresh coriander. Serve immediately.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Butter Garlic",
+                accentHex: "CA8A04",
+                totalMinutes: 30,
+                ingredients: bhuttaBaseIngredients + [
+                    Ingredient(name: "Butter (soft)", amount: 3, unit: "tbsp"),
+                    Ingredient(name: "Garlic paste", amount: 1.5, unit: "tbsp"),
+                    Ingredient(name: "Green chilli (finely chopped)", amount: 4, unit: "nos."),
+                    Ingredient(name: "Red chilli flakes", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Oregano", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Fried garlic", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Spring onion greens", amount: 1, unit: "handful")
+                ],
+                steps: [
+                    bhuttaBoilStep,
+                    bhuttaSmokedButterStep,
+                    Step(order: 3, instruction: "Mix the soft butter, garlic paste, chopped green chilli, red chilli flakes, and oregano into a butter-garlic marinade. Apply over a boiled cob."),
+                    Step(order: 4, instruction: "Cook over a direct flame on a steel net, rotating, until charred and the garlic butter is fragrant."),
+                    Step(order: 5, instruction: "Finish with smoked butter, lemon juice, a Kashmiri chilli + salt mix, fried garlic, and spring onion greens. Serve hot.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Chilli Lemon",
+                accentHex: "65A30D",
+                totalMinutes: 30,
+                ingredients: bhuttaBaseIngredients + [
+                    Ingredient(name: "Olive oil", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Mustard sauce", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Garlic (finely chopped)", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Green chilli (finely chopped)", amount: 4, unit: "nos."),
+                    Ingredient(name: "Red chilli flakes", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Oregano", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Black salt", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tbsp"),
+                    Ingredient(name: "Honey", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Lemon zest", amount: 1, unit: "lemon"),
+                    Ingredient(name: "Lemon juice", amount: 1, unit: "lemon"),
+                    Ingredient(name: "Fresh coriander (chopped)", amount: 1, unit: "handful")
+                ],
+                steps: [
+                    bhuttaBoilStep,
+                    bhuttaSmokedButterStep,
+                    Step(order: 3, instruction: "Mix all the chilli-lemon marinade ingredients in a bowl. Apply over a boiled cob. (This marinade also works on paneer, broccoli, and pineapple.)"),
+                    Step(order: 4, instruction: "Cook over a direct flame on a steel net, rotating, until charred."),
+                    Step(order: 5, instruction: "Finish with smoked butter, lemon juice, a Kashmiri chilli + salt mix, and fresh coriander. Serve immediately.")
+                ]
+            ),
+            RecipeVariation(
+                name: "Khatta Meetha",
+                accentHex: "92400E",
+                totalMinutes: 30,
+                ingredients: bhuttaBaseIngredients + [
+                    Ingredient(name: "Tamarind pulp", amount: 4, unit: "tbsp"),
+                    Ingredient(name: "Jaggery powder", amount: 2, unit: "tbsp"),
+                    Ingredient(name: "Black salt", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Black pepper powder", amount: 0.5, unit: "tsp"),
+                    Ingredient(name: "Cumin powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tsp"),
+                    Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+                    Ingredient(name: "Garam masala", amount: 1, unit: "pinch")
+                ],
+                steps: [
+                    bhuttaBoilStep,
+                    bhuttaSmokedButterStep,
+                    Step(order: 3, instruction: "Mix all the khatta-meetha marinade ingredients into a smooth paste. Apply over a boiled cob."),
+                    Step(order: 4, instruction: "Cook over a direct flame on a steel net, rotating, until the jaggery caramelises beautifully and the cob is charred."),
+                    Step(order: 5, instruction: "Finish with smoked butter, a Kashmiri chilli + salt mix, and a sprinkle of jaggery powder. Serve immediately.")
+                ]
+            )
+        ],
+        baseLabel: "Classic"
     )
 }
