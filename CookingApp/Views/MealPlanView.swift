@@ -362,7 +362,7 @@ struct RecipePickerSheet: View {
             .filter { $0.mealType == slot.mealType }
             .filter { searchText.isEmpty ||
                 $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.ingredients.contains { $0.name.localizedCaseInsensitiveContains(searchText) }
+                $0.searchableIngredients.contains { $0.name.localizedCaseInsensitiveContains(searchText) }
             }
     }
 

@@ -4,6 +4,7 @@ import CloudKit
 @main
 struct CookingAppApp: App {
     @StateObject private var store = RecipeStore()
+    @StateObject private var favorites = FavoritesStore()
     @StateObject private var groceryStore = GroceryStore()
     @StateObject private var mealPlanStore = MealPlanStore()
     @StateObject private var auth = AuthManager()
@@ -60,6 +61,7 @@ struct CookingAppApp: App {
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }
         .environmentObject(store)
+        .environmentObject(favorites)
         .environmentObject(groceryStore)
         .environmentObject(mealPlanStore)
         .environmentObject(auth)

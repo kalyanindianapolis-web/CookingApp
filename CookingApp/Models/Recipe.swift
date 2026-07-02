@@ -71,6 +71,12 @@ struct Recipe: Identifiable, Hashable, Codable {
         self.imageName = imageName
     }
 
+    /// All ingredients that should match a search — the base recipe plus every variation.
+    /// Lets a search hit an ingredient that only appears in a variation.
+    var searchableIngredients: [Ingredient] {
+        ingredients + (variations?.flatMap(\.ingredients) ?? [])
+    }
+
     func applying(_ variation: RecipeVariation) -> Recipe {
         var copy = self
         copy.ingredients = variation.ingredients

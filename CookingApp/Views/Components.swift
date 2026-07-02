@@ -19,12 +19,17 @@ extension Color {
 struct RecipeCard: View {
     let recipe: Recipe
     var isUserRecipe: Bool = false
+    var isFavorite: Bool = false
 
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
                 if let imageName = recipe.imageName {
                     Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                } else if let uiImage = UserRecipeImageStore.image(for: recipe.id) {
+                    Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                 } else {
@@ -49,6 +54,11 @@ struct RecipeCard: View {
                             .padding(.horizontal, 5).padding(.vertical, 2)
                             .background(Color.primary)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
+                    }
+                    if isFavorite {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.red)
                     }
                 }
                 HStack(spacing: 10) {

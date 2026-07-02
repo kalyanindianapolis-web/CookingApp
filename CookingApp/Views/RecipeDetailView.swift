@@ -9,6 +9,7 @@ struct RecipeDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var groceryStore: GroceryStore
     @EnvironmentObject var store: RecipeStore
+    @EnvironmentObject var favorites: FavoritesStore
 
     init(recipe: Recipe) {
         self.recipe = recipe
@@ -51,7 +52,11 @@ struct RecipeDetailView: View {
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading) { backButton }
         .overlay(alignment: .topTrailing) {
-            if store.isUserRecipe(recipe) { editButton }
+            HStack(spacing: 8) {
+                favoriteButton
+                if store.isUserRecipe(recipe) { editButton }
+            }
+            .padding(.trailing, 16).padding(.top, 12)
         }
         .sheet(isPresented: $showIngredientCheck) {
             IngredientCheckView(recipe: effectiveRecipe)
@@ -69,10 +74,12 @@ struct RecipeDetailView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
-                LinearGradient(
-                    colors: [.black.opacity(0.35), .clear],
-                    startPoint: .bottom, endPoint: .center
-                )
+                heroScrim
+            } else if let uiImage = UserRecipeImageStore.image(for: effectiveRecipe.id) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                heroScrim
             } else {
                 LinearGradient(
                     colors: [Color(hex: effectiveRecipe.accentHex), Color(hex: effectiveRecipe.accentHex).opacity(0.7)],
@@ -85,6 +92,13 @@ struct RecipeDetailView: View {
         }
         .frame(height: 220)
         .clipped()
+    }
+
+    private var heroScrim: some View {
+        LinearGradient(
+            colors: [.black.opacity(0.35), .clear],
+            startPoint: .bottom, endPoint: .center
+        )
     }
 
     private var backButton: some View {
@@ -108,7 +122,19 @@ struct RecipeDetailView: View {
                 .background(.white.opacity(0.92))
                 .clipShape(Circle())
         }
-        .padding(.trailing, 16).padding(.top, 12)
+    }
+
+    private var favoriteButton: some View {
+        Button {
+            withAnimation(.spring(duration: 0.3)) { favorites.toggle(recipe) }
+        } label: {
+            Image(systemName: favorites.isFavorite(recipe) ? "heart.fill" : "heart")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(favorites.isFavorite(recipe) ? .red : .primary)
+                .frame(width: 36, height: 36)
+                .background(.white.opacity(0.92))
+                .clipShape(Circle())
+        }
     }
 
     private var titleBlock: some View {
@@ -286,4 +312,5 @@ struct RecipeDetailView: View {
     NavigationStack { RecipeDetailView(recipe: SeedRecipes.dalTadka) }
         .environmentObject(RecipeStore())
         .environmentObject(GroceryStore())
+        .environmentObject(FavoritesStore())
 }

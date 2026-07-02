@@ -1,10 +1,14 @@
 import SwiftUI
+import PhotosUI
 
 struct AddRecipeView: View {
     @EnvironmentObject var store: RecipeStore
     @Environment(\.dismiss) private var dismiss
 
     private let recipeToEdit: Recipe?
+
+    @State private var photoItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
 
     @State private var name: String
     @State private var sfSymbol: String
@@ -38,8 +42,9 @@ struct AddRecipeView: View {
                 DraftIngredient(name: $0.name, amount: $0.amount == $0.amount.rounded() ? String(Int($0.amount)) : String($0.amount), unit: $0.unit)
             })
             _steps = State(initialValue: r.steps.map {
-                DraftStep(order: $0.order, instruction: $0.instruction, tip: $0.tip ?? "", timerMinutes: Int((Double($0.timerSeconds ?? 0) / 60).rounded()))
+                DraftStep(order: $0.order, instruction: $0.instruction, tip: $0.tip ?? "", timerSeconds: $0.timerSeconds ?? 0)
             })
+            _selectedImageData = State(initialValue: UserRecipeImageStore.data(for: r.id))
         } else {
             _name = State(initialValue: "")
             _sfSymbol = State(initialValue: "fork.knife")
@@ -65,9 +70,18 @@ struct AddRecipeView: View {
     var body: some View {
         NavigationStack {
             Form {
+                photoSection
                 basicInfoSection
                 ingredientsSection
                 stepsSection
+            }
+            .onChange(of: photoItem) { _, newItem in
+                guard let newItem else { return }
+                Task {
+                    if let data = try? await newItem.loadTransferable(type: Data.self) {
+                        selectedImageData = normalizedJPEG(from: data) ?? data
+                    }
+                }
             }
             .navigationTitle(recipeToEdit == nil ? "New Recipe" : "Edit Recipe")
             .navigationBarTitleDisplayMode(.inline)
@@ -92,6 +106,52 @@ struct AddRecipeView: View {
                 Text("Please add a recipe name, at least one ingredient, and at least one step.")
             }
         }
+    }
+
+    private var photoSection: some View {
+        Section {
+            if let data = selectedImageData, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 170)
+                    .frame(maxWidth: .infinity)
+                    .clipped()
+                    .listRowInsets(EdgeInsets())
+            }
+            HStack {
+                PhotosPicker(selection: $photoItem, matching: .images, photoLibrary: .shared()) {
+                    Label(selectedImageData == nil ? "Add Photo" : "Change Photo", systemImage: "photo")
+                        .foregroundStyle(Color(hex: accentHex))
+                }
+                if selectedImageData != nil {
+                    Spacer()
+                    Button(role: .destructive) {
+                        selectedImageData = nil
+                        photoItem = nil
+                    } label: {
+                        Label("Remove", systemImage: "trash")
+                    }
+                }
+            }
+        } header: {
+            Text("Photo")
+        } footer: {
+            Text("Optional. Shown on the recipe card and detail screen. Falls back to the icon below.")
+        }
+    }
+
+    /// Downscales to at most 1200px on the long edge and re-encodes as JPEG to
+    /// keep stored photos small.
+    private func normalizedJPEG(from data: Data) -> Data? {
+        guard let image = UIImage(data: data) else { return nil }
+        let maxDim: CGFloat = 1200
+        let longEdge = max(image.size.width, image.size.height)
+        let scale = min(1, maxDim / longEdge)
+        let newSize = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let resized = renderer.image { _ in image.draw(in: CGRect(origin: .zero, size: newSize)) }
+        return resized.jpegData(compressionQuality: 0.8)
     }
 
     private var basicInfoSection: some View {
@@ -240,10 +300,16 @@ struct AddRecipeView: View {
                     order: i + 1,
                     instruction: s.instruction,
                     tip: s.tip.isEmpty ? nil : s.tip,
-                    timerSeconds: s.timerMinutes > 0 ? s.timerMinutes * 60 : nil
+                    timerSeconds: s.timerSeconds > 0 ? s.timerSeconds : nil
                 )
             }
         )
+
+        if let data = selectedImageData {
+            UserRecipeImageStore.save(data, for: recipe.id)
+        } else {
+            UserRecipeImageStore.delete(for: recipe.id)
+        }
 
         if recipeToEdit != nil {
             store.update(recipe)
@@ -274,13 +340,13 @@ struct DraftStep: Identifiable {
     var order: Int
     var instruction: String
     var tip: String
-    var timerMinutes: Int
+    var timerSeconds: Int
 
-    init(order: Int, instruction: String = "", tip: String = "", timerMinutes: Int = 0) {
+    init(order: Int, instruction: String = "", tip: String = "", timerSeconds: Int = 0) {
         self.order = order
         self.instruction = instruction
         self.tip = tip
-        self.timerMinutes = timerMinutes
+        self.timerSeconds = timerSeconds
     }
 }
 
@@ -336,8 +402,8 @@ struct StepRow: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Stepper(
-                    step.timerMinutes == 0 ? "No timer" : "Timer: \(step.timerMinutes) min",
-                    value: $step.timerMinutes, in: 0...120
+                    step.timerSeconds == 0 ? "No timer" : "Timer: \(Self.timerLabel(step.timerSeconds))",
+                    value: $step.timerSeconds, in: 0...7200, step: 15
                 )
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -345,6 +411,17 @@ struct StepRow: View {
             .padding(.leading, 34)
         }
         .padding(.vertical, 4)
+    }
+
+    /// Formats seconds as "45 sec", "1 min", or "1 min 30 sec".
+    static func timerLabel(_ seconds: Int) -> String {
+        let m = seconds / 60
+        let s = seconds % 60
+        switch (m, s) {
+        case (0, _):  return "\(s) sec"
+        case (_, 0):  return "\(m) min"
+        default:      return "\(m) min \(s) sec"
+        }
     }
 }
 

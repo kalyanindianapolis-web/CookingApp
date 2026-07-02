@@ -33,6 +33,14 @@ class GroceryStore: ObservableObject {
     }
 
     func add(name: String, quantity: String, category: GroceryCategory = .other) {
+        // Merge into an existing unchecked item of the same name rather than
+        // creating a duplicate (e.g. the same ingredient from two recipes).
+        if let existing = fetchUncheckedEntity(named: name) {
+            existing.quantity = Self.combinedQuantity(existing.quantity ?? "", quantity)
+            PersistenceController.shared.save()
+            load()
+            return
+        }
         let entity = GroceryItemEntity(context: context)
         entity.id = UUID()
         entity.name = name
@@ -41,6 +49,41 @@ class GroceryStore: ObservableObject {
         entity.category = category.rawValue
         PersistenceController.shared.save()
         load()
+    }
+
+    private func fetchUncheckedEntity(named name: String) -> GroceryItemEntity? {
+        let request = NSFetchRequest<GroceryItemEntity>(entityName: "GroceryItemEntity")
+        request.predicate = NSPredicate(format: "name ==[c] %@ AND isChecked == NO", name)
+        return try? context.fetch(request).first
+    }
+
+    /// Combines two grocery quantity strings. Sums them when both are a plain
+    /// "<number> <unit>" with matching units; otherwise joins with " + " so
+    /// nothing is lost (e.g. fractions like "1/2 cup" or mixed units).
+    static func combinedQuantity(_ a: String, _ b: String) -> String {
+        let a = a.trimmingCharacters(in: .whitespaces)
+        let b = b.trimmingCharacters(in: .whitespaces)
+        if a.isEmpty { return b }
+        if b.isEmpty { return a }
+        if let (na, ua) = parseQuantity(a),
+           let (nb, ub) = parseQuantity(b),
+           ua.lowercased() == ub.lowercased() {
+            let sum = na + nb
+            let numStr = sum == sum.rounded() ? String(Int(sum)) : String(format: "%g", sum)
+            return ub.isEmpty ? numStr : "\(numStr) \(ub)"
+        }
+        return "\(a) + \(b)"
+    }
+
+    /// Parses a leading decimal number and trailing unit. Returns nil for
+    /// fraction strings (e.g. "1 1/2 cup") so those fall back to a " + " join.
+    private static func parseQuantity(_ q: String) -> (Double, String)? {
+        let scanner = Scanner(string: q)
+        scanner.charactersToBeSkipped = .whitespaces
+        guard let n = scanner.scanDouble() else { return nil }
+        let rest = String(q[scanner.currentIndex...]).trimmingCharacters(in: .whitespaces)
+        if rest.contains("/") { return nil }
+        return (n, rest)
     }
 
     func toggle(_ item: GroceryItem) {

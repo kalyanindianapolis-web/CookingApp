@@ -2,8 +2,10 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var store: RecipeStore
+    @EnvironmentObject var favorites: FavoritesStore
     @State private var searchText = ""
     @State private var selectedCuisine: String = "All"
+    @State private var showFavoritesOnly = false
     @State private var showAddRecipe = false
     @State private var recipeToEdit: Recipe? = nil
 
@@ -18,8 +20,9 @@ struct HomeView: View {
             let matchesCuisine = selectedCuisine == "All" || recipe.cuisine == selectedCuisine
             let matchesSearch = searchText.isEmpty ||
                 recipe.name.localizedCaseInsensitiveContains(searchText) ||
-                recipe.ingredients.contains { $0.name.localizedCaseInsensitiveContains(searchText) }
-            return matchesCuisine && matchesSearch
+                recipe.searchableIngredients.contains { $0.name.localizedCaseInsensitiveContains(searchText) }
+            let matchesFavorites = !showFavoritesOnly || favorites.isFavorite(recipe)
+            return matchesCuisine && matchesSearch && matchesFavorites
         }
     }
 
@@ -30,13 +33,16 @@ struct HomeView: View {
                     header
                     searchBar
                     cuisineChipsRow
+                    if filteredRecipes.isEmpty {
+                        emptyState
+                    }
                     ForEach(MealType.allCases, id: \.self) { mealType in
                         let recipes = filteredRecipes.filter { $0.mealType == mealType }
                         if !recipes.isEmpty {
                             sectionHeader("\(mealType.rawValue) (\(recipes.count))")
                             ForEach(recipes) { recipe in
                                 NavigationLink(value: recipe) {
-                                    RecipeCard(recipe: recipe, isUserRecipe: store.isUserRecipe(recipe))
+                                    RecipeCard(recipe: recipe, isUserRecipe: store.isUserRecipe(recipe), isFavorite: favorites.isFavorite(recipe))
                                 }
                                 .buttonStyle(.plain)
                                 .contextMenu {
@@ -88,14 +94,28 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(greeting)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .padding(.top, 12)
-            Text("What's cooking?")
-                .font(.system(size: 32, weight: .bold))
-                .tracking(-0.5)
+        HStack(alignment: .firstTextBaseline) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(greeting)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 12)
+                Text("What's cooking?")
+                    .font(.system(size: 32, weight: .bold))
+                    .tracking(-0.5)
+            }
+            Spacer()
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { showFavoritesOnly.toggle() }
+            } label: {
+                Image(systemName: showFavoritesOnly ? "heart.fill" : "heart")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(showFavoritesOnly ? .red : .secondary)
+                    .frame(width: 40, height: 40)
+                    .background(Color(uiColor: .systemBackground))
+                    .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.06), radius: 3, y: 1)
+            }
         }
     }
 
@@ -137,6 +157,24 @@ struct HomeView: View {
         }
     }
 
+    private var emptyState: some View {
+        VStack(spacing: 12) {
+            Image(systemName: showFavoritesOnly ? "heart.slash" : "magnifyingglass")
+                .font(.system(size: 44, weight: .light))
+                .foregroundStyle(.tertiary)
+            Text(showFavoritesOnly ? "No favorites yet" : "No recipes found")
+                .font(.system(size: 17, weight: .medium))
+            Text(showFavoritesOnly
+                 ? "Tap the heart on a recipe to save it here."
+                 : "Try a different search or filter.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 60)
+    }
+
     private func sectionHeader(_ title: String) -> some View {
         Text(title.uppercased())
             .font(.system(size: 13, weight: .semibold))
@@ -160,4 +198,4 @@ struct HomeView: View {
     }
 }
 
-#Preview { HomeView().environmentObject(RecipeStore()) }
+#Preview { HomeView().environmentObject(RecipeStore()).environmentObject(FavoritesStore()) }

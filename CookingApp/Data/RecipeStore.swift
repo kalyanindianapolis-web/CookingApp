@@ -66,6 +66,7 @@ class RecipeStore: ObservableObject {
         if let entity = try? context.fetch(request).first {
             context.delete(entity)
             PersistenceController.shared.save()
+            UserRecipeImageStore.delete(for: recipe.id)
             load()
         }
     }
