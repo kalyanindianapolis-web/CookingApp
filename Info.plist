@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Lets CloudKit deliver silent pushes so NSPersistentCloudKitContainer
+	     syncs in the background / in real time. -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+
 	<!-- Local network access: allows HTTP to homeassistant.local and 192.168.x.x -->
 	<key>NSAppTransportSecurity</key>
 	<dict>

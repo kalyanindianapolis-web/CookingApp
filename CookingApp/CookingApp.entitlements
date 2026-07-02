@@ -14,5 +14,9 @@
 	<array>
 		<string>CloudKit</string>
 	</array>
+	<!-- Push for CloudKit sync notifications. Xcode promotes this to
+	     "production" automatically when archiving for App Store / TestFlight. -->
+	<key>aps-environment</key>
+	<string>development</string>
 </dict>
 </plist>
