@@ -22,6 +22,10 @@ struct CookingAppApp: App {
     var body: some Scene {
         WindowGroup {
             rootView
+                // Accept household share invites even before the user has
+                // signed in (the invitee may not have completed Sign in with
+                // Apple yet); the shared data appears once they enter the app.
+                .onOpenURL { url in sharing.acceptShare(url: url) }
                 // Push remote recipes into RecipeStore whenever the loader updates
                 .onChange(of: remoteLoader.recipes) { _, recipes in
                     store.updateRemoteRecipes(recipes)
@@ -39,11 +43,9 @@ struct CookingAppApp: App {
     private var rootView: some View {
         #if targetEnvironment(simulator)
         mainTabView
-            .onOpenURL { url in sharing.acceptShare(url: url) }
         #else
         if auth.isSignedIn {
             mainTabView
-                .onOpenURL { url in sharing.acceptShare(url: url) }
         } else {
             AuthView()
                 .environmentObject(auth)

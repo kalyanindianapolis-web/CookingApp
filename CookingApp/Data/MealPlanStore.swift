@@ -48,6 +48,9 @@ class MealPlanStore: ObservableObject {
         entity.accentHex = recipe.accentHex
         entity.cuisine = recipe.cuisine
         entity.totalMinutes = Int32(recipe.totalMinutes)
+        let household = PersistenceController.shared.currentHousehold(in: context)
+        entity.household = household
+        PersistenceController.shared.placeInHouseholdStore(entity, household: household, in: context)
         PersistenceController.shared.save()
         load()
     }

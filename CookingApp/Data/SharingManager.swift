@@ -7,9 +7,11 @@ import UIKit
 @MainActor
 class SharingManager: NSObject, ObservableObject, UICloudSharingControllerDelegate {
     @Published var isShared = false
+    @Published var isOwner = false
     @Published var participants: [String] = []
 
     private let persistence: PersistenceController
+    private let containerIdentifier = "iCloud.com.kalyan.CookingApp"
     private var currentShare: CKShare?
 
     init(persistence: PersistenceController = .shared) {
@@ -22,78 +24,75 @@ class SharingManager: NSObject, ObservableObject, UICloudSharingControllerDelega
         }
     }
 
-    // MARK: - Share sheet
+    var cloudKitAvailable: Bool { cloudContainer != nil }
 
-    func presentShareSheet(from viewController: UIViewController) async {
-        guard let ckContainer = persistence.container as? NSPersistentCloudKitContainer else {
-            let alert = UIAlertController(
-                title: "iCloud Not Configured",
-                message: "Enable iCloud + CloudKit in Xcode Signing & Capabilities to share your household.",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            viewController.present(alert, animated: true)
-            return
+    private var cloudContainer: NSPersistentCloudKitContainer? {
+        persistence.container as? NSPersistentCloudKitContainer
+    }
+
+    // MARK: - Prepare share (presented by the SwiftUI wrapper in SettingsView)
+
+    /// Fetch-or-create the household share so it can be handed to a
+    /// `UICloudSharingController`. Works with an empty grocery list because the
+    /// share is anchored on the Household root, not a grocery item. Returns nil
+    /// when CloudKit isn't available.
+    func prepareShare() async -> (CKShare, CKContainer)? {
+        guard let ckContainer = cloudContainer else { return nil }
+
+        if let share = currentShare {
+            return (share, CKContainer(identifier: containerIdentifier))
         }
 
         let context = persistence.context
-        let request = NSFetchRequest<NSManagedObject>(entityName: "GroceryItemEntity")
-        request.fetchLimit = 1
-
-        guard let anchor = (try? context.fetch(request))?.first else {
-            let alert = UIAlertController(
-                title: "Add a grocery item first",
-                message: "Add at least one item to your grocery list before sharing.",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            viewController.present(alert, animated: true)
-            return
-        }
+        let household = persistence.currentHousehold(in: context)
+        persistence.save()
 
         do {
-            let (_, share, cloudContainer) = try await ckContainer.share([anchor], to: nil)
-            share[CKShare.SystemFieldKey.title] = "Our Meal Plan"
-
-            let controller = UICloudSharingController(share: share, container: cloudContainer)
-            controller.delegate = self
-            viewController.present(controller, animated: true)
-
+            let (_, share, container) = try await ckContainer.share([household], to: nil)
+            share[CKShare.SystemFieldKey.title] = (household.name ?? "Our Household") as CKRecordValue
             currentShare = share
             isShared = true
+            isOwner = true
             updateParticipants(from: share)
+            return (share, container)
         } catch {
-            print("Share error: \(error)")
+            print("Prepare share error: \(error)")
+            return nil
         }
     }
 
     // MARK: - Accept incoming share
 
     func acceptShare(url: URL) {
-        guard let ckContainer = persistence.container as? NSPersistentCloudKitContainer,
-              let store = persistence.container.persistentStoreCoordinator.persistentStores.first else { return }
-        Task {
-            CKContainer.default().fetchShareMetadata(with: url) { [weak self] metadata, error in
-                guard let self, let metadata, error == nil else { return }
-                Task {
-                    do {
-                        try await ckContainer.acceptShareInvitations(from: [metadata], into: store)
-                        await self.fetchExistingShare()
-                    } catch {
-                        print("Accept share error: \(error)")
-                    }
+        guard let ckContainer = cloudContainer, let store = persistence.sharedStore else { return }
+        CKContainer(identifier: containerIdentifier).fetchShareMetadata(with: url) { [weak self] metadata, error in
+            guard let self, let metadata, error == nil else { return }
+            Task {
+                do {
+                    try await ckContainer.acceptShareInvitations(from: [metadata], into: store)
+                    await self.fetchExistingShare()
+                } catch {
+                    print("Accept share error: \(error)")
                 }
             }
         }
     }
 
+    /// Owner stops sharing (keeps data); participant leaves (removes their copy).
     func leaveHousehold() {
         guard let share = currentShare else { return }
+        let container = CKContainer(identifier: containerIdentifier)
+        let owner = isOwner
         Task {
             do {
-                try await CKContainer.default().privateCloudDatabase.deleteRecord(withID: share.recordID)
+                if owner {
+                    try await container.privateCloudDatabase.deleteRecord(withID: share.recordID)
+                } else {
+                    try await container.sharedCloudDatabase.deleteRecord(withID: share.recordID)
+                }
                 currentShare = nil
                 isShared = false
+                isOwner = false
                 participants = []
             } catch {
                 print("Leave household error: \(error)")
@@ -112,17 +111,16 @@ class SharingManager: NSObject, ObservableObject, UICloudSharingControllerDelega
     // MARK: - Helpers
 
     private func fetchExistingShare() async {
-        guard let ckContainer = persistence.container as? NSPersistentCloudKitContainer,
-              let store = persistence.container.persistentStoreCoordinator.persistentStores.first else { return }
-        do {
-            let shares = try await ckContainer.fetchShares(in: store)
-            if let existing = shares.first {
+        guard let ckContainer = cloudContainer else { return }
+        let stores = [persistence.privateStore, persistence.sharedStore].compactMap { $0 }
+        for store in stores {
+            if let shares = try? await ckContainer.fetchShares(in: store), let existing = shares.first {
                 currentShare = existing
                 isShared = true
+                isOwner = (store == persistence.privateStore)
                 updateParticipants(from: existing)
+                return
             }
-        } catch {
-            // No existing share — fine
         }
     }
 
