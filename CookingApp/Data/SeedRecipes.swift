@@ -233,7 +233,7 @@ enum SeedRecipes {
         sfSymbol: "square.stack.fill",
         accentHex: "F5A623",
         isMultiDish: false,
-        mealType: .breakfast,
+        mealType: .snacks,
         ingredients: [
             Ingredient(name: "Full fat milk", amount: 1, unit: "litre"),
             Ingredient(name: "Vinegar", amount: 2, unit: "tbsp"),
@@ -1184,7 +1184,7 @@ enum SeedRecipes {
         sfSymbol: "fork.knife",
         accentHex: "EA580C",
         isMultiDish: false,
-        mealType: .breakfast,
+        mealType: .snacks,
         ingredients: [
             // Sandwich chutney
             Ingredient(name: "Fresh coriander", amount: 1, unit: "bunch"),
@@ -1666,7 +1666,7 @@ enum SeedRecipes {
         sfSymbol: "flame.fill",
         accentHex: "F59E0B",
         isMultiDish: false,
-        mealType: .lunchDinner,
+        mealType: .snacks,
         ingredients: bhuttaBaseIngredients + [
             Ingredient(name: "Lemon juice", amount: 1, unit: "lemon"),
             Ingredient(name: "Kashmiri red chilli powder", amount: 1, unit: "tsp"),

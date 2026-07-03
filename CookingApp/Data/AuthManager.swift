@@ -59,6 +59,8 @@ class AuthManager: NSObject, ObservableObject {
 
     func signOut() {
         UserDefaults.standard.removeObject(forKey: userIDKey)
+        UserDefaults.standard.removeObject(forKey: displayNameKey)
+        displayName = ""
         isSignedIn = false
     }
 }

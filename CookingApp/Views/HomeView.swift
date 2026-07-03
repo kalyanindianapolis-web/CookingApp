@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var store: RecipeStore
     @EnvironmentObject var favorites: FavoritesStore
+    @EnvironmentObject var auth: AuthManager
     @State private var searchText = ""
     @State private var selectedCuisine: String = "All"
     @State private var showFavoritesOnly = false
@@ -85,12 +86,18 @@ struct HomeView: View {
 
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
+        let timeOfDay: String
         switch hour {
-        case 5..<12: return "Good morning, Kalyan"
-        case 12..<17: return "Good afternoon, Kalyan"
-        case 17..<21: return "Good evening, Kalyan"
-        default:      return "Good night, Kalyan"
+        case 5..<12:  timeOfDay = "Good morning"
+        case 12..<17: timeOfDay = "Good afternoon"
+        case 17..<21: timeOfDay = "Good evening"
+        default:      timeOfDay = "Good night"
         }
+        // Personalize with the signed-in user's first name (from Sign in with Apple).
+        if let firstName = auth.displayName.split(separator: " ").first {
+            return "\(timeOfDay), \(firstName)"
+        }
+        return timeOfDay
     }
 
     private var header: some View {
@@ -198,4 +205,9 @@ struct HomeView: View {
     }
 }
 
-#Preview { HomeView().environmentObject(RecipeStore()).environmentObject(FavoritesStore()) }
+#Preview {
+    HomeView()
+        .environmentObject(RecipeStore())
+        .environmentObject(FavoritesStore())
+        .environmentObject(AuthManager())
+}

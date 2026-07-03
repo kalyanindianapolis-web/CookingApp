@@ -88,8 +88,8 @@ struct MealPlanView: View {
             }
             .animation(.spring(duration: 0.3), value: showAddedBanner)
             .sheet(item: $pickerContext) { ctx in
-                RecipePickerSheet(slot: ctx.slot) { recipe in
-                    mealPlanStore.set(recipe: recipe, for: ctx.date, slot: ctx.slot)
+                RecipePickerSheet(slot: ctx.slot) { recipe, variation in
+                    mealPlanStore.set(recipe: recipe, variation: variation, for: ctx.date, slot: ctx.slot)
                 }
                 .environmentObject(recipeStore)
             }
@@ -212,11 +212,18 @@ struct MealPlanView: View {
     }
 
     private func addDayToGrocery() {
-        let dayRecipeIds = Set(dayEntries.map { $0.recipeId })
-        let recipes = recipeStore.allRecipes.filter { dayRecipeIds.contains($0.id) }
         var seen: Set<String> = []
-        for recipe in recipes {
-            for ing in recipe.ingredients {
+        for entry in dayEntries {
+            guard let recipe = recipeStore.allRecipes.first(where: { $0.id == entry.recipeId }) else { continue }
+            // Apply the picked variation so we pull its ingredients, not the base's.
+            let effective: Recipe
+            if let name = entry.variationName,
+               let variation = recipe.variations?.first(where: { $0.name == name }) {
+                effective = recipe.applying(variation)
+            } else {
+                effective = recipe
+            }
+            for ing in effective.ingredients {
                 let key = ing.groceryName.lowercased()
                 guard !seen.contains(key) else { continue }
                 seen.insert(key)
@@ -318,7 +325,7 @@ struct MealSlotRow: View {
                 if let entry = entry {
                     HStack(alignment: .center, spacing: 0) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(entry.recipeName)
+                            Text(entry.displayName)
                                 .font(.system(size: 15, weight: .semibold))
                                 .lineLimit(1)
                             Text("\(entry.cuisine) · \(entry.totalMinutes) min")
@@ -353,9 +360,23 @@ struct RecipePickerSheet: View {
     @EnvironmentObject var recipeStore: RecipeStore
     @Environment(\.dismiss) private var dismiss
     let slot: MealSlotType
-    let onPick: (Recipe) -> Void
+    let onPick: (Recipe, RecipeVariation?) -> Void
 
     @State private var searchText = ""
+
+    /// A selectable row — a recipe, optionally a specific variation.
+    struct PickOption: Identifiable {
+        let id: String
+        let recipe: Recipe
+        let variation: RecipeVariation?
+        /// Card content: the variation applied, labelled "Recipe — Variation".
+        var displayRecipe: Recipe {
+            guard let variation else { return recipe }
+            var r = recipe.applying(variation)
+            r.name = "\(recipe.name) — \(variation.name)"
+            return r
+        }
+    }
 
     private var filteredRecipes: [Recipe] {
         recipeStore.allRecipes
@@ -366,13 +387,26 @@ struct RecipePickerSheet: View {
             }
     }
 
+    /// Recipes with variations expand into a base row plus one row per variation.
+    private var options: [PickOption] {
+        filteredRecipes.flatMap { recipe -> [PickOption] in
+            guard let variations = recipe.variations, !variations.isEmpty else {
+                return [PickOption(id: recipe.id.uuidString, recipe: recipe, variation: nil)]
+            }
+            let base = PickOption(id: recipe.id.uuidString + "|base", recipe: recipe, variation: nil)
+            return [base] + variations.map {
+                PickOption(id: recipe.id.uuidString + "|" + $0.name, recipe: recipe, variation: $0)
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 10) {
                     searchBar.padding(.top, 4)
 
-                    if filteredRecipes.isEmpty {
+                    if options.isEmpty {
                         VStack(spacing: 12) {
                             Image(systemName: "fork.knife")
                                 .font(.system(size: 40, weight: .light))
@@ -384,12 +418,12 @@ struct RecipePickerSheet: View {
                         }
                         .frame(maxWidth: .infinity)
                     } else {
-                        ForEach(filteredRecipes) { recipe in
+                        ForEach(options) { option in
                             Button {
-                                onPick(recipe)
+                                onPick(option.recipe, option.variation)
                                 dismiss()
                             } label: {
-                                RecipeCard(recipe: recipe, isUserRecipe: recipeStore.isUserRecipe(recipe))
+                                RecipeCard(recipe: option.displayRecipe, isUserRecipe: recipeStore.isUserRecipe(option.recipe))
                             }
                             .buttonStyle(.plain)
                         }

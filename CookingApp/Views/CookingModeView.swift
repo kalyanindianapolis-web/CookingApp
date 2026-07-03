@@ -9,19 +9,21 @@ struct CookingModeView: View {
     @EnvironmentObject var groceryStore: GroceryStore
 
     @State private var currentStepIndex = 0
-    @State private var timerSecondsLeft = 0
-    @State private var timerRunning = false
-    @State private var timerCancellable: AnyCancellable?
-    @State private var timerDone = false
-    @State private var timerEndDate: Date? = nil
-    @State private var showTimerWarning = false
-    @State private var pendingStepIndex: Int? = nil
 
-    // Stable id for this cooking session's scheduled local notification.
-    private let timerNotificationID = UUID().uuidString
+    // Per-step timer state — keyed by step.id — so timers keep running when you
+    // move between steps and several can run at once.
+    @State private var endDates: [UUID: Date] = [:]        // running timers → target end
+    @State private var pausedRemaining: [UUID: Int] = [:]   // paused timers → seconds left
+    @State private var finished: Set<UUID> = []             // completed timers
+    @State private var now = Date()
+    @State private var ticker: AnyCancellable?
+
+    // Unique per cooking session so notifications don't collide across recipes.
+    private let sessionID = UUID().uuidString
 
     private var currentStep: Step { recipe.steps[currentStepIndex] }
     private var progress: Double { Double(currentStepIndex + 1) / Double(recipe.steps.count) }
+    private var runningCount: Int { endDates.count }
 
     var body: some View {
         ZStack {
@@ -43,30 +45,19 @@ struct CookingModeView: View {
         }
         .preferredColorScheme(.dark)
         .onAppear {
-            loadTimer()
             CookTimerNotifier.requestAuthorization()
             UIApplication.shared.isIdleTimerDisabled = true   // keep screen awake while cooking
+            startTicker()
         }
         .onDisappear {
-            stopTimer()
+            ticker?.cancel()
+            ticker = nil
+            // Cancel any still-pending step notifications for this session.
+            for id in endDates.keys { CookTimerNotifier.cancel(id: notifID(id)) }
             UIApplication.shared.isIdleTimerDisabled = false
         }
         .onChange(of: scenePhase) { _, phase in
-            // Re-sync the countdown against wall-clock time when returning to the app.
-            if phase == .active, timerRunning { tick() }
-        }
-        .alert("Timer Still Running", isPresented: $showTimerWarning) {
-            Button("Leave Step", role: .destructive) {
-                if let idx = pendingStepIndex {
-                    stopTimer()
-                    currentStepIndex = idx
-                    loadTimer()
-                    pendingStepIndex = nil
-                }
-            }
-            Button("Stay", role: .cancel) { pendingStepIndex = nil }
-        } message: {
-            Text("The timer is still running. Leave this step anyway?")
+            if phase == .active { tick() }   // re-sync against wall-clock time
         }
     }
 
@@ -83,15 +74,24 @@ struct CookingModeView: View {
                     .clipShape(Circle())
             }
             Spacer()
-            Text(recipe.name)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(.white.opacity(0.7))
-                .lineLimit(1)
+            if runningCount > 0 {
+                Label("\(runningCount) running", systemImage: "timer")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .padding(.horizontal, 10).padding(.vertical, 5)
+                    .background(.white.opacity(0.12))
+                    .clipShape(Capsule())
+            } else {
+                Text(recipe.name)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.7))
+                    .lineLimit(1)
+            }
             Spacer()
             Text("\(currentStepIndex + 1) / \(recipe.steps.count)")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(.white.opacity(0.5))
-                .frame(width: 36, alignment: .trailing)
+                .frame(width: 60, alignment: .trailing)
         }
         .padding(.top, 16)
         .padding(.bottom, 12)
@@ -144,22 +144,23 @@ struct CookingModeView: View {
     private var timerSection: some View {
         Group {
             if currentStep.timerSeconds != nil {
+                let isDone = finished.contains(currentStep.id)
                 VStack(spacing: 12) {
-                    Text(timeString(timerSecondsLeft))
+                    Text(timeString(displaySeconds(currentStep)))
                         .font(.system(size: 48, weight: .thin, design: .monospaced))
-                        .foregroundStyle(timerDone ? .green : .white)
-                        .animation(.easeInOut(duration: 0.3), value: timerDone)
+                        .foregroundStyle(isDone ? .green : .white)
+                        .animation(.easeInOut(duration: 0.3), value: isDone)
 
-                    if timerDone {
+                    if isDone {
                         Text("Timer done!")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundStyle(.green)
                             .transition(.opacity)
                     } else {
                         Button {
-                            timerRunning ? pauseTimer() : startTimer()
+                            toggleTimer(currentStep)
                         } label: {
-                            Image(systemName: timerRunning ? "pause.fill" : "play.fill")
+                            Image(systemName: isRunning(currentStep) ? "pause.fill" : "play.fill")
                                 .font(.system(size: 20))
                                 .foregroundStyle(.black)
                                 .frame(width: 52, height: 52)
@@ -169,7 +170,7 @@ struct CookingModeView: View {
                     }
                 }
                 .padding(.bottom, 16)
-                .animation(.easeInOut(duration: 0.3), value: timerDone)
+                .animation(.easeInOut(duration: 0.3), value: isDone)
             }
         }
     }
@@ -177,9 +178,7 @@ struct CookingModeView: View {
     private var navigationButtons: some View {
         HStack(spacing: 12) {
             if currentStepIndex > 0 {
-                Button {
-                    go(to: currentStepIndex - 1)
-                } label: {
+                Button { currentStepIndex -= 1 } label: {
                     Text("← Back")
                         .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(.white.opacity(0.7))
@@ -191,9 +190,7 @@ struct CookingModeView: View {
             }
 
             if currentStepIndex < recipe.steps.count - 1 {
-                Button {
-                    go(to: currentStepIndex + 1)
-                } label: {
+                Button { currentStepIndex += 1 } label: {
                     Text("Next →")
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(.black)
@@ -221,69 +218,60 @@ struct CookingModeView: View {
 
     // MARK: - Timer logic
 
-    private func go(to index: Int) {
-        if timerRunning {
-            pendingStepIndex = index
-            showTimerWarning = true
-        } else {
-            stopTimer()
-            currentStepIndex = index
-            loadTimer()
+    private func notifID(_ stepID: UUID) -> String { "cook-\(sessionID)-\(stepID.uuidString)" }
+
+    private func isRunning(_ step: Step) -> Bool { endDates[step.id] != nil }
+
+    /// Seconds to show for a step: live countdown if running, 0 if done,
+    /// else the paused remainder or the step's full duration.
+    private func displaySeconds(_ step: Step) -> Int {
+        if let end = endDates[step.id] { return max(0, Int(ceil(end.timeIntervalSince(now)))) }
+        if finished.contains(step.id) { return 0 }
+        return pausedRemaining[step.id] ?? (step.timerSeconds ?? 0)
+    }
+
+    private func toggleTimer(_ step: Step) {
+        isRunning(step) ? pause(step) : start(step)
+    }
+
+    private func start(_ step: Step) {
+        let seconds = pausedRemaining[step.id] ?? (step.timerSeconds ?? 0)
+        guard seconds > 0 else { return }
+        finished.remove(step.id)
+        pausedRemaining[step.id] = nil
+        endDates[step.id] = Date().addingTimeInterval(TimeInterval(seconds))
+        // Local notification so it fires even if the app is backgrounded.
+        CookTimerNotifier.schedule(id: notifID(step.id), after: seconds, recipeName: recipe.name)
+        startTicker()
+    }
+
+    private func pause(_ step: Step) {
+        if let end = endDates[step.id] {
+            pausedRemaining[step.id] = max(0, Int(ceil(end.timeIntervalSinceNow)))
         }
+        endDates[step.id] = nil
+        CookTimerNotifier.cancel(id: notifID(step.id))
     }
 
-    private func loadTimer() {
-        timerSecondsLeft = currentStep.timerSeconds ?? 0
-        timerRunning = false
-        timerDone = false
-        timerEndDate = nil
-        CookTimerNotifier.cancel(id: timerNotificationID)
-    }
-
-    private func startTimer() {
-        timerRunning = true
-        timerEndDate = Date().addingTimeInterval(TimeInterval(timerSecondsLeft))
-        // Schedule a local notification so the alert still fires if the app is
-        // backgrounded (the Combine timer below is suspended when not active).
-        CookTimerNotifier.schedule(id: timerNotificationID, after: timerSecondsLeft, recipeName: recipe.name)
-        timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
+    private func startTicker() {
+        guard ticker == nil else { return }
+        ticker = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in tick() }
     }
 
-    /// Derives remaining time from the target end date so the countdown stays
-    /// accurate across backgrounding.
+    /// Advances the clock and completes any timers whose end time has passed.
     private func tick() {
-        guard let end = timerEndDate else { return }
-        let remaining = Int(ceil(end.timeIntervalSinceNow))
-        if remaining > 0 {
-            timerSecondsLeft = remaining
-        } else {
-            timerSecondsLeft = 0
-            finishTimer()
+        now = Date()
+        let done = endDates.filter { $0.value <= now }.map(\.key)
+        guard !done.isEmpty else { return }
+        for id in done {
+            endDates[id] = nil
+            finished.insert(id)
+            CookTimerNotifier.cancel(id: notifID(id))
         }
-    }
-
-    private func finishTimer() {
-        stopTimer()
-        timerDone = true
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         AudioServicesPlaySystemSound(1005)
-    }
-
-    private func pauseTimer() {
-        timerRunning = false
-        timerCancellable?.cancel()
-        timerEndDate = nil
-        CookTimerNotifier.cancel(id: timerNotificationID)
-    }
-
-    private func stopTimer() {
-        timerRunning = false
-        timerCancellable?.cancel()
-        timerCancellable = nil
-        timerEndDate = nil
-        CookTimerNotifier.cancel(id: timerNotificationID)
     }
 
     private func timeString(_ seconds: Int) -> String {

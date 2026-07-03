@@ -98,6 +98,7 @@ enum Difficulty: String, CaseIterable, Codable {
 enum MealType: String, CaseIterable, Codable {
     case breakfast   = "Breakfast"
     case lunchDinner = "Lunch & Dinner"
+    case snacks      = "Snacks"
 }
 
 struct Ingredient: Identifiable, Hashable, Codable {

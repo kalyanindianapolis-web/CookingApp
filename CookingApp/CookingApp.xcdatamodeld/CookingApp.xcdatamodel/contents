@@ -25,6 +25,7 @@
         <attribute name="recipeName" optional="YES" attributeType="String"/>
         <attribute name="slot" optional="YES" attributeType="String"/>
         <attribute name="totalMinutes" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="variationName" optional="YES" attributeType="String"/>
         <relationship name="household" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HouseholdEntity" inverseName="mealPlanEntries" inverseEntity="HouseholdEntity"/>
     </entity>
     <entity name="RecipeEntity" representedClassName="RecipeEntity" codeGenerationType="class" syncable="YES">

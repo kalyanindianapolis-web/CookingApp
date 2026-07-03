@@ -34,20 +34,22 @@ class MealPlanStore: ObservableObject {
         return entries.first { startOfDay($0.date) == day && $0.slot == slot }
     }
 
-    func set(recipe: Recipe, for date: Date, slot: MealSlotType) {
+    func set(recipe: Recipe, variation: RecipeVariation? = nil, for date: Date, slot: MealSlotType) {
         let day = startOfDay(date)
         // Remove existing entry for this slot
         clearEntityFor(date: day, slot: slot)
-        // Insert new
+        // Insert new — use the variation's accent/time when one is picked
+        let effective = variation.map { recipe.applying($0) } ?? recipe
         let entity = MealPlanEntryEntity(context: context)
         entity.id = UUID()
         entity.date = day
         entity.slot = slot.rawValue
         entity.recipeId = recipe.id
         entity.recipeName = recipe.name
-        entity.accentHex = recipe.accentHex
+        entity.variationName = variation?.name
+        entity.accentHex = effective.accentHex
         entity.cuisine = recipe.cuisine
-        entity.totalMinutes = Int32(recipe.totalMinutes)
+        entity.totalMinutes = Int32(effective.totalMinutes)
         let household = PersistenceController.shared.currentHousehold(in: context)
         entity.household = household
         PersistenceController.shared.placeInHouseholdStore(entity, household: household, in: context)
@@ -96,7 +98,8 @@ class MealPlanStore: ObservableObject {
                 recipeName: recipeName,
                 accentHex: entity.accentHex ?? "E53935",
                 cuisine: entity.cuisine ?? "",
-                totalMinutes: Int(entity.totalMinutes)
+                totalMinutes: Int(entity.totalMinutes),
+                variationName: entity.variationName
             )
         }
     }
