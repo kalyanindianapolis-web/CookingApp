@@ -8,6 +8,7 @@ enum SeedRecipes {
         thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
         crispyVeggieBurger, paneerKajuMasala, greenMoongDal, dalMakhani,
         lasooniPalakPaneer, tawaPulao, bhutta,
+        paneerHotGarlicSauce, burntGarlicRice, afghaniPaneer,
         chilliCheeseCornSandwich, chiaPudding
     ]
 
@@ -1842,5 +1843,162 @@ enum SeedRecipes {
         ],
         baseLabel: "Classic",
         imageName: "recipe_bhutta"
+    )
+
+    // MARK: - Paneer in Hot Garlic Sauce
+
+    static let paneerHotGarlicSauce = Recipe(
+        name: "Paneer in Hot Garlic Sauce",
+        cuisine: "Indo-Chinese",
+        difficulty: .medium,
+        totalMinutes: 30,
+        defaultServings: 4,
+        sfSymbol: "flame.fill",
+        accentHex: "DC2626",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Aromatics & veg
+            Ingredient(name: "Garlic (chopped)", amount: 20, unit: "cloves"),
+            Ingredient(name: "Ginger (chopped)", amount: 2, unit: "inch"),
+            Ingredient(name: "Green chilli (chopped)", amount: 2, unit: "nos."),
+            Ingredient(name: "Bell pepper (triangles)", amount: 1, unit: "no."),
+            Ingredient(name: "Onion (triangles)", amount: 1, unit: "medium"),
+            Ingredient(name: "Spring onion", amount: 2, unit: "stalks"),
+            // Paneer & sauce
+            Ingredient(name: "Paneer", amount: 350, unit: "g"),
+            Ingredient(name: "Oil (for shallow frying)", amount: 2, unit: "tsp"),
+            Ingredient(name: "Corn flour", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Water", amount: 3, unit: "tbsp"),
+            Ingredient(name: "Oil (for sauce)", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Whole dried red chilli", amount: 4, unit: "nos."),
+            Ingredient(name: "Red chilli sauce", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Schezwan sauce", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Ketchup", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Light soy sauce", amount: 1, unit: "tsp"),
+            Ingredient(name: "Vinegar", amount: 0.5, unit: "tsp"),
+            Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
+            Ingredient(name: "White pepper", amount: 1, unit: "pinch"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required")
+        ],
+        steps: [
+            Step(order: 1, instruction: "If the paneer block is thick, slice it into 2 slabs. Shallow-fry in a nonstick pan with a little oil until golden on both sides, cool slightly, then cut into cubes.", tip: "Frying slabs before cubing keeps the pieces neat and intact."),
+            Step(order: 2, instruction: "Mix the corn flour with 2–3 tbsp water into a smooth, lump-free slurry and keep it ready beside the stove."),
+            Step(order: 3, instruction: "Heat a wok on high, add oil, then the chopped ginger, garlic, green chilli, and whole dried red chillies. Sauté briefly — keep the garlic sharp and aromatic, don't brown it.", tip: "Save about a tablespoon of the ginger-garlic-chilli mix if you're also making the burnt chilli garlic fried rice."),
+            Step(order: 4, instruction: "Add the onion and bell pepper triangles and the spring onion whites. Stir-fry on high for a few seconds."),
+            Step(order: 5, instruction: "Add the red chilli sauce, Schezwan sauce, ketchup, soy sauce, vinegar, sugar, white pepper, and salt. Mix well."),
+            Step(order: 6, instruction: "Lower the flame and pour in the corn flour slurry, stirring continuously, until the sauce thickens to a glossy consistency. Add a splash of hot water if it gets too thick.", timerSeconds: 60),
+            Step(order: 7, instruction: "Add the fried paneer cubes and gently toss until coated in the hot garlic sauce."),
+            Step(order: 8, instruction: "Add the chopped spring onion greens, give a final mix, and switch off the heat. Serve hot.")
+        ],
+        imageName: "recipe_paneer_hot_garlic"
+    )
+
+    // MARK: - Burnt Chilli Garlic Fried Rice
+
+    static let burntGarlicRice = Recipe(
+        name: "Burnt Chilli Garlic Fried Rice",
+        cuisine: "Indo-Chinese",
+        difficulty: .medium,
+        totalMinutes: 20,
+        defaultServings: 4,
+        sfSymbol: "flame.fill",
+        accentHex: "B45309",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Aromatics & veg
+            Ingredient(name: "Garlic (chopped)", amount: 10, unit: "cloves"),
+            Ingredient(name: "Ginger (chopped)", amount: 1, unit: "inch"),
+            Ingredient(name: "Green chilli (chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Carrot (chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Capsicum (chopped)", amount: 1, unit: "small"),
+            Ingredient(name: "French beans (chopped)", amount: 5, unit: "nos."),
+            // Rice & seasoning
+            Ingredient(name: "Oil", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Whole dried red chilli", amount: 3, unit: "nos."),
+            Ingredient(name: "Star anise", amount: 2, unit: "nos."),
+            Ingredient(name: "Light soy sauce", amount: 1, unit: "tsp"),
+            Ingredient(name: "Vinegar", amount: 1, unit: "tsp"),
+            Ingredient(name: "Cooked rice", amount: 4, unit: "cups"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
+            Ingredient(name: "White pepper powder", amount: 1, unit: "large pinch"),
+            Ingredient(name: "Hot water", amount: 1, unit: "splash")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Place a wok on high flame and let it get smoking hot. Add the oil and heat it thoroughly."),
+            Step(order: 2, instruction: "Add the chopped ginger, garlic, green chilli, whole dried red chillies, and star anise. Sauté until the garlic and chillies turn lightly burnt — that's the signature flavour. Don't fully burn them or the rice turns bitter.", tip: "A smoking-hot wok is what gives this its restaurant-style char (wok hei)."),
+            Step(order: 3, instruction: "Add the chopped mixed vegetables and stir-fry on high for 1–2 minutes, keeping them crunchy.", timerSeconds: 120),
+            Step(order: 4, instruction: "Pour the soy sauce around the edges of the wok (so it lightly chars), add the vinegar, and mix well."),
+            Step(order: 5, instruction: "Add the cooked rice with salt, sugar, and white pepper. Stir-fry on high for 2–3 minutes until everything is well combined.", timerSeconds: 180),
+            Step(order: 6, instruction: "Add a small splash of hot water and toss — the steam keeps the rice soft, moist, and fluffy. Serve hot with the paneer in hot garlic sauce.")
+        ],
+        imageName: "recipe_burnt_garlic_rice"
+    )
+
+    // MARK: - Afghani Paneer
+
+    static let afghaniPaneer = Recipe(
+        name: "Afghani Paneer",
+        cuisine: "Mughlai",
+        difficulty: .medium,
+        totalMinutes: 40,
+        defaultServings: 4,
+        sfSymbol: "fork.knife",
+        accentHex: "0D9488",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            // Paneer
+            Ingredient(name: "Paneer (cubed)", amount: 300, unit: "g"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
+            Ingredient(name: "Black pepper", amount: 1, unit: "pinch"),
+            Ingredient(name: "Ginger garlic paste", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Lemon juice", amount: 1, unit: "tsp"),
+            Ingredient(name: "Oil", amount: 2, unit: "tbsp"),
+            // Gravy
+            Ingredient(name: "Oil (gravy)", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Green cardamom", amount: 3, unit: "nos."),
+            Ingredient(name: "Bay leaf", amount: 1, unit: "no."),
+            Ingredient(name: "Black cardamom", amount: 1, unit: "no."),
+            Ingredient(name: "Cinnamon", amount: 1, unit: "inch"),
+            Ingredient(name: "Cumin seeds", amount: 1, unit: "pinch"),
+            Ingredient(name: "Onion (sliced)", amount: 2, unit: "medium"),
+            Ingredient(name: "Ginger", amount: 2, unit: "inch"),
+            Ingredient(name: "Garlic", amount: 15, unit: "cloves"),
+            Ingredient(name: "Green chilli", amount: 3, unit: "nos."),
+            Ingredient(name: "Cashew", amount: 15, unit: "nos."),
+            Ingredient(name: "Salt (gravy)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Hot water", amount: 1, unit: "as required"),
+            Ingredient(name: "Curd", amount: 1, unit: "cup"),
+            Ingredient(name: "Mint leaves", amount: 10, unit: "leaves"),
+            Ingredient(name: "Fresh coriander", amount: 1, unit: "handful"),
+            // Powdered spices
+            Ingredient(name: "Turmeric powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Garam masala", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Coriander powder", amount: 1, unit: "tbsp"),
+            Ingredient(name: "Cumin powder", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Chaat masala", amount: 0.5, unit: "tsp"),
+            // Final
+            Ingredient(name: "Oil (final)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Butter", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Asafoetida (hing)", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
+            Ingredient(name: "Black pepper (final)", amount: 1, unit: "pinch"),
+            Ingredient(name: "Roasted kasuri methi powder", amount: 1, unit: "large pinch")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Add the paneer cubes to a bowl with salt, black pepper, ginger garlic paste, and lemon juice. Mix to coat well."),
+            Step(order: 2, instruction: "Shallow-fry the paneer in a little oil until light golden on both sides. Transfer to a bowl and set aside."),
+            Step(order: 3, instruction: "Heat oil in a pan on high. Add the whole spices, then the onions, ginger, garlic, green chilli, cashews, and a pinch of salt. Cook on high until the onions turn soft."),
+            Step(order: 4, instruction: "Add hot water, cover, and cook on medium for 4–5 minutes. Switch off, discard the cinnamon and bay leaf, and let the mixture cool completely.", timerSeconds: 270),
+            Step(order: 5, instruction: "Blend the cooled mixture with the curd, mint, fresh coriander, and all the powdered spices into a smooth puree.", tip: "Cool the mixture before adding curd so it doesn't split when blended."),
+            Step(order: 6, instruction: "Heat oil and butter in a kadhai. Add asafoetida, then the puree. Stir, bring to a boil, then lower the flame and simmer for 2–3 minutes.", timerSeconds: 180),
+            Step(order: 7, instruction: "Add hot water if the gravy is too thick — it should be semi-thick. Taste and adjust salt."),
+            Step(order: 8, instruction: "Add the sugar, black pepper, roasted kasuri methi powder, and the fried paneer. Stir and cook for 1–2 minutes. Serve rich and creamy with tandoori roti or any Indian bread.")
+        ],
+        imageName: "recipe_afghani_paneer"
     )
 }
