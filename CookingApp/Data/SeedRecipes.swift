@@ -5,7 +5,7 @@ enum SeedRecipes {
         dalTadka, jeeraRice, bagaraRice, chanaMasala, alooGobi,
         paneerDahiSandwich, paneer, kajuMasala, rajmaMasala,
         paniPuriPani, masalaPuri, phuchkaAndChurmur,
-        thechaKPaneerRice, paneerHotGarlicRice, malaiKofta,
+        thechaKPaneerRice, malaiKofta,
         crispyVeggieBurger, paneerKajuMasala, greenMoongDal, dalMakhani,
         lasooniPalakPaneer, tawaPulao, bhutta,
         paneerHotGarlicSauce, burntGarlicRice, afghaniPaneer,
@@ -1172,69 +1172,6 @@ enum SeedRecipes {
         ]
     )
 
-    // MARK: - Paneer in Hot Garlic Sauce & Burnt Chilli Garlic Fried Rice
-
-    static let paneerHotGarlicRice = Recipe(
-        name: "Paneer Hot Garlic Sauce & Fried Rice",
-        cuisine: "Indo-Chinese",
-        difficulty: .medium,
-        totalMinutes: 40,
-        defaultServings: 4,
-        sfSymbol: "flame.fill",
-        accentHex: "DC2626",
-        isMultiDish: true,
-        mealType: .lunchDinner,
-        ingredients: [
-            // Shared veggie prep
-            Ingredient(name: "Garlic", amount: 27, unit: "cloves"),
-            Ingredient(name: "Ginger", amount: 3, unit: "inch piece"),
-            Ingredient(name: "Green chillies", amount: 3, unit: "nos."),
-            Ingredient(name: "Carrot", amount: 1, unit: "no."),
-            Ingredient(name: "Capsicum / bell pepper (for rice)", amount: 1, unit: "small"),
-            Ingredient(name: "French beans", amount: 4, unit: "nos."),
-            Ingredient(name: "Bell pepper (for sauce)", amount: 1, unit: "no."),
-            Ingredient(name: "Onion", amount: 1, unit: "medium"),
-            Ingredient(name: "Spring onion", amount: 2, unit: "stalks"),
-            Ingredient(name: "Cooked rice", amount: 4, unit: "cups"),
-            // Paneer hot garlic sauce
-            Ingredient(name: "Paneer", amount: 350, unit: "g"),
-            Ingredient(name: "Oil (for shallow frying)", amount: 1, unit: "tsp"),
-            Ingredient(name: "Corn flour", amount: 1.5, unit: "tbsp"),
-            Ingredient(name: "Oil (for sauce)", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Whole dried red chillies (sauce)", amount: 3, unit: "nos."),
-            Ingredient(name: "Red chilli sauce", amount: 2, unit: "tbsp"),
-            Ingredient(name: "Schezwan sauce", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Ketchup", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Light soy sauce", amount: 1, unit: "tsp"),
-            Ingredient(name: "Vinegar", amount: 0.5, unit: "tsp"),
-            Ingredient(name: "White pepper powder", amount: 1, unit: "pinch"),
-            Ingredient(name: "Salt", amount: 1, unit: "to taste"),
-            Ingredient(name: "Sugar", amount: 1, unit: "pinch"),
-            // Burnt chilli garlic fried rice
-            Ingredient(name: "Oil (for rice)", amount: 1, unit: "tbsp"),
-            Ingredient(name: "Whole dried red chillies (rice)", amount: 2, unit: "nos."),
-            Ingredient(name: "Star anise", amount: 1, unit: "no."),
-            Ingredient(name: "Light soy sauce (rice)", amount: 1, unit: "tsp"),
-            Ingredient(name: "Vinegar (rice)", amount: 1, unit: "tsp")
-        ],
-        steps: [
-            Step(order: 1, instruction: "Finely chop the garlic, ginger, and green chillies together — use a string chopper or a knife. This mixture is split between the sauce and the fried rice so prep the full quantity now and set it aside.", tip: "Save about 1 tbsp of this mixture for the fried rice step — the rest goes into the sauce."),
-            Step(order: 2, instruction: "Coarsely chop the carrot, one capsicum, and french beans in the chopper — these go into the fried rice. Cut the remaining bell pepper and onion into rough triangles for the sauce. Separate the spring onion whites (roughly chopped) from the greens (finely sliced)."),
-            Step(order: 3, instruction: "If the paneer block is thick, slice it into 2 flat slabs. Heat a nonstick pan with a drizzle of oil and shallow-fry the slabs on medium-high until golden on both sides. Remove, cool slightly, then cut into cubes.", tip: "Frying slabs before cutting keeps the edges neat and intact. Work on low-medium heat — high flame toughens paneer.", timerSeconds: 300),
-            Step(order: 4, instruction: "Mix corn flour with 2–3 tbsp of water into a smooth, lump-free slurry. Keep it beside the stove ready to add — it thickens fast once it hits the hot sauce."),
-            Step(order: 5, instruction: "Heat a wok on high until smoking. Add 2 tbsp oil. Add the garlic-ginger-chilli mixture (reserve 1 tbsp for the rice) and the whole dried red chillies. Sauté very briefly — just 15–20 seconds. The garlic should stay sharp and aromatic, not brown.", timerSeconds: 20),
-            Step(order: 6, instruction: "Add the onion and bell pepper triangles and the spring onion whites. Stir-fry on high for about 30 seconds — they should still have bite.", timerSeconds: 30),
-            Step(order: 7, instruction: "Add the red chilli sauce, Schezwan sauce, ketchup, soy sauce, vinegar, a pinch of sugar, white pepper, and salt. Mix well to combine all the sauces."),
-            Step(order: 8, instruction: "Lower the flame. Pour in the corn flour slurry in a slow stream, stirring continuously. The sauce will thicken quickly to a glossy, coating consistency. Add a splash of hot water if it gets too thick.", timerSeconds: 60),
-            Step(order: 9, instruction: "Add the fried paneer cubes and gently toss until every piece is coated in the sauce. Add the spring onion greens, toss once more, and switch off the heat. Your Paneer in Hot Garlic Sauce is ready."),
-            Step(order: 10, instruction: "For the fried rice: wipe the wok and place it back on the highest flame. Let it get completely smoking hot before adding 1 tbsp oil.", tip: "A smoking-hot wok is non-negotiable for fried rice — it creates the wok hei (smoky char) that makes it taste like a restaurant."),
-            Step(order: 11, instruction: "Add the reserved garlic-ginger-chilli mixture, the whole dried red chillies, and star anise. Cook, stirring, until the garlic takes on a lightly charred colour — this is the signature 'burnt chilli garlic' flavour. Push just far enough; completely black garlic turns bitter.", timerSeconds: 60),
-            Step(order: 12, instruction: "Add the coarsely chopped mixed vegetables (carrot, capsicum, french beans). Stir-fry on high for 1–2 minutes, keeping them crunchy.", timerSeconds: 90),
-            Step(order: 13, instruction: "Pour the soy sauce and vinegar around the hot edge of the wok (not into the centre) — this flash-chars them and deepens the flavour. Toss to combine.", tip: "Adding sauces to the edge rather than the centre gives a deeper caramelised flavour."),
-            Step(order: 14, instruction: "Add the cooked rice, salt, a pinch of sugar, and a large pinch of white pepper. Stir-fry on high for 2–3 minutes, tossing continuously so every grain gets coated and slightly toasted.", timerSeconds: 150),
-            Step(order: 15, instruction: "Add a small splash of hot water and toss vigorously. The steam loosens any stuck grains and keeps the rice moist and fluffy. Serve immediately alongside the hot garlic paneer.")
-        ]
-    )
 
     // MARK: - Veg Chilli Cheese Corn Sandwich
 
