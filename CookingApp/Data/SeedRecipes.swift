@@ -8,7 +8,7 @@ enum SeedRecipes {
         thechaKPaneerRice, malaiKofta,
         crispyVeggieBurger, paneerKajuMasala, greenMoongDal, dalMakhani,
         lasooniPalakPaneer, tawaPulao, bhutta,
-        paneerHotGarlicSauce, burntGarlicRice, afghaniPaneer,
+        paneerHotGarlicSauce, burntGarlicRice, afghaniPaneer, palakKhichdi,
         chilliCheeseCornSandwich, chiaPudding
     ]
 
@@ -1937,5 +1937,43 @@ enum SeedRecipes {
             Step(order: 8, instruction: "Add the sugar, black pepper, roasted kasuri methi powder, and the fried paneer. Stir and cook for 1–2 minutes. Serve rich and creamy with tandoori roti or any Indian bread.")
         ],
         imageName: "recipe_afghani_paneer"
+    )
+
+    // MARK: - Palak Khichdi (Pressure Cooker)
+
+    static let palakKhichdi = Recipe(
+        name: "Palak Khichdi",
+        cuisine: "North Indian",
+        difficulty: .easy,
+        totalMinutes: 30,
+        defaultServings: 4,
+        sfSymbol: "leaf.fill",
+        accentHex: "15803D",
+        isMultiDish: false,
+        mealType: .lunchDinner,
+        ingredients: [
+            Ingredient(name: "Oil", amount: 2, unit: "tbsp"),
+            Ingredient(name: "Cloves", amount: 5, unit: "nos."),
+            Ingredient(name: "Black peppercorns", amount: 10, unit: "nos."),
+            Ingredient(name: "Cumin seeds (jeera)", amount: 1, unit: "tsp"),
+            Ingredient(name: "Cinnamon stick", amount: 1, unit: "no."),
+            Ingredient(name: "Onion (chopped)", amount: 1, unit: "no."),
+            Ingredient(name: "Ginger-garlic paste", amount: 1, unit: "tsp"),
+            Ingredient(name: "Green chillies", amount: 2, unit: "nos."),
+            Ingredient(name: "Spinach (palak, cut)", amount: 1, unit: "cup"),
+            Ingredient(name: "Garam masala", amount: 0.25, unit: "tsp"),
+            Ingredient(name: "Rice", amount: 1, unit: "cup"),
+            Ingredient(name: "Moong dal", amount: 1, unit: "cup"),
+            Ingredient(name: "Water", amount: 5, unit: "cups"),
+            Ingredient(name: "Salt", amount: 1, unit: "to taste")
+        ],
+        steps: [
+            Step(order: 1, instruction: "Heat the oil in a pressure cooker. Fry the cloves, peppercorns, cumin seeds, and cinnamon stick until fragrant.", tip: "No whole peppercorns? Use ½ tsp pepper powder instead, or just sprinkle pepper on while eating."),
+            Step(order: 2, instruction: "Add the chopped onion, ginger-garlic paste (or a few garlic cloves), and green chillies. Sauté until the onions are soft and cooked."),
+            Step(order: 3, instruction: "Add the cut spinach and garam masala. Cook for about 5 minutes.", timerSeconds: 300),
+            Step(order: 4, instruction: "Add the rice, moong dal, water, and salt. Close the cooker and cook for 3–5 whistles, then let the pressure release naturally."),
+            Step(order: 5, instruction: "Mash the rice and dal together. If it's too thick, add a little boiled water to loosen the consistency. Serve hot.")
+        ],
+        imageName: "recipe_palak_khichdi"
     )
 }
